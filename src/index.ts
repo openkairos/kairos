@@ -1,10 +1,10 @@
 import './config/boot';
 import { create } from '@koala-ts/framework';
 import { appConfig, server } from './config';
+import { logger } from './infrastructure/logging';
 
 const app = create(appConfig);
 
 app.listen(server.port);
 
-// eslint-disable-next-line no-console
-console.log(`Server is running on http://localhost:${server.port}`);
+logger.info(`Server is running on http://localhost:${server.port}`);
