@@ -1,7 +1,7 @@
 import './config/boot';
 import { create } from '@koala-ts/framework';
 import { appConfig, server } from './config';
-import { logger } from '@/shared/infrastructure/logging';
+import { logger } from '@/shared/application/logging';
 
 const app = create(appConfig);
 
