@@ -10,7 +10,6 @@ describe('Logger', () => {
     logger.info('test message', { foo: 'bar' });
 
     const logged = await stream.read();
-
     expect(logged.msg).toBe('test message');
     expect(logged.level).toBe('info');
     expect(logged.foo).toBe('bar');
