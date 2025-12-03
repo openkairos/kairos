@@ -16,9 +16,14 @@
     "outDir": "./dist",
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"
