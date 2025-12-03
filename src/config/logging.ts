@@ -1,9 +1,9 @@
-import { type LoggerOptions } from '@/shared/application/logging';
+import { type LogLevel } from '@/shared/application/logging';
 
 interface LogConfig {
-  level: LoggerOptions['level'];
+  level: LogLevel,
 }
 
 export const logConfig: LogConfig = {
-  level: (process.env.LOG_LEVEL ?? 'info') as LoggerOptions['level'],
+  level: (process.env.LOG_LEVEL ?? 'info') as LogLevel,
 };

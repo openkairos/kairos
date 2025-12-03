@@ -1,5 +1,7 @@
+export type LogLevel = 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace' | 'silent';
+
 export interface LoggerOptions {
-  level: 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace' | 'silent';
+  level: LogLevel;
 }
 
 export interface Logger {
