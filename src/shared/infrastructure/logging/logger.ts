@@ -1,5 +1,5 @@
 import { type DestinationStream, type Logger as Pino, type LoggerOptions as PinoOptions, pino } from 'pino';
-import { type Logger, type LoggerOptions } from './types';
+import { type Logger, type LoggerOptions } from '../../application/logging';
 
 export function createLogger(options: LoggerOptions, stream?: DestinationStream): Logger {
   const logger = pino(toPinoOptions(options), stream);
