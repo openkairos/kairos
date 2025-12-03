@@ -1,4 +1,4 @@
-import { type LoggerOptions } from '../shared/application/logging/types';
+import { type LoggerOptions } from '@/shared/application/logging';
 
 interface LogConfig {
   level: LoggerOptions['level'];
