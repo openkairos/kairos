@@ -1,4 +1,4 @@
-import { logConfig } from '../../config/logging';
+import { logConfig } from '../../../config/logging';
 import { createLogger } from './logger';
 
 export const logger = createLogger({
