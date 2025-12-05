@@ -21,4 +21,15 @@ describe('Logger', () => {
     expect(logged.level).toBe(level);
     expect(logged.foo).toBe('bar');
   });
+
+  test('Log without context', async () => {
+    const stream = sink();
+    const logger = createLogger({ level: 'trace' }, stream);
+
+    logger.info('test message without context');
+
+    const logged = await stream.read();
+    expect(logged.msg).toBe('test message without context');
+    expect(logged.level).toBe('info');
+  });
 });
