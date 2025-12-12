@@ -1,2 +1,2 @@
 export * from './types';
-export { useEmit, useRequest, useResponse } from '@/shared/infrastructure/event-bus/event-bus';
+export { useEmit, useRequest, useResponse } from '@koala-ts/framework/dist/Event';
