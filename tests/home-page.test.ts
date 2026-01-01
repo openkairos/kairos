@@ -3,14 +3,14 @@ import { createTestAgent } from '@koala-ts/framework/dist/Testing/TestAgentFacto
 import { beforeEach, describe, test } from 'vitest';
 import { appConfig } from '../src/config';
 
-describe('Home Page', function() {
+describe('Home Page', function () {
   let agent: TestAgent;
 
-  beforeEach(function() {
+  beforeEach(function () {
     agent = createTestAgent(appConfig);
   });
 
-  test('it should return welcome message', function() {
+  test('it should return welcome message', function () {
     return agent.get('/').expect(200, 'KoalaTS: Effortlessly elegant, relentlessly efficient. 🎩🐨');
   });
 });

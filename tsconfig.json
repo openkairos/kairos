@@ -21,24 +21,14 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     }
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "vitest.config.ts",
-    "tests"
-  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "vitest.config.ts", "tests"],
   "tsc-alias": {
     "resolveFullPaths": true,
     "verbose": false
   },
-  "types": [
-  ]
+  "types": []
 }
