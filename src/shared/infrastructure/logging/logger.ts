@@ -38,7 +38,7 @@ function toPinoOptions(options: LoggerOptions): PinoOptions {
   return {
     level: options.level,
     formatters: {
-      level: (label) => ({ level: label }),
+      level: label => ({ level: label }),
     },
   };
 }
