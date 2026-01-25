@@ -1,4 +1,5 @@
 import { createPasswordHasher } from '@koala-ts/framework';
+import { type PasswordHasher } from '@/shared/application/security/types';
 
-export const passwordHasher = createPasswordHasher();
-export type PasswordHasher = typeof passwordHasher;
+export * from './types';
+export const passwordHasher: PasswordHasher = createPasswordHasher();
