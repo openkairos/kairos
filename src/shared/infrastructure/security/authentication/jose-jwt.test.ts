@@ -28,11 +28,17 @@ describe('Jose JWT', () => {
 
 function getTokenParts(token: string): { header: object; payload: { exp: number; iat: number }; signature: string } {
   const parts = token.split('.');
-  if (parts.length !== 3) throw new Error('Invalid token');
+  assertJwtParts(parts);
 
   return {
-    header: JSON.parse(Buffer.from(parts[0] as unknown as string, 'base64').toString('utf-8')),
-    payload: JSON.parse(Buffer.from(parts[1] as unknown as string, 'base64').toString('utf-8')),
-    signature: parts[2] as unknown as string,
+    header: JSON.parse(Buffer.from(parts[0], 'base64').toString('utf-8')),
+    payload: JSON.parse(Buffer.from(parts[1], 'base64').toString('utf-8')),
+    signature: parts[2],
   };
+}
+
+function assertJwtParts(parts: readonly unknown[]): asserts parts is [string, string, string] {
+  if (parts.length !== 3 || !parts.every(part => typeof part === 'string')) {
+    throw new Error('Invalid token format');
+  }
 }
