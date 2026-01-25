@@ -1,5 +1,6 @@
-import { type AuthenticatedUser, type PasswordCredentials, type UserRepository } from '@/authentication/types';
+import { type PasswordCredentials, type UserRepository } from '@/authentication/types';
 import { createHttpError, type HttpErrorFactory } from '@/shared/application/errors';
+import { type AuthenticatedUser } from '@/shared/application/security';
 
 export async function login(
   repository: UserRepository,

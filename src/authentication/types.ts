@@ -10,19 +10,6 @@ export interface PasswordCredentials {
   password: string;
 }
 
-export interface AccessToken {
-  access_token: string;
-  token_type: 'Bearer';
-  expires_in: number;
-  refresh_token?: string;
-  scope?: string;
-}
-
-export interface AuthenticatedUser {
-  user: User;
-  token: AccessToken;
-}
-
 export interface LoginRequest extends HttpRequest {
   body: {
     email: string;
