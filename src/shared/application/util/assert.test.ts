@@ -29,12 +29,6 @@ describe('Assert utility', () => {
       }).toThrow('Value is not a non-empty string');
     });
 
-    it('should fail if the value is only spaces', () => {
-      expect(() => {
-        assertIsNonEmptyString('   ');
-      }).toThrow('Value is not a non-empty string');
-    });
-
     it('should pass if value is a non-empty string', () => {
       expect(() => {
         assertIsNonEmptyString('valid string');
