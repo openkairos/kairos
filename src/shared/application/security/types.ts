@@ -1,11 +1,9 @@
 import { type User } from '@/shared/domain';
 
 export interface AccessToken {
-  access_token: string;
   token_type: 'Bearer';
   expires_in: number;
-  refresh_token?: string;
-  scope?: string;
+  access_token: string;
 }
 
 export interface AuthenticatedUser {
