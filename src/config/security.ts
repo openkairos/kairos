@@ -1,5 +1,10 @@
+import { assertIsNonEmptyString } from '@/shared/application/util';
+
+const appKey = process.env.APP_KEY;
+assertIsNonEmptyString(appKey, 'APP_KEY is not defined in environment variables');
+
 export const securityConfig = {
-  appKey: process.env.APP_KEY ?? '',
+  appKey,
   accessToken: {
     ttl: 3600,
     algorithm: 'HS256',
