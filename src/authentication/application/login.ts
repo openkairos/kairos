@@ -1,5 +1,5 @@
+import { type PasswordVerifier } from '@/authentication/application/password-verifier-interface';
 import { type PasswordCredentials } from '@/authentication/application/query/password-credential';
-import { type PasswordVerifier } from '@/authentication/domain/password-verifier-interface';
 import { type UserFinder } from '@/authentication/domain/user-finder-interface';
 import { type AuthenticatedUser } from '@/shared/application/security';
 
