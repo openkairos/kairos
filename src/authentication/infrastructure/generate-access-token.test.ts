@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { generateAccessToken } from '@/shared/infrastructure/security/authentication/generate-access-token';
+import { generateAccessToken } from '@/authentication/infrastructure/generate-access-token';
 
 describe('Generate access token', () => {
   test('generate access token', async () => {

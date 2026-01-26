@@ -1,4 +1,4 @@
-import { login } from '@/authentication/login';
+import { login } from '@/authentication/application/login';
 import { partial } from '@/shared/application/util';
 import { userRepository } from '@/shared/infrastructure/persistence/repository';
 
