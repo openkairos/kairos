@@ -1,7 +1,7 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
 import { SignJWT } from 'jose';
 import { securityConfig } from '@/config';
-import { type User } from '@/shared/domain';
+import { type User } from '@/shared/domain/entity/User';
 
 const { appKey, accessToken } = securityConfig;
 const key = createSecretKey(Buffer.from(appKey.replace('base64:', ''), 'base64'));

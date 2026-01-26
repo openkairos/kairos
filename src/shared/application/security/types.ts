@@ -1,4 +1,4 @@
-import { type User } from '@/shared/domain';
+import { type User } from '@/shared/domain/entity/User';
 
 export interface AccessToken {
   token_type: 'Bearer';
@@ -9,14 +9,6 @@ export interface AccessToken {
 export interface AuthenticatedUser {
   user: User;
   token: AccessToken;
-}
-
-export interface PasswordHasher {
-  hash(plainPassword: string): Promise<string>;
-
-  verify(hashedPassword: string, plainPassword: string): Promise<boolean>;
-
-  needsRehash(hashedPassword: string): boolean;
 }
 
 export type AccessTokenGenerator = (user: AuthenticatedUser) => Promise<AccessToken>;

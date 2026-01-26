@@ -1,4 +1,4 @@
-import { type User } from '@/shared/domain';
+import { type User } from '@/shared/domain/entity/User';
 
 /**
  * Finds user by email.
