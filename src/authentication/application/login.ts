@@ -1,4 +1,5 @@
-import { type PasswordCredentials, type UserRepository } from '@/authentication/types';
+import { type PasswordCredentials } from '@/authentication/application/query/password-credential.query';
+import { type UserRepository } from '@/authentication/types';
 import { createHttpError, type HttpErrorFactory } from '@/shared/application/errors';
 import { type AuthenticatedUser } from '@/shared/application/security';
 
