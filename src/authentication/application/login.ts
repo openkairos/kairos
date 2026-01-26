@@ -1,14 +1,9 @@
 import { type PasswordCredentials } from '@/authentication/application/query/password-credential';
 import { type UserFinder } from '@/authentication/domain/user-finder-interface';
-import { createHttpError } from '@/shared/application/errors';
 import { type AuthenticatedUser } from '@/shared/application/security';
 
 export async function login(findUser: UserFinder, credentials: PasswordCredentials): Promise<AuthenticatedUser> {
   const user = await findUser(credentials.email);
-
-  if (undefined === user) {
-    throw createHttpError.Unauthorized('Invalid credentials');
-  }
 
   return {
     user,
