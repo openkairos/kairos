@@ -1,7 +1,7 @@
+import { type AuthenticatedUser } from '@/authentication';
 import { type PasswordVerifier } from '@/authentication/application/password-verifier-interface';
 import { type PasswordCredentials } from '@/authentication/application/query/password-credential';
 import { type UserFinder } from '@/authentication/domain/user-finder-interface';
-import { type AuthenticatedUser } from '@/shared/application/security';
 
 export async function login(
   findUser: UserFinder,
