@@ -1,12 +1,12 @@
-import { type AuthenticatedUser } from '@/authentication';
-import { type PasswordVerifier } from '@/authentication/application/password-verifier-interface';
-import { type PasswordCredentials } from '@/authentication/application/query/password-credential';
+import { type PasswordCredentialsQuery } from '@/authentication/application/login/password-credential-query';
+import { type PasswordVerifier } from '@/authentication/application/login/password-verifier-interface';
+import { type AuthenticatedUser } from '@/authentication/domain/authenticated-user';
 import { type UserFinder } from '@/authentication/domain/user-finder-interface';
 
 export async function login(
   findUser: UserFinder,
   verifyPassword: PasswordVerifier,
-  credentials: PasswordCredentials,
+  credentials: PasswordCredentialsQuery,
 ): Promise<AuthenticatedUser> {
   const user = await findUser(credentials.email);
 
