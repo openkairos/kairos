@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { sign } from '@/authentication/infrastructure/jose-jwt';
+import { sign } from '@/authentication/infrastructure/access-token/jose-jwt';
 
 describe('Jose JWT', () => {
   describe('Sign JWT', () => {
