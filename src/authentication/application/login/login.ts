@@ -1,3 +1,4 @@
+import { type AccessTokenGenerator } from '@/authentication/application/login/access-token-generator-interface';
 import { type PasswordCredentialsQuery } from '@/authentication/application/login/password-credential-query';
 import { type PasswordVerifier } from '@/authentication/application/login/password-verifier-interface';
 import { type AuthenticatedUser } from '@/authentication/domain/authenticated-user';
@@ -6,6 +7,7 @@ import { type UserFinder } from '@/authentication/domain/user-finder-interface';
 export async function login(
   findUser: UserFinder,
   verifyPassword: PasswordVerifier,
+  generateAccessToken: AccessTokenGenerator,
   credentials: PasswordCredentialsQuery,
 ): Promise<AuthenticatedUser> {
   const user = await findUser(credentials.email);

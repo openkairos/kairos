@@ -1,3 +1,4 @@
-import type { AccessToken, AuthenticatedUser } from '@/authentication';
+import { type AccessToken } from '@/authentication/domain/access-token';
+import { type User } from '@/shared/domain/entity/User';
 
-export type AccessTokenGenerator = (user: AuthenticatedUser) => Promise<AccessToken>;
+export type AccessTokenGenerator = (user: User) => Promise<AccessToken>;
