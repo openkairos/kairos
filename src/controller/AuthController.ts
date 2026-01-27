@@ -1,6 +1,6 @@
 import { type HttpScope, Route } from '@koala-ts/framework';
 import { loginUseCase } from '@/authentication';
-import { LoginRequest } from '@/authentication/types';
+import { LoginRequest } from '@/authentication/interface/login-request';
 
 export class AuthController {
   @Route({ method: 'POST', path: '/api/v1/login' })
