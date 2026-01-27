@@ -1,6 +1,6 @@
 import { createTestAgent } from '@koala-ts/framework/dist/Testing/TestAgentFactory';
 import { describe, expect, test } from 'vitest';
-import { appConfig } from '../src/config';
+import { appConfig } from '@/config';
 
 describe('Login feature test', () => {
   test('It should authenticate admin user', async () => {
