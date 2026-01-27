@@ -1,8 +1,8 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
 import { SignJWT } from 'jose';
-import { type AccessToken } from '@/authentication/domain/access-token';
+import { type AccessToken } from '@/app/authentication/domain/access-token';
+import { type User } from '@/app/shared/domain/entity';
 import { securityConfig } from '@/config';
-import { type User } from '@/shared/domain/entity';
 
 export async function generateAccessToken(user: User): Promise<AccessToken> {
   const { accessToken } = securityConfig;

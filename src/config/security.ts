@@ -1,4 +1,4 @@
-import { assertIsNonEmptyString } from '@/shared/application/util';
+import { assertIsNonEmptyString } from '@/app/shared/application/util';
 
 const appKey = process.env.APP_KEY;
 assertIsNonEmptyString(appKey, 'APP_KEY is not defined in environment variables');
