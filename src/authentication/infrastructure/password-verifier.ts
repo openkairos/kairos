@@ -1,6 +1,6 @@
 import { InvalidCredentialsError } from '@/authentication/application/errors';
 import { type PasswordVerifier } from '@/authentication/application/login/password-verifier-interface';
-import { passwordHasher } from '@/shared/infrastructure/security/index';
+import { passwordHasher } from '@/shared/infrastructure/security';
 
 export const verifyPassword: PasswordVerifier = async (
   plainPassword: string,
