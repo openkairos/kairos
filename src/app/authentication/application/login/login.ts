@@ -16,10 +16,6 @@ export async function login(
 
   return {
     user,
-    token: {
-      access_token: 'mocked_access_token',
-      token_type: 'Bearer',
-      expires_in: 3600,
-    },
+    token: await generateAccessToken(user),
   };
 }

@@ -1,10 +1,10 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
 import { SignJWT } from 'jose';
-import { type AccessToken } from '@/app/authentication/domain/access-token';
+import { type AccessTokenGenerator } from '@/app/authentication/application/login/access-token-generator-interface';
 import { type User } from '@/app/shared/domain/entity';
 import { securityConfig } from '@/config';
 
-export async function generateAccessToken(user: User): Promise<AccessToken> {
+export const generateAccessToken: AccessTokenGenerator = async (user: User) => {
   const { accessToken } = securityConfig;
 
   return {
@@ -12,7 +12,7 @@ export async function generateAccessToken(user: User): Promise<AccessToken> {
     expires_in: accessToken.ttl,
     access_token: await sign(user),
   };
-}
+};
 
 async function sign(user: User): Promise<string> {
   const { appKey, accessToken } = securityConfig;
