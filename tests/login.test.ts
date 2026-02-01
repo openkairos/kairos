@@ -14,5 +14,6 @@ describe('Login feature test', () => {
     expect(response.status).toBe(200);
     expect(response.body.data).toHaveProperty('user');
     expect(response.body.data).toHaveProperty('token');
+    expect(response.body.data.user).not.toHaveProperty('password');
   });
 });

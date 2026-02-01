@@ -4,3 +4,7 @@ export interface User {
   email: string;
   password: string;
 }
+
+export const userMetadata = {
+  password: { ignore: true },
+};
