@@ -8,11 +8,11 @@ import { normalize } from '@/app/shared/infrastructure/serializer';
 export class AuthController {
   @Route({ method: 'POST', path: '/api/v1/login' })
   async login({ response, request }: HttpScope<LoginRequest>): Promise<void> {
-    const authenticatedUser: AuthenticatedUser = await loginUseCase.execute(request.body);
+    const { token, user }: AuthenticatedUser = await loginUseCase.execute(request.body);
 
     const data = {
-      user: normalize(authenticatedUser.user, { metadata: userMetadata }),
-      token: normalize(authenticatedUser.token),
+      user: normalize(user, { metadata: userMetadata }),
+      token: normalize(token),
     };
 
     response.body = { data };
