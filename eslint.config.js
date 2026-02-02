@@ -5,29 +5,34 @@ import stylistic from '@stylistic/eslint-plugin';
 import pluginImport from 'eslint-plugin-import';
 import pluginPromise from 'eslint-plugin-promise';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import {fileURLToPath} from 'node:url';
 import prettier from 'eslint-plugin-prettier/recommended';
 
 const tsconfigRootDir = path.dirname(fileURLToPath(import.meta.url));
 
 const applyTypeCheckedConfig = configs =>
-  configs.map(cfg => ({
-    ...cfg,
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ...(cfg.languageOptions ?? {}),
-      parserOptions: {
-        ...(cfg.languageOptions?.parserOptions ?? {}),
-        project: ['./tsconfig.eslint.json'],
-        tsconfigRootDir,
+    configs.map(cfg => ({
+      ...cfg,
+      files: ['**/*.{ts,tsx}'],
+      languageOptions: {
+        ...(cfg.languageOptions ?? {}),
+        parserOptions: {
+          ...(cfg.languageOptions?.parserOptions ?? {}),
+          project: ['./tsconfig.eslint.json'],
+          tsconfigRootDir,
+        },
       },
-    },
-  }));
+    }));
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ['dist/**', 'node_modules/**', 'coverage/**', '*.config.js', '*.config.ts'],
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      'coverage/**',
+      '*.config.js',
+      '*.config.ts'],
   },
   {
     files: ['**/*.{js,mjs,cjs}'],
@@ -130,7 +135,13 @@ export default [
       'import/order': [
         'error',
         {
-          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index'],
           'newlines-between': 'never',
           alphabetize: {
             order: 'asc',
@@ -161,7 +172,7 @@ export default [
 
       // Stylistic rules
       '@stylistic/indent': ['error', 2],
-      '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
+      '@stylistic/quotes': ['error', 'single', {avoidEscape: true}],
       '@stylistic/semi': ['error', 'always'],
       '@stylistic/comma-dangle': ['error', 'always-multiline'],
       '@stylistic/object-curly-spacing': ['error', 'always'],

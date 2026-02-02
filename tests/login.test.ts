@@ -8,7 +8,7 @@ describe('Login feature test', () => {
 
     const response = await agent.post('/api/v1/login').send({
       email: 'admin@example.com',
-      password: 'password', // eslint-disable-line sonarjs/no-hardcoded-passwords
+      password: 'password',
     });
 
     expect(response.status).toBe(200);
