@@ -3,3 +3,9 @@ export interface AccessToken {
   expires_in: number;
   access_token: string;
 }
+
+export const accessTokenMedata = {
+  token_type: { groups: ['auth:login'] },
+  expires_in: { groups: ['auth:login'] },
+  access_token: { groups: ['auth:login'] },
+};

@@ -7,4 +7,7 @@ export interface User {
 
 export const userMetadata = {
   password: { ignore: true },
+  id: { groups: ['auth:login'] },
+  username: { groups: ['auth:login'] },
+  email: { groups: ['auth:login'] },
 };
