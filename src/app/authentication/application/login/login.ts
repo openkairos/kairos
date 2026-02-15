@@ -4,18 +4,24 @@ import { type PasswordVerifier } from '@/app/authentication/application/login/pa
 import { type AuthenticatedUser } from '@/app/authentication/domain/authenticated-user';
 import { type UserFinder } from '@/app/authentication/domain/user-finder-interface';
 
-export async function login(
-  findUser: UserFinder,
-  verifyPassword: PasswordVerifier,
-  generateAccessToken: AccessTokenGenerator,
-  credentials: PasswordCredentialsQuery,
-): Promise<AuthenticatedUser> {
-  const user = await findUser(credentials.email);
+interface AuthenticateDependencies {
+  findByEmailOrFail: UserFinder;
+  verifyPassword: PasswordVerifier;
+  generateAccessToken: AccessTokenGenerator;
+}
 
-  await verifyPassword(credentials.password, user.password);
+/**
+ * @throws {import('@/app/authentication/application/errors').InvalidCredentialsError}
+ */
+export function authenticate({ findByEmailOrFail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
+  return async (credentials: PasswordCredentialsQuery): Promise<AuthenticatedUser> => {
+    const user = await findByEmailOrFail(credentials.email);
 
-  return {
-    user,
-    token: await generateAccessToken(user),
+    await verifyPassword(credentials.password, user.password);
+
+    return {
+      user,
+      token: await generateAccessToken(user),
+    };
   };
 }
