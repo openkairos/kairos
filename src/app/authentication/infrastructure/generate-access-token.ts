@@ -1,6 +1,6 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
 import { SignJWT } from 'jose';
-import { type AccessTokenGenerator } from '@/app/authentication/application/login/access-token-generator-interface';
+import { type AccessTokenGenerator } from '@/app/authentication/application/authenticate';
 import { type User } from '@/app/shared/domain/entity';
 import { securityConfig } from '@/config';
 
