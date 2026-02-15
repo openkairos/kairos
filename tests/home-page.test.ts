@@ -1,5 +1,4 @@
-import { type TestAgent } from '@koala-ts/framework';
-import { createTestAgent } from '@koala-ts/framework/dist/Testing/TestAgentFactory';
+import { createTestAgent, type TestAgent } from '@koala-ts/framework';
 import { beforeEach, describe, test } from 'vitest';
 import { appConfig } from '../src/config';
 
