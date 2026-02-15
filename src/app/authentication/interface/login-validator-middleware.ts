@@ -1,6 +1,7 @@
 import { type HttpScope, type NextMiddleware } from '@koala-ts/framework';
-import { createValidator, type Violation } from '@koala-ts/framework/validator';
+import { createValidator, flattenViolations } from '@koala-ts/framework/validator';
 import { email, notBlank } from '@koala-ts/framework/validator/constraints';
+import { createHttpError } from '@/app/shared/application/errors';
 
 export async function loginValidatorMiddleware(scope: HttpScope, next: NextMiddleware): Promise<void> {
   const validate = createValidator({ constraints: { notBlank, email } });
@@ -11,26 +12,8 @@ export async function loginValidatorMiddleware(scope: HttpScope, next: NextMiddl
   });
 
   if (violations.length > 0) {
-    scope.response.status = 400;
-    scope.response.body = {
-      errors: flattenViolations(violations),
-    };
-    return;
+    throw createHttpError(400, 'Validation failed.', { errors: flattenViolations(violations) });
   }
 
   await next();
-}
-
-function flattenViolations(violations: Violation[]): Record<string, string[]> {
-  const result: Record<string, string[]> = {};
-
-  for (const violation of violations) {
-    const property = violation.path;
-
-    result[property] ??= [];
-
-    result[property].push(violation.message);
-  }
-
-  return result;
 }
