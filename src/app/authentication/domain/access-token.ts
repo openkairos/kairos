@@ -4,7 +4,7 @@ export interface AccessToken {
   access_token: string;
 }
 
-export const accessTokenMedata = {
+export const accessTokenSerializerMetadata = {
   token_type: { groups: ['auth:login'] },
   expires_in: { groups: ['auth:login'] },
   access_token: { groups: ['auth:login'] },

@@ -1,6 +1,6 @@
 import type { AccessToken } from '@/app/authentication/domain/access-token';
 import { type AuthenticatedUser } from '@/app/authentication/domain/authenticated-user';
-import { type UserFinder } from '@/app/authentication/domain/user-finder-interface';
+import { type UserFinder } from '@/app/authentication/domain/user-finder';
 import type { User } from '@/app/shared/domain/entity';
 
 /**

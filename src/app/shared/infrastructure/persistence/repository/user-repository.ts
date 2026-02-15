@@ -1,5 +1,5 @@
 import { InvalidCredentialsError } from '@/app/authentication/application/errors';
-import { type UserFinder } from '@/app/authentication/domain/user-finder-interface';
+import { type UserFinder } from '@/app/authentication/domain/user-finder';
 import { type User } from '@/app/shared/domain/entity';
 
 export const findByEmailOrFail: UserFinder = async (email: string): Promise<User> => {
