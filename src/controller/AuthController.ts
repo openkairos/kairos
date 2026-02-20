@@ -3,7 +3,7 @@ import { authenticateUser } from '@/app/authentication';
 import { AuthenticatedUser, authenticatedUserSerializerMetadata } from '@/app/authentication/domain/authenticated-user';
 import { LoginRequest, loginRequestValidationConstraints } from '@/app/authentication/interface/login-request';
 import { normalize } from '@/app/shared/infrastructure/serializer';
-import { validate } from '@/shared/interface/middleware';
+import { validate } from '@/app/shared/interface/middleware';
 
 export class AuthController {
   @Route({ method: 'POST', path: '/api/v1/login', middleware: [validate(loginRequestValidationConstraints)] })
