@@ -1,7 +1,6 @@
 import { authenticate } from '@/app/authentication/application/authenticate';
-import { generateAccessToken } from '@/app/authentication/infrastructure/generate-access-token';
-import { verifyPassword } from '@/app/authentication/infrastructure/password-verifier';
 import { findOneByEmailOrFail } from '@/app/shared/infrastructure/persistence/repository/user-repository';
+import { generateAccessToken, verifyPassword } from '@/app/shared/infrastructure/security';
 
 export const authenticateUser = authenticate({
   findOneByEmailOrFail,

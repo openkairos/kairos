@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { generateAccessToken } from '@/app/authentication/infrastructure/generate-access-token';
+import { generateAccessToken } from '@/app/shared/infrastructure/security/generate-access-token';
 
 describe('Generate access token', () => {
   test('it should generate a JWT token', async () => {
