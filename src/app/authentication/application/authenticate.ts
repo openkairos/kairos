@@ -1,14 +1,14 @@
 import type { AccessToken } from '@/app/authentication/domain/access-token';
 import { type AuthenticatedUser } from '@/app/authentication/domain/authenticated-user';
-import { type UserFinder } from '@/app/authentication/domain/user-finder';
 import type { User } from '@/app/shared/domain/entity';
+import { type FindOneByEmailOrFail } from '@/app/shared/domain/repository';
 
 /**
  * @throws {import('@/app/authentication/application/errors').InvalidCredentialsError}
  */
-export function authenticate({ findByEmailOrFail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
-  return async (credentials: PasswordCredentialsQuery): Promise<AuthenticatedUser> => {
-    const user = await findByEmailOrFail(credentials.email);
+export function authenticate({ findOneByEmailOrFail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
+  return async function execute(credentials: PasswordCredentialsQuery): Promise<AuthenticatedUser> {
+    const user = await findOneByEmailOrFail(credentials.email);
 
     await verifyPassword(credentials.password, user.password);
 
@@ -23,17 +23,17 @@ export function authenticate({ findByEmailOrFail, verifyPassword, generateAccess
  * Verifies a plain text password against a hashed password.
  * @throws {import('@/app/authentication/application/errors').InvalidCredentialsError}
  */
-export type PasswordVerifier = (password: string, hashedPassword: string) => Promise<void>;
+export type VerifyPassword = (password: string, hashedPassword: string) => Promise<void>;
 
 export interface PasswordCredentialsQuery {
   email: string;
   password: string;
 }
 
-export type AccessTokenGenerator = (user: User) => Promise<AccessToken>;
+export type GenerateAccessToken = (user: User) => Promise<AccessToken>;
 
 interface AuthenticateDependencies {
-  findByEmailOrFail: UserFinder;
-  verifyPassword: PasswordVerifier;
-  generateAccessToken: AccessTokenGenerator;
+  findOneByEmailOrFail: FindOneByEmailOrFail;
+  verifyPassword: VerifyPassword;
+  generateAccessToken: GenerateAccessToken;
 }

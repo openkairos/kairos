@@ -1,10 +1,10 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
 import { SignJWT } from 'jose';
-import { type AccessTokenGenerator } from '@/app/authentication/application/authenticate';
+import { type GenerateAccessToken } from '@/app/authentication/application/authenticate';
 import { type User } from '@/app/shared/domain/entity';
 import { securityConfig } from '@/config';
 
-export const generateAccessToken: AccessTokenGenerator = async (user: User) => {
+export const generateAccessToken: GenerateAccessToken = async (user: User) => {
   const { accessToken } = securityConfig;
 
   return {
