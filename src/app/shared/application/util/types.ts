@@ -17,3 +17,7 @@ export interface Logger {
 
   trace(message: string, context?: unknown): void;
 }
+
+export interface EventEmitter {
+  emit(event: string, ...args: unknown[]): void;
+}
