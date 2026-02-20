@@ -6,3 +6,8 @@ export interface LoginRequest extends HttpRequest {
     password: string;
   };
 }
+
+export const loginRequestValidationConstraints = {
+  email: ['notBlank', 'email'],
+  password: ['notBlank'],
+};

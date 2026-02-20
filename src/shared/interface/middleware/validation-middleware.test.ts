@@ -26,14 +26,6 @@ describe('Validation middleware', () => {
     const next = vi.fn();
     const middleware = validationMiddleware(validate)({ name: ['notBlank'] });
 
-    await middleware(scope as unknown as HttpScope, next);
-
-    expect(next).not.toHaveBeenCalled();
-    expect(scope.response.status).toBe(400);
-    expect(scope.response.body).toEqual({
-      errors: {
-        name: ['This value should not be blank.'],
-      },
-    });
+    await expect(middleware(scope as unknown as HttpScope, next)).rejects.toThrow('Validation failed.');
   });
 });

@@ -1,5 +1,6 @@
 import { type HttpScope, type NextMiddleware } from '@koala-ts/framework';
 import { flattenViolations, type ValidationRules, type Validator } from '@koala-ts/framework/validator';
+import { createHttpError } from '@/app/shared/application/errors';
 
 export function validationMiddleware(validate: Validator) {
   return function createMiddleware(constraints: ValidationRules) {
@@ -7,9 +8,7 @@ export function validationMiddleware(validate: Validator) {
       const violations = validate(scope.request.body ?? {}, constraints);
 
       if (violations.length > 0) {
-        scope.response.status = 400;
-        scope.response.body = { errors: flattenViolations(violations) };
-        return;
+        throw createHttpError(400, 'Validation failed.', { errors: flattenViolations(violations) });
       }
 
       await next();
