@@ -39,6 +39,25 @@ describe('HTTP error renderer middleware', () => {
     expect(scope.response.withHeaders).not.toHaveBeenCalled();
   });
 
+  it('should rethrow non-record thrown values', async () => {
+    const scope = {
+      response: {
+        status: 404,
+        body: undefined,
+        withHeaders: vi.fn(),
+      },
+    };
+    const primitiveError: unknown = 'boom';
+    const next = vi.fn(() => {
+      throw primitiveError;
+    });
+
+    await expect(renderHttpError(scope as unknown as HttpScope, next)).rejects.toBe(primitiveError);
+    expect(scope.response.status).toBe(404);
+    expect(scope.response.body).toBeUndefined();
+    expect(scope.response.withHeaders).not.toHaveBeenCalled();
+  });
+
   it('should render http errors as JSON response', async () => {
     const scope = {
       response: {
