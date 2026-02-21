@@ -1,37 +1,36 @@
-import { InvalidCredentialsError, type InvalidCredentialsException } from '@/app/authentication/application/errors';
+import { type InvalidCredentialsException } from '@/app/authentication/application/errors';
 import type { AccessToken } from '@/app/authentication/domain/access-token';
 import { type AuthenticatedUser } from '@/app/authentication/domain/authenticated-user';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
-import { isErr, type Result } from '@/app/shared/application/util/result';
+import { isErr, ok, type Result } from '@/app/shared/application/util/result';
 import type { User } from '@/app/shared/domain/entity';
 
-/**
- * @throws {import('@/app/authentication/application/errors').InvalidCredentialsError}
- */
 export function authenticate({ findOneByEmail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
-  return async function execute(credentials: PasswordCredentialsQuery): Promise<AuthenticatedUser> {
-    const result = await findOneByEmail(credentials.email);
-    if (isErr(result)) throw InvalidCredentialsError;
+  return async function execute(credentials: PasswordCredentialsQuery): Promise<AuthenticateResult> {
+    const userResult = await findOneByEmail(credentials.email);
+    if (isErr(userResult)) return userResult;
 
-    const verifyPasswordResult = await verifyPassword(credentials.password, result.value.password);
-    if (isErr(verifyPasswordResult)) throw InvalidCredentialsError;
+    const verifyPasswordResult = await verifyPassword(credentials.password, userResult.value.password);
+    if (isErr(verifyPasswordResult)) return verifyPasswordResult;
 
-    return {
-      user: result.value,
-      token: await generateAccessToken(result.value),
-    };
+    return ok({
+      user: userResult.value,
+      token: await generateAccessToken(userResult.value),
+    });
   };
 }
-
-export type VerifyPassword = (
-  password: string,
-  hashedPassword: string,
-) => Promise<Result<void, InvalidCredentialsException>>;
 
 export interface PasswordCredentialsQuery {
   email: string;
   password: string;
 }
+
+type AuthenticateResult = Result<AuthenticatedUser, InvalidCredentialsException>;
+
+export type VerifyPassword = (
+  password: string,
+  hashedPassword: string,
+) => Promise<Result<void, InvalidCredentialsException>>;
 
 export type GenerateAccessToken = (user: User) => Promise<AccessToken>;
 

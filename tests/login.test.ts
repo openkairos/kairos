@@ -39,7 +39,6 @@ describe('Login feature test', () => {
     });
 
     expect(response.status).toBe(401);
-    expect(response.text).toBe('Invalid credentials');
-    expect(response.body.data).toBeUndefined();
+    expect(response.body).toEqual({ message: 'Invalid credentials' });
   });
 });
