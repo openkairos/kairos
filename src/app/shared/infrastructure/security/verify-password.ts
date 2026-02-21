@@ -1,11 +1,9 @@
 import { type VerifyPassword } from '@/app/authentication/application/authenticate';
-import { InvalidCredentialsError } from '@/app/authentication/application/errors';
+import { invalidCredentialsException } from '@/app/authentication/application/errors';
+import { err, ok } from '@/app/shared/application/util/result';
 import { passwordHasher } from '@/app/shared/infrastructure/security/index';
 
-export const verifyPassword: VerifyPassword = async (plainPassword: string, hashedPassword: string): Promise<void> => {
+export const verifyPassword: VerifyPassword = async (plainPassword: string, hashedPassword: string) => {
   const isValid = await passwordHasher.verify(hashedPassword, plainPassword);
-
-  if (!isValid) {
-    throw InvalidCredentialsError;
-  }
+  return isValid ? ok(undefined) : err(invalidCredentialsException);
 };

@@ -1,8 +1,8 @@
-import { InvalidCredentialsError } from '@/app/authentication/application/errors';
+import { InvalidCredentialsError, type InvalidCredentialsException } from '@/app/authentication/application/errors';
 import type { AccessToken } from '@/app/authentication/domain/access-token';
 import { type AuthenticatedUser } from '@/app/authentication/domain/authenticated-user';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
-import { isErr } from '@/app/shared/application/util/result';
+import { isErr, type Result } from '@/app/shared/application/util/result';
 import type { User } from '@/app/shared/domain/entity';
 
 /**
@@ -13,7 +13,8 @@ export function authenticate({ findOneByEmail, verifyPassword, generateAccessTok
     const result = await findOneByEmail(credentials.email);
     if (isErr(result)) throw InvalidCredentialsError;
 
-    await verifyPassword(credentials.password, result.value.password);
+    const verifyPasswordResult = await verifyPassword(credentials.password, result.value.password);
+    if (isErr(verifyPasswordResult)) throw InvalidCredentialsError;
 
     return {
       user: result.value,
@@ -22,11 +23,10 @@ export function authenticate({ findOneByEmail, verifyPassword, generateAccessTok
   };
 }
 
-/**
- * Verifies a plain text password against a hashed password.
- * @throws {import('@/app/authentication/application/errors').InvalidCredentialsError}
- */
-export type VerifyPassword = (password: string, hashedPassword: string) => Promise<void>;
+export type VerifyPassword = (
+  password: string,
+  hashedPassword: string,
+) => Promise<Result<void, InvalidCredentialsException>>;
 
 export interface PasswordCredentialsQuery {
   email: string;

@@ -4,6 +4,7 @@ import {
   type GenerateAccessToken,
   type VerifyPassword,
 } from '@/app/authentication/application/authenticate';
+import { invalidCredentialsException } from '@/app/authentication/application/errors';
 import type { AccessToken } from '@/app/authentication/domain/access-token';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
 import { ok } from '@/app/shared/application/util/result';
@@ -23,7 +24,7 @@ describe('Authenticate use case', () => {
       access_token: 'jwt-token',
     };
     const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(ok(user));
-    const verifyPassword: VerifyPassword = vi.fn(() => Promise.resolve());
+    const verifyPassword: VerifyPassword = vi.fn().mockResolvedValue(ok(undefined));
     const generateAccessToken: GenerateAccessToken = vi.fn(() => Promise.resolve(token));
     const execute = authenticate({ findOneByEmail, verifyPassword, generateAccessToken });
 
@@ -46,8 +47,9 @@ describe('Authenticate use case', () => {
       password: 'hashed-password',
     };
     const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(ok(user));
-    const error = new Error('Invalid credentials');
-    const verifyPassword: VerifyPassword = vi.fn(() => Promise.reject(error));
+    const verifyPassword: VerifyPassword = vi
+      .fn()
+      .mockResolvedValue({ isErr: true, error: invalidCredentialsException });
     const generateAccessToken: GenerateAccessToken = vi.fn();
     const execute = authenticate({ findOneByEmail, verifyPassword, generateAccessToken });
 
