@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { err, ok } from '@/app/shared/application/util/result';
+import { err, isErr, isOk, ok } from '@/app/shared/application/util/result';
 
 describe('Result module', () => {
   test('Ok constructor', () => {
@@ -8,5 +8,15 @@ describe('Result module', () => {
 
   test('Err constructor', () => {
     expect(err('ERROR')).toEqual({ isOk: false, error: 'ERROR' });
+  });
+
+  test('isOk type guard', () => {
+    expect(ok(35)).toSatisfy(isOk);
+    expect(err('ERROR')).not.toSatisfy(isOk);
+  });
+
+  test('isErr type guard', () => {
+    expect(err('ERROR')).toSatisfy(isErr);
+    expect(ok(35)).not.toSatisfy(isErr);
   });
 });

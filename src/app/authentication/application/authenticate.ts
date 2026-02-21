@@ -1,7 +1,7 @@
 import type { AccessToken } from '@/app/authentication/domain/access-token';
 import { type AuthenticatedUser } from '@/app/authentication/domain/authenticated-user';
+import { type FindOneByEmailOrFail } from '@/app/authentication/domain/user-credentials-repository';
 import type { User } from '@/app/shared/domain/entity';
-import { type FindOneByEmailOrFail } from '@/app/shared/domain/repository';
 
 /**
  * @throws {import('@/app/authentication/application/errors').InvalidCredentialsError}

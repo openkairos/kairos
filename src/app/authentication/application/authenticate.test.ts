@@ -5,8 +5,8 @@ import {
   type VerifyPassword,
 } from '@/app/authentication/application/authenticate';
 import type { AccessToken } from '@/app/authentication/domain/access-token';
+import { type FindOneByEmailOrFail } from '@/app/authentication/domain/user-credentials-repository';
 import type { User } from '@/app/shared/domain/entity';
-import type { FindOneByEmailOrFail } from '@/app/shared/domain/repository';
 
 describe('Authenticate use case', () => {
   it('should authenticate user and return access token', async () => {

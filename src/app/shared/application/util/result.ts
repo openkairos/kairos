@@ -17,3 +17,6 @@ export function ok<T>(value: T): Ok<T> {
 export function err<E>(error: E): Err<E> {
   return { isOk: false, error };
 }
+
+export const isOk = <T, E>(r: Result<T, E>): r is Ok<T> => r.isOk;
+export const isErr = <T, E>(r: Result<T, E>): r is Err<E> => !r.isOk;
