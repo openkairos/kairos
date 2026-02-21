@@ -4,7 +4,7 @@ import {
   type GenerateAccessToken,
   type VerifyPassword,
 } from '@/app/authentication/application/authenticate';
-import { invalidCredentialsException } from '@/app/authentication/application/errors';
+import { invalidCredentialsError } from '@/app/authentication/application/errors';
 import { type AccessToken } from '@/app/authentication/domain/access-token';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
 import { err, ok } from '@/app/shared/application/util/result';
@@ -25,7 +25,7 @@ describe('Authenticate use case', () => {
   };
 
   it('should fail if user does not exist', async () => {
-    const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(err(invalidCredentialsException));
+    const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(err(invalidCredentialsError));
     const verifyPassword: VerifyPassword = vi.fn();
     const generateAccessToken: GenerateAccessToken = vi.fn();
     const execute = authenticate({ findOneByEmail, verifyPassword, generateAccessToken });
@@ -35,12 +35,12 @@ describe('Authenticate use case', () => {
       password: 'plain-password',
     });
 
-    expect(result).toEqual(err(invalidCredentialsException));
+    expect(result).toEqual(err(invalidCredentialsError));
   });
 
   it('should fail if password is invalid', async () => {
     const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(ok(user));
-    const verifyPassword: VerifyPassword = vi.fn().mockResolvedValue(err(invalidCredentialsException));
+    const verifyPassword: VerifyPassword = vi.fn().mockResolvedValue(err(invalidCredentialsError));
     const generateAccessToken: GenerateAccessToken = vi.fn();
     const execute = authenticate({ findOneByEmail, verifyPassword, generateAccessToken });
 
@@ -49,7 +49,7 @@ describe('Authenticate use case', () => {
       password: 'plain-password',
     });
 
-    expect(result).toEqual(err(invalidCredentialsException));
+    expect(result).toEqual(err(invalidCredentialsError));
   });
 
   it('should authenticate user and return access token', async () => {

@@ -1,4 +1,4 @@
-import { type InvalidCredentialsException } from '@/app/authentication/application/errors';
+import { type InvalidCredentialsError } from '@/app/authentication/application/errors';
 import type { AccessToken } from '@/app/authentication/domain/access-token';
 import { type AuthenticatedUser } from '@/app/authentication/domain/authenticated-user';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
@@ -25,12 +25,12 @@ export interface PasswordCredentialsQuery {
   password: string;
 }
 
-type AuthenticateResult = Result<AuthenticatedUser, InvalidCredentialsException>;
+type AuthenticateResult = Result<AuthenticatedUser, InvalidCredentialsError>;
 
 export type VerifyPassword = (
   password: string,
   hashedPassword: string,
-) => Promise<Result<void, InvalidCredentialsException>>;
+) => Promise<Result<void, InvalidCredentialsError>>;
 
 export type GenerateAccessToken = (user: User) => Promise<AccessToken>;
 

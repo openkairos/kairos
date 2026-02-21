@@ -1,13 +1,9 @@
-import { createHttpError } from '@/app/shared/application/util';
-
-export const InvalidCredentialsError = createHttpError.Unauthorized('Invalid credentials');
-
-export interface InvalidCredentialsException {
+export interface InvalidCredentialsError {
   type: 'INVALID_CREDENTIALS';
   message: 'Invalid credentials';
 }
 
-export const invalidCredentialsException: InvalidCredentialsException = {
+export const invalidCredentialsError: InvalidCredentialsError = {
   type: 'INVALID_CREDENTIALS',
   message: 'Invalid credentials',
 };

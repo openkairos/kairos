@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { verifyPassword } from './verify-password';
-import { invalidCredentialsException } from '@/app/authentication/application/errors';
+import { invalidCredentialsError } from '@/app/authentication/application/errors';
 import { passwordHasher } from '@/app/shared/infrastructure/security/index';
 
 describe('Password verifier', () => {
@@ -11,7 +11,7 @@ describe('Password verifier', () => {
 
     expect(result).toEqual({
       isOk: false,
-      error: invalidCredentialsException,
+      error: invalidCredentialsError,
     });
   });
 
