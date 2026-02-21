@@ -1,5 +1,5 @@
-import { type VerifyPassword } from '@/app/authentication/application/authenticate';
 import { invalidCredentialsError } from '@/app/authentication/application/errors';
+import { type VerifyPassword } from '@/app/authentication/application/login';
 import { err, ok } from '@/app/shared/application/util/result';
 import { passwordHasher } from '@/app/shared/infrastructure/security/index';
 

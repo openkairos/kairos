@@ -5,7 +5,7 @@ import { type FindOneByEmail } from '@/app/authentication/domain/user-credential
 import { isErr, ok, type Result } from '@/app/shared/application/util/result';
 import type { User } from '@/app/shared/domain/entity';
 
-export function authenticate({ findOneByEmail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
+export function login({ findOneByEmail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
   return async function execute(credentials: PasswordCredentialsQuery): Promise<AuthenticateResult> {
     const userResult = await findOneByEmail(credentials.email);
     if (isErr(userResult)) return userResult;
