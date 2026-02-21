@@ -6,11 +6,11 @@ import { isErr, ok, type Result } from '@/app/shared/application/util/result';
 import type { User } from '@/app/shared/domain/entity';
 
 export function login({ findOneByEmail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
-  return async function execute(credentials: PasswordCredentialsQuery): Promise<AuthenticateResult> {
-    const userResult = await findOneByEmail(credentials.email);
+  return async function execute(command: LoginUserCommand): Promise<AuthenticateResult> {
+    const userResult = await findOneByEmail(command.email);
     if (isErr(userResult)) return userResult;
 
-    const verifyPasswordResult = await verifyPassword(credentials.password, userResult.value.password);
+    const verifyPasswordResult = await verifyPassword(command.password, userResult.value.password);
     if (isErr(verifyPasswordResult)) return verifyPasswordResult;
 
     return ok({
@@ -20,7 +20,7 @@ export function login({ findOneByEmail, verifyPassword, generateAccessToken }: A
   };
 }
 
-export interface PasswordCredentialsQuery {
+export interface LoginUserCommand {
   email: string;
   password: string;
 }
