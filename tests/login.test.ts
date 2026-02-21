@@ -29,4 +29,17 @@ describe('Login feature test', () => {
     ]);
     expect(response.body.errors).toHaveProperty('password', ['This value should not be blank.']);
   });
+
+  test('it should not authenticate with wrong credentials', async () => {
+    const agent = createTestAgent(appConfig);
+
+    const response = await agent.post('/api/v1/login').send({
+      email: 'admin@example.com',
+      password: 'wrongpassword',
+    });
+
+    expect(response.status).toBe(401);
+    expect(response.text).toBe('Invalid credentials');
+    expect(response.body.data).toBeUndefined();
+  });
 });
