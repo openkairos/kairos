@@ -1,20 +1,23 @@
+import { InvalidCredentialsError } from '@/app/authentication/application/errors';
 import type { AccessToken } from '@/app/authentication/domain/access-token';
 import { type AuthenticatedUser } from '@/app/authentication/domain/authenticated-user';
-import { type FindOneByEmailOrFail } from '@/app/authentication/domain/user-credentials-repository';
+import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
+import { isErr } from '@/app/shared/application/util/result';
 import type { User } from '@/app/shared/domain/entity';
 
 /**
  * @throws {import('@/app/authentication/application/errors').InvalidCredentialsError}
  */
-export function authenticate({ findOneByEmailOrFail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
+export function authenticate({ findOneByEmail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
   return async function execute(credentials: PasswordCredentialsQuery): Promise<AuthenticatedUser> {
-    const user = await findOneByEmailOrFail(credentials.email);
+    const result = await findOneByEmail(credentials.email);
+    if (isErr(result)) throw InvalidCredentialsError;
 
-    await verifyPassword(credentials.password, user.password);
+    await verifyPassword(credentials.password, result.value.password);
 
     return {
-      user,
-      token: await generateAccessToken(user),
+      user: result.value,
+      token: await generateAccessToken(result.value),
     };
   };
 }
@@ -33,7 +36,7 @@ export interface PasswordCredentialsQuery {
 export type GenerateAccessToken = (user: User) => Promise<AccessToken>;
 
 interface AuthenticateDependencies {
-  findOneByEmailOrFail: FindOneByEmailOrFail;
+  findOneByEmail: FindOneByEmail;
   verifyPassword: VerifyPassword;
   generateAccessToken: GenerateAccessToken;
 }

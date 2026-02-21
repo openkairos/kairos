@@ -5,7 +5,8 @@ import {
   type VerifyPassword,
 } from '@/app/authentication/application/authenticate';
 import type { AccessToken } from '@/app/authentication/domain/access-token';
-import { type FindOneByEmailOrFail } from '@/app/authentication/domain/user-credentials-repository';
+import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
+import { ok } from '@/app/shared/application/util/result';
 import type { User } from '@/app/shared/domain/entity';
 
 describe('Authenticate use case', () => {
@@ -21,22 +22,17 @@ describe('Authenticate use case', () => {
       expires_in: 3600,
       access_token: 'jwt-token',
     };
-    const findOneByEmailOrFail: FindOneByEmailOrFail = vi.fn((email: string) =>
-      Promise.resolve({
-        ...user,
-        email,
-      }),
-    );
+    const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(ok(user));
     const verifyPassword: VerifyPassword = vi.fn(() => Promise.resolve());
     const generateAccessToken: GenerateAccessToken = vi.fn(() => Promise.resolve(token));
-    const execute = authenticate({ findOneByEmailOrFail, verifyPassword, generateAccessToken });
+    const execute = authenticate({ findOneByEmail, verifyPassword, generateAccessToken });
 
     const result = await execute({
       email: 'admin@example.com',
       password: 'plain-password',
     });
 
-    expect(findOneByEmailOrFail).toHaveBeenCalledWith('admin@example.com');
+    expect(findOneByEmail).toHaveBeenCalledWith('admin@example.com');
     expect(verifyPassword).toHaveBeenCalledWith('plain-password', 'hashed-password');
     expect(generateAccessToken).toHaveBeenCalledWith(user);
     expect(result).toEqual({ user, token });
@@ -49,11 +45,11 @@ describe('Authenticate use case', () => {
       email: 'admin@example.com',
       password: 'hashed-password',
     };
-    const findOneByEmailOrFail: FindOneByEmailOrFail = vi.fn(() => Promise.resolve(user));
+    const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(ok(user));
     const error = new Error('Invalid credentials');
     const verifyPassword: VerifyPassword = vi.fn(() => Promise.reject(error));
     const generateAccessToken: GenerateAccessToken = vi.fn();
-    const execute = authenticate({ findOneByEmailOrFail, verifyPassword, generateAccessToken });
+    const execute = authenticate({ findOneByEmail, verifyPassword, generateAccessToken });
 
     await expect(
       execute({

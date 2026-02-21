@@ -13,10 +13,12 @@ describe('Result module', () => {
   test('isOk type guard', () => {
     expect(ok(35)).toSatisfy(isOk);
     expect(err('ERROR')).not.toSatisfy(isOk);
+    expect({}).not.toSatisfy(isOk);
   });
 
   test('isErr type guard', () => {
     expect(err('ERROR')).toSatisfy(isErr);
     expect(ok(35)).not.toSatisfy(isErr);
+    expect({}).toSatisfy(isErr);
   });
 });

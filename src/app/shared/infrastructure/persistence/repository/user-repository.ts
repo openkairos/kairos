@@ -1,18 +1,6 @@
-import { InvalidCredentialsError, invalidCredentialsException } from '@/app/authentication/application/errors';
-import {
-  type FindOneByEmail,
-  type FindOneByEmailOrFail,
-} from '@/app/authentication/domain/user-credentials-repository';
-import { err, isErr, ok } from '@/app/shared/application/util/result';
-import { type User } from '@/app/shared/domain/entity';
-
-export const findOneByEmailOrFail: FindOneByEmailOrFail = async (email: string): Promise<User> => {
-  const result = await findOneByEmail(email);
-
-  if (isErr(result)) throw InvalidCredentialsError;
-
-  return Promise.resolve(result.value);
-};
+import { invalidCredentialsException } from '@/app/authentication/application/errors';
+import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
+import { err, ok } from '@/app/shared/application/util/result';
 
 export const findOneByEmail: FindOneByEmail = async (email: string) => {
   if ('admin@example.com' !== email) return Promise.resolve(err(invalidCredentialsException));
