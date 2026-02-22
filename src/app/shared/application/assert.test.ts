@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertIsNonEmptyString, assertIsString } from '@/app/shared/application/util/assert';
+import { assertIsNonEmptyString, assertIsString } from '@/app/shared/application/assert';
 
 describe('Assert utility', () => {
   describe('assert is string', () => {
