@@ -1,6 +1,6 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
 import { login } from '@/app/authentication/application/login';
-import { loginRequestConstraints } from '@/app/authentication/interface/login-request';
+import { loginRequestConstraints } from '@/app/authentication/interface/http/login-request';
 import { systemClock } from '@/app/shared/application/clock';
 import { findOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository';
 import {
