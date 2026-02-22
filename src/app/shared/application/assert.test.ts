@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertIsNonEmptyString, assertIsString } from '@/app/shared/application/assert';
+import { assertIsNonEmptyString, assertIsString, assertOneOf } from '@/app/shared/application/assert';
 
 describe('Assert utility', () => {
   describe('assert is string', () => {
@@ -33,6 +33,20 @@ describe('Assert utility', () => {
       expect(() => {
         assertIsNonEmptyString('valid string');
       }).not.toThrow();
+    });
+  });
+
+  describe('assert one of', () => {
+    it('should pass if value is one of valid values', () => {
+      expect(() => {
+        assertOneOf('info', 'fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent');
+      }).not.toThrow();
+    });
+
+    it('should fail if value is not one of valid values', () => {
+      expect(() => {
+        assertOneOf('verbose', 'fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent');
+      }).toThrow('Value is not one of: fatal, error, warn, info, debug, trace, silent');
     });
   });
 });
