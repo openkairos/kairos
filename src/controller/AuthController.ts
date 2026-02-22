@@ -2,7 +2,7 @@ import { type HttpScope, Route } from '@koala-ts/framework';
 import { loginUser } from '@/app/authentication';
 import { loginHttpMapper } from '@/app/authentication/interface/login-http-mapper';
 import { LoginRequest, loginRequestConstraints } from '@/app/authentication/interface/login-request';
-import { mapResultToHttp } from '@/app/shared/interface/map-result-to-http';
+import { mapResultToHttp } from '@/app/shared/adapter/http/map-result-to-http';
 import { validateRequest } from '@/composition/http/middleware';
 
 export class AuthController {

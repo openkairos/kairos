@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
+import { mapResultToHttp } from '@/app/shared/adapter/http/map-result-to-http';
 import { err, ok } from '@/app/shared/application/result';
-import { mapResultToHttp } from '@/app/shared/interface/map-result-to-http';
 
 describe('Map result to HTTP', () => {
   it('should use on ok mapper for success results', () => {
