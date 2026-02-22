@@ -1,8 +1,8 @@
 import { type HttpScope, Route } from '@koala-ts/framework';
 import { LoginRequest } from '@/app/authentication/interface/login-request';
 import { mapResultToHttp } from '@/app/shared/adapter/http/map-result-to-http';
-import { loginHttpMapper } from '@/composition/authentication/adapter';
 import { loginUser, validateLoginRequest } from '@/composition/authentication/login';
+import { loginHttpMapper } from '@/composition/http/mapper';
 
 export class AuthController {
   @Route({ method: 'POST', path: '/api/v1/login', middleware: [validateLoginRequest] })
