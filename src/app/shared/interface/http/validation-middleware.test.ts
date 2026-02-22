@@ -1,6 +1,6 @@
-import { type HttpScope } from '@koala-ts/framework';
 import { describe, expect, it, vi } from 'vitest';
 import { HTTP_BAD_REQUEST } from '@/app/shared/interface/http/status-code';
+import { type HttpScope } from '@/app/shared/interface/http/types';
 import { validationMiddleware } from '@/app/shared/interface/http/validation-middleware';
 
 describe('Validation middleware', () => {
