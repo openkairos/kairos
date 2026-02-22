@@ -1,5 +1,5 @@
 import { flattenViolations } from '@koala-ts/framework/validator';
-import { validate as koalaValidator } from '@/app/shared/infrastructure/validation';
 import { validationMiddleware } from '@/app/shared/interface/http';
+import { validate } from '@/composition/http/validation';
 
-export const validateRequest = validationMiddleware(koalaValidator, flattenViolations);
+export const validateRequest = validationMiddleware(validate, flattenViolations);

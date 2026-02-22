@@ -1,12 +1,11 @@
 import { type HttpScope, Route } from '@koala-ts/framework';
-import { LoginRequest, loginRequestConstraints } from '@/app/authentication/interface/login-request';
+import { LoginRequest } from '@/app/authentication/interface/login-request';
 import { mapResultToHttp } from '@/app/shared/adapter/http/map-result-to-http';
 import { loginHttpMapper } from '@/composition/authentication/adapter';
-import { loginUser } from '@/composition/authentication/login';
-import { validateRequest } from '@/composition/http/middleware';
+import { loginUser, validateLoginRequest } from '@/composition/authentication/login';
 
 export class AuthController {
-  @Route({ method: 'POST', path: '/api/v1/login', middleware: [validateRequest(loginRequestConstraints)] })
+  @Route({ method: 'POST', path: '/api/v1/login', middleware: [validateLoginRequest] })
   async login({ response, request }: HttpScope<LoginRequest>): Promise<void> {
     const result = await loginUser(request.body);
 

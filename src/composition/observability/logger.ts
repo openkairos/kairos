@@ -1,5 +1,5 @@
-import { createLogger } from './pino';
 import { type Logger } from '@/app/shared/application/logger';
+import { createLogger } from '@/app/shared/infrastructure/logger/pino';
 import { loggerConfig } from '@/config';
 
 export const appLogger: Logger = createLogger({
