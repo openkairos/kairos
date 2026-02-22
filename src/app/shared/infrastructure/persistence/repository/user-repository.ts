@@ -1,6 +1,6 @@
 import { invalidCredentialsError } from '@/app/authentication/domain/errors';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
-import { err, ok } from '@/app/shared/application/util/result';
+import { err, ok } from '@/app/shared/application/result';
 
 export const findOneByEmail: FindOneByEmail = async (email: string) => {
   if ('admin@example.com' !== email) return Promise.resolve(err(invalidCredentialsError));

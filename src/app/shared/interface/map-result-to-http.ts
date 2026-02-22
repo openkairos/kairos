@@ -1,4 +1,4 @@
-import { isErr, type Result } from '@/app/shared/application/util/result';
+import { isErr, type Result } from '@/app/shared/application/result';
 import { type StatusCode } from '@/app/shared/interface/status-code';
 
 export interface HttpResponsePayload {

@@ -4,7 +4,7 @@ import { type AccessToken } from '@/app/authentication/domain/access-token';
 import { invalidCredentialsError } from '@/app/authentication/domain/errors';
 import type { User } from '@/app/authentication/domain/user';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
-import { err, ok } from '@/app/shared/application/util/result';
+import { err, ok } from '@/app/shared/application/result';
 
 describe('Authenticate use case', () => {
   const user: User = {

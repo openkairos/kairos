@@ -3,7 +3,7 @@ import { type AuthenticatedUser } from '@/app/authentication/domain/authenticate
 import { type InvalidCredentialsError } from '@/app/authentication/domain/errors';
 import type { User } from '@/app/authentication/domain/user';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
-import { isErr, ok, type Result } from '@/app/shared/application/util/result';
+import { isErr, ok, type Result } from '@/app/shared/application/result';
 
 export function login({ findOneByEmail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
   return async function execute(command: LoginUserCommand): Promise<AuthenticateResult> {
