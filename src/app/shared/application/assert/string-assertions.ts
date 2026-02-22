@@ -10,9 +10,3 @@ export function assertIsNonEmptyString(value: unknown, message?: string): assert
     throw new Error(message ?? 'Value is not a non-empty string');
   }
 }
-
-export function assertOneOf<T>(value: unknown, ...validValues: readonly T[]): asserts value is T {
-  if (!validValues.includes(value as T)) {
-    throw new Error(`Value is not one of: ${validValues.join(', ')}`);
-  }
-}
