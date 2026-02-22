@@ -3,9 +3,9 @@ import {
   authenticatedUserSerializerMetadata,
 } from '@/app/authentication/domain/authenticated-user';
 import { type InvalidCredentialsError } from '@/app/authentication/domain/errors';
+import { type HttpResponsePayload } from '@/app/shared/adapter/http/map-result-to-http';
 import { normalize } from '@/app/shared/infrastructure/serializer';
-import { type HttpResponsePayload } from '@/app/shared/interface/map-result-to-http';
-import { HTTP_OK, HTTP_UNAUTHORIZED } from '@/app/shared/interface/status-code';
+import { HTTP_OK, HTTP_UNAUTHORIZED } from '@/app/shared/interface/http/status-code';
 
 const mapLoginSuccessToHttp = (user: AuthenticatedUser): HttpResponsePayload => ({
   status: HTTP_OK,

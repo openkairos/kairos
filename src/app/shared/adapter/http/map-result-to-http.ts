@@ -1,5 +1,5 @@
 import { isErr, type Result } from '@/app/shared/application/result';
-import { type StatusCode } from '@/app/shared/interface/status-code';
+import { type StatusCode } from '@/app/shared/interface/http/status-code';
 
 export interface HttpResponsePayload {
   status: StatusCode;
