@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { createGenerateAccessToken } from '@/app/shared/infrastructure/security/generate-access-token';
+import { createGenerateAccessToken } from '@/app/shared/infrastructure/security/access-token/generate-access-token';
 
 describe('Generate access token', () => {
   test('returns a bearer token payload for authenticated user', async () => {

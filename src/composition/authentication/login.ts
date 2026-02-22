@@ -2,8 +2,10 @@ import { createSecretKey, randomUUID } from 'node:crypto';
 import { login } from '@/app/authentication/application/login';
 import { systemClock } from '@/app/shared/application/clock';
 import { findOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository';
-import { createGenerateAccessToken } from '@/app/shared/infrastructure/security/generate-access-token';
-import { createJwtAccessTokenSigner } from '@/app/shared/infrastructure/security/jwt-access-token-signer';
+import {
+  createGenerateAccessToken,
+  createJwtAccessTokenSigner,
+} from '@/app/shared/infrastructure/security/access-token';
 import { verifyPassword } from '@/app/shared/infrastructure/security/verify-password';
 import { securityConfig } from '@/config/security';
 

@@ -2,7 +2,7 @@ import { createSecretKey } from 'node:crypto';
 import { decodeJwt } from 'jose';
 import { describe, expect, test, vi } from 'vitest';
 import { frozenClock } from '@/app/shared/application/clock';
-import { createJwtAccessTokenSigner } from '@/app/shared/infrastructure/security/jwt-access-token-signer';
+import { createJwtAccessTokenSigner } from '@/app/shared/infrastructure/security/access-token/jwt-access-token-signer';
 
 describe('JWT access token signer', () => {
   test('returns a signed token with expected claims for authenticated user', async () => {
