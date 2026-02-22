@@ -3,7 +3,7 @@ import { loginUser } from '@/app/authentication';
 import { loginHttpMapper } from '@/app/authentication/interface/login-http-mapper';
 import { LoginRequest, loginRequestConstraints } from '@/app/authentication/interface/login-request';
 import { mapResultToHttp } from '@/app/shared/interface/map-result-to-http';
-import { validateRequest } from '@/app/shared/interface/middleware';
+import { validateRequest } from '@/composition/http/middleware';
 
 export class AuthController {
   @Route({ method: 'POST', path: '/api/v1/login', middleware: [validateRequest(loginRequestConstraints)] })
