@@ -1,7 +1,7 @@
 import { type HttpScope } from '@koala-ts/framework';
 import { describe, expect, it, vi } from 'vitest';
-import { validationMiddleware } from '@/app/shared/interface/middleware/validation-middleware';
-import { HTTP_BAD_REQUEST } from '@/app/shared/interface/status-code';
+import { HTTP_BAD_REQUEST } from '@/app/shared/interface/http/status-code';
+import { validationMiddleware } from '@/app/shared/interface/http/validation-middleware';
 
 describe('Validation middleware', () => {
   it('should pass if no constraints are violated', async () => {
