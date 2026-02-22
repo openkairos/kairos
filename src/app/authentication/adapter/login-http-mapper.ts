@@ -3,21 +3,27 @@ import {
   authenticatedUserSerializerMetadata,
 } from '@/app/authentication/domain/authenticated-user';
 import { type InvalidCredentialsError } from '@/app/authentication/domain/errors';
-import { type HttpResponsePayload } from '@/app/shared/adapter/http/map-result-to-http';
-import { normalize } from '@/app/shared/infrastructure/serializer';
+import { type HttpResponsePayload, type Mapper } from '@/app/shared/adapter/http/map-result-to-http';
+import { type MapSuccessToHttp } from '@/app/shared/adapter/http/map-success-to-http';
 import { HTTP_OK, HTTP_UNAUTHORIZED } from '@/app/shared/interface/http/status-code';
 
-const mapLoginSuccessToHttp = (user: AuthenticatedUser): HttpResponsePayload => ({
-  status: HTTP_OK,
-  body: { data: normalize(user, { groups: ['auth:login'], metadata: authenticatedUserSerializerMetadata }) },
-});
+interface CreateLoginHttpMapperDependencies {
+  mapSuccessToHttp: MapSuccessToHttp;
+}
 
-const mapLoginErrorToHttp = (error: InvalidCredentialsError): HttpResponsePayload => ({
-  status: HTTP_UNAUTHORIZED,
-  body: { message: error.message },
-});
+export function createLoginHttpMapper({
+  mapSuccessToHttp,
+}: CreateLoginHttpMapperDependencies): Mapper<AuthenticatedUser, InvalidCredentialsError> {
+  const mapLoginSuccessToHttp = (user: AuthenticatedUser): HttpResponsePayload =>
+    mapSuccessToHttp(user, HTTP_OK, { groups: ['auth:login'], metadata: authenticatedUserSerializerMetadata });
 
-export const loginHttpMapper = {
-  onOk: mapLoginSuccessToHttp,
-  onErr: mapLoginErrorToHttp,
-};
+  const mapLoginErrorToHttp = (error: InvalidCredentialsError): HttpResponsePayload => ({
+    status: HTTP_UNAUTHORIZED,
+    body: { message: error.message },
+  });
+
+  return {
+    onOk: mapLoginSuccessToHttp,
+    onErr: mapLoginErrorToHttp,
+  };
+}
