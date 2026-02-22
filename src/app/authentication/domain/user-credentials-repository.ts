@@ -1,4 +1,4 @@
-import { type InvalidCredentialsError } from '@/app/authentication/application/errors';
+import { type InvalidCredentialsError } from '@/app/authentication/domain/errors';
 import { type Result } from '@/app/shared/application/util/result';
 import type { User } from '@/app/shared/domain/entity';
 

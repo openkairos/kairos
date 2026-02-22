@@ -1,4 +1,4 @@
-import { invalidCredentialsError } from '@/app/authentication/application/errors';
+import { invalidCredentialsError } from '@/app/authentication/domain/errors';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
 import { err, ok } from '@/app/shared/application/util/result';
 

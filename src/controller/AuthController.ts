@@ -1,9 +1,8 @@
 import { type HttpScope, Route } from '@koala-ts/framework';
 import { loginUser } from '@/app/authentication';
-import { authenticatedUserSerializerMetadata } from '@/app/authentication/domain/authenticated-user';
+import { loginHttpMapper } from '@/app/authentication/interface/login-http-mapper';
 import { LoginRequest, loginRequestConstraints } from '@/app/authentication/interface/login-request';
-import { isErr } from '@/app/shared/application/util/result';
-import { normalize } from '@/app/shared/infrastructure/serializer';
+import { mapResultToHttp } from '@/app/shared/interface/map-result-to-http';
 import { validateRequest } from '@/app/shared/interface/middleware';
 
 export class AuthController {
@@ -11,14 +10,9 @@ export class AuthController {
   async login({ response, request }: HttpScope<LoginRequest>): Promise<void> {
     const result = await loginUser(request.body);
 
-    if (isErr(result)) {
-      response.status = 401;
-      response.body = { message: result.error.message };
-      return;
-    }
+    const http = mapResultToHttp(result, loginHttpMapper);
 
-    response.body = {
-      data: normalize(result.value, { groups: ['auth:login'], metadata: authenticatedUserSerializerMetadata }),
-    };
+    response.status = http.status;
+    response.body = http.body;
   }
 }
