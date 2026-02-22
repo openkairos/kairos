@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { err, ok } from '@/app/shared/application/util/result';
+import { err, ok } from '@/app/shared/application/result';
 import { mapResultToHttp } from '@/app/shared/interface/map-result-to-http';
 
 describe('Map result to HTTP', () => {

@@ -1,8 +1,8 @@
 import { sink } from 'pino-test';
 import { describe, expect, test } from 'vitest';
-import { createLogger } from './logger';
+import { createLogger } from './pino';
 
-describe('Logger', () => {
+describe('Pino Logger', () => {
   test.each([
     { level: 'fatal' },
     { level: 'error' },

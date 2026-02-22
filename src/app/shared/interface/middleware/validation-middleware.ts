@@ -1,6 +1,6 @@
 import { type HttpScope, type NextMiddleware } from '@koala-ts/framework';
 import { flattenViolations, type ValidationRules, type Validator } from '@koala-ts/framework/validator';
-import { createHttpError } from '@/app/shared/application/util';
+import createHttpError from 'http-errors';
 
 export function validationMiddleware(validate: Validator) {
   return function createMiddleware(constraints: ValidationRules) {

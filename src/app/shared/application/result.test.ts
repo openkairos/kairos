@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { err, isErr, isOk, ok } from '@/app/shared/application/util/result';
+import { err, isErr, isOk, ok } from '@/app/shared/application/result';
 
 describe('Result module', () => {
   test('Ok constructor', () => {
