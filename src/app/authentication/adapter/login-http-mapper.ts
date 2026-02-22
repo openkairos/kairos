@@ -19,7 +19,7 @@ export function createLoginHttpMapper({
 
   const mapLoginErrorToHttp = (error: InvalidCredentialsError): HttpResponsePayload => ({
     status: HTTP_UNAUTHORIZED,
-    body: { message: error.message },
+    body: error,
   });
 
   return {

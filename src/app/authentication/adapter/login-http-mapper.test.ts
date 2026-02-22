@@ -45,7 +45,10 @@ describe('Login HTTP mapper', () => {
     expect(mapSuccessToHttp).not.toHaveBeenCalled();
     expect(response).toEqual({
       status: 401,
-      body: { message: 'Invalid credentials' },
+      body: {
+        type: 'INVALID_CREDENTIALS',
+        message: 'Invalid credentials',
+      },
     });
   });
 });
