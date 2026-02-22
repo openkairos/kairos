@@ -1,7 +1,7 @@
 import '@/bootstrap';
 import { create } from '@koala-ts/framework';
 import { appConfig, server } from './config';
-import { logger } from '@/app/shared/application/util';
+import { logger } from '@/app/shared/infrastructure/logger';
 
 const app = create(appConfig);
 
