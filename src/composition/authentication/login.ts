@@ -6,7 +6,8 @@ import {
   createGenerateAccessToken,
   createJwtAccessTokenSigner,
 } from '@/app/shared/infrastructure/security/access-token';
-import { verifyPassword } from '@/app/shared/infrastructure/security/password/verify-password';
+import { passwordHasher } from '@/app/shared/infrastructure/security/password/password-hasher';
+import { createVerifyPassword } from '@/app/shared/infrastructure/security/password/verify-password';
 import { securityConfig } from '@/config/security';
 
 const signingKey = createSecretKey(Buffer.from(securityConfig.appKey.replace('base64:', ''), 'base64'));
@@ -22,6 +23,8 @@ const generateAccessToken = createGenerateAccessToken({
   accessTokenConfig: securityConfig.accessToken,
   sign: signAccessToken,
 });
+
+const verifyPassword = createVerifyPassword({ hasher: passwordHasher });
 
 export const loginUser = login({
   findOneByEmail,
