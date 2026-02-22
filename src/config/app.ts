@@ -1,7 +1,9 @@
 import { type KoalaConfig } from '@koala-ts/framework';
+import { renderHttpError } from '@/app/shared/interface/middleware';
+import { AuthController } from '@/controller/AuthController';
 import { HomeController } from '@/controller/HomeController';
 
 export const appConfig: KoalaConfig = {
-  controllers: [HomeController],
-  globalMiddleware: [],
+  controllers: [HomeController, AuthController],
+  globalMiddleware: [renderHttpError],
 };
