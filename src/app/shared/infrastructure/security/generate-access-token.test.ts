@@ -1,8 +1,16 @@
-import { describe, expect, test } from 'vitest';
-import { generateAccessToken } from '@/app/shared/infrastructure/security/generate-access-token';
+import { describe, expect, test, vi } from 'vitest';
+import { createGenerateAccessToken } from '@/app/shared/infrastructure/security/generate-access-token';
 
 describe('Generate access token', () => {
-  test('it should generate a JWT token', async () => {
+  test('returns a bearer token payload for authenticated user', async () => {
+    const sign = vi.fn().mockResolvedValue('signed-access-token');
+    const generateAccessToken = createGenerateAccessToken({
+      accessTokenConfig: {
+        ttl: 60,
+      },
+      sign,
+    });
+
     const user = {
       id: 'user-id-123',
       username: 'testuser',
@@ -12,8 +20,11 @@ describe('Generate access token', () => {
 
     const accessToken = await generateAccessToken(user);
 
-    expect(accessToken.token_type).toBe('Bearer');
-    expect(accessToken.expires_in).toBe(3600);
-    expect(accessToken.access_token.split('.')).toHaveLength(3);
+    expect(sign).toHaveBeenCalledWith(user);
+    expect(accessToken).toEqual({
+      token_type: 'Bearer',
+      expires_in: 60,
+      access_token: 'signed-access-token',
+    });
   });
 });

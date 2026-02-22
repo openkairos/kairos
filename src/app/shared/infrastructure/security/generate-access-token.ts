@@ -1,30 +1,45 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
-import { SignJWT } from 'jose';
 import { type GenerateAccessToken } from '@/app/authentication/application/login';
 import type { User } from '@/app/authentication/domain/user';
-import { securityConfig } from '@/config';
+import { systemClock } from '@/app/shared/application/clock';
+import {
+  createJwtAccessTokenSigner,
+  type SignAccessToken,
+} from '@/app/shared/infrastructure/security/jwt-access-token-signer';
+import { securityConfig } from '@/config/security';
 
-export const generateAccessToken: GenerateAccessToken = async (user: User) => {
-  const { accessToken } = securityConfig;
-
-  return {
-    token_type: 'Bearer',
-    expires_in: accessToken.ttl,
-    access_token: await sign(user),
-  };
-};
-
-async function sign(user: User): Promise<string> {
-  const { appKey, accessToken } = securityConfig;
-  const key = createSecretKey(Buffer.from(appKey.replace('base64:', ''), 'base64'));
-
-  const jwtSigner = new SignJWT({ id: user.id, username: user.username })
-    .setProtectedHeader({ alg: accessToken.algorithm })
-    .setIssuer(accessToken.issuer)
-    .setSubject(user.id)
-    .setIssuedAt()
-    .setExpirationTime(`${accessToken.ttl}s`)
-    .setJti(randomUUID());
-
-  return jwtSigner.sign(key);
+interface AccessTokenConfig {
+  ttl: number;
 }
+
+interface CreateGenerateAccessTokenDependencies {
+  accessTokenConfig: AccessTokenConfig;
+  sign: SignAccessToken;
+}
+
+export function createGenerateAccessToken({
+  accessTokenConfig,
+  sign,
+}: CreateGenerateAccessTokenDependencies): GenerateAccessToken {
+  return async (user: User) => ({
+    token_type: 'Bearer',
+    expires_in: accessTokenConfig.ttl,
+    access_token: await sign(user),
+  });
+}
+
+const defaultSigningKey = createSecretKey(Buffer.from(securityConfig.appKey.replace('base64:', ''), 'base64'));
+
+function createDefaultSigner(): SignAccessToken {
+  return createJwtAccessTokenSigner({
+    key: defaultSigningKey,
+    accessTokenConfig: securityConfig.accessToken,
+    clock: systemClock,
+    newJti: randomUUID,
+  });
+}
+
+export const generateAccessToken = createGenerateAccessToken({
+  accessTokenConfig: securityConfig.accessToken,
+  sign: createDefaultSigner(),
+});
