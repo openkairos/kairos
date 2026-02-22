@@ -15,3 +15,16 @@ export interface HttpScope {
 export type NextMiddleware = () => Promise<void> | void;
 
 export type HttpMiddleware = (scope: HttpScope, next: NextMiddleware) => Promise<void>;
+
+export type ValidationRules = Record<string, string[]>;
+
+export interface ValidationViolation {
+  path: string;
+  message: string;
+  constraint: string;
+  value: unknown;
+}
+
+export type Validator = (payload: Record<string, unknown>, rules: ValidationRules) => ValidationViolation[];
+
+export type ViolationMapper = (violations: ValidationViolation[]) => Record<string, string[] | string>;
