@@ -2,4 +2,3 @@ import { validate as KoalaValidator } from '@/app/shared/infrastructure/validati
 import { validationMiddleware } from '@/app/shared/interface/middleware/validation-middleware';
 
 export const validateRequest = validationMiddleware(KoalaValidator);
-export * from './http-error-renderer';

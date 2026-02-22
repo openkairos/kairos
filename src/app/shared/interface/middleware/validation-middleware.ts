@@ -1,6 +1,6 @@
 import { type HttpScope, type NextMiddleware } from '@koala-ts/framework';
 import { flattenViolations, type ValidationRules, type Validator } from '@koala-ts/framework/validator';
-import createHttpError from 'http-errors';
+import { HTTP_BAD_REQUEST } from '@/app/shared/interface/status-code';
 
 export function validationMiddleware(validate: Validator) {
   return function createMiddleware(constraints: ValidationRules) {
@@ -8,7 +8,9 @@ export function validationMiddleware(validate: Validator) {
       const violations = validate(scope.request.body ?? {}, constraints);
 
       if (violations.length > 0) {
-        throw createHttpError(400, 'Validation failed.', { errors: flattenViolations(violations) });
+        scope.response.status = HTTP_BAD_REQUEST;
+        scope.response.body = { errors: flattenViolations(violations) };
+        return;
       }
 
       await next();
