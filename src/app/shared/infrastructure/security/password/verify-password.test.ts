@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { verifyPassword } from './verify-password';
 import { invalidCredentialsError } from '@/app/authentication/domain/errors';
-import { passwordHasher } from '@/app/shared/infrastructure/security/password-hasher';
+import { passwordHasher } from '@/app/shared/infrastructure/security/password/password-hasher';
 
 describe('Password verifier', () => {
   it('should fail if the password is not correct', async () => {
