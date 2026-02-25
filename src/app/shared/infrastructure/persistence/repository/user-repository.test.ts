@@ -1,32 +1,44 @@
+import { integrationTest } from '@tests/__vitest__/integration-test';
 import { describe, expect, it } from 'vitest';
-import { findOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository';
+import { invalidCredentialsError } from '@/app/authentication/domain/errors';
+import { createFindOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository';
+import { usersCollection } from '@/composition/persistence/mongodb';
 
 describe('User Repository', () => {
+  integrationTest();
+
   describe('find one by email', () => {
-    it('should find admin user by valid email', async () => {
+    it('returns user when credentials record exists', async () => {
       const email = 'admin@example.com';
+      await usersCollection.insertOne({
+        username: 'admin',
+        email,
+        password: '$hashed-password',
+        roles: ['ROLE_SUPER_ADMIN'],
+      });
+      const findOneByEmail = createFindOneByEmail({ usersCollection });
 
       const result = await findOneByEmail(email);
 
       expect(result).toEqual({
         isOk: true,
-        value: expect.objectContaining({
-          id: '1',
+        value: {
+          id: expect.any(String),
           username: 'admin',
           email,
-        }),
+          password: '$hashed-password',
+        },
       });
     });
 
-    it('should fail to find user by invalid email', async () => {
-      const result = await findOneByEmail('invalid@example.com');
+    it('returns invalid credentials when no user record exists', async () => {
+      const findOneByEmail = createFindOneByEmail({ usersCollection });
+
+      const result = await findOneByEmail('missing@example.com');
 
       expect(result).toEqual({
         isOk: false,
-        error: {
-          type: 'INVALID_CREDENTIALS',
-          message: 'Invalid credentials',
-        },
+        error: invalidCredentialsError,
       });
     });
   });

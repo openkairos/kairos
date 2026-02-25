@@ -1,16 +1,22 @@
 import { invalidCredentialsError } from '@/app/authentication/domain/errors';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
 import { err, ok } from '@/app/shared/application/result';
+import { type UsersCollection } from '@/app/shared/infrastructure/persistence/mongodb/users-collection-schema';
 
-export const findOneByEmail: FindOneByEmail = async (email: string) => {
-  if ('admin@example.com' !== email) return Promise.resolve(err(invalidCredentialsError));
+interface CreateFindOneByEmailDependencies {
+  usersCollection: UsersCollection;
+}
 
-  return Promise.resolve(
-    ok({
-      id: '1',
-      username: 'admin',
-      email,
-      password: '$argon2id$v=19$m=65536,t=3,p=4$7P3FZGpYmiP/XHQ5FwwRDg$uKY9J6tbSlo5senn16tHzCxfz/gpqi8Ha1O61lISvPw',
-    }),
-  );
-};
+export function createFindOneByEmail({ usersCollection }: CreateFindOneByEmailDependencies): FindOneByEmail {
+  return async (email: string) => {
+    const user = await usersCollection.findOne({ email });
+    if (user === null) return err(invalidCredentialsError);
+
+    return ok({
+      id: user._id.toHexString(),
+      username: user.username,
+      email: user.email,
+      password: user.password,
+    });
+  };
+}

@@ -1,15 +1,25 @@
 import { createTestAgent } from '@koala-ts/framework';
+import { integrationTest } from '@tests/__vitest__/integration-test';
 import { describe, expect, test } from 'vitest';
+import { usersCollection } from '@/composition/persistence/mongodb';
+import { hashPassword } from '@/composition/security/password';
 import { appConfig } from '@/config';
 
 describe('Login feature test', () => {
+  integrationTest();
+
   test('It should authenticate admin user', async () => {
     const agent = createTestAgent(appConfig);
-
-    const response = await agent.post('/api/v1/login').send({
-      email: 'admin@example.com',
-      password: 'password',
+    const password = 'password';
+    const payload = { email: 'admin@example.com', password };
+    await usersCollection.insertOne({
+      username: 'admin',
+      email: payload.email,
+      password: await hashPassword(password),
+      roles: ['ROLE_SUPER_ADMIN'],
     });
+
+    const response = await agent.post('/api/v1/login').send(payload);
 
     expect(response.status).toBe(200);
     expect(response.body.data).toHaveProperty('user');
@@ -19,8 +29,9 @@ describe('Login feature test', () => {
 
   test('it should validate login request', async () => {
     const agent = createTestAgent(appConfig);
+    const payload = {};
 
-    const response = await agent.post('/api/v1/login').send({});
+    const response = await agent.post('/api/v1/login').send(payload);
 
     expect(response.status).toBe(400);
     expect(response.body.errors).toHaveProperty('email', [
@@ -32,11 +43,15 @@ describe('Login feature test', () => {
 
   test('it should not authenticate with wrong credentials', async () => {
     const agent = createTestAgent(appConfig);
-
-    const response = await agent.post('/api/v1/login').send({
-      email: 'admin@example.com',
-      password: 'wrongpassword',
+    const email = 'admin@example.com';
+    await usersCollection.insertOne({
+      username: 'admin',
+      email,
+      password: await hashPassword('password'),
+      roles: ['ROLE_SUPER_ADMIN'],
     });
+
+    const response = await agent.post('/api/v1/login').send({ email, password: 'wrongpassword' });
 
     expect(response.status).toBe(401);
     expect(response.body).toEqual({
