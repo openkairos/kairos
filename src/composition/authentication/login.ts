@@ -2,14 +2,14 @@ import { createSecretKey, randomUUID } from 'node:crypto';
 import { login } from '@/app/authentication/application/login';
 import { loginRequestConstraints } from '@/app/authentication/interface/http/login-request';
 import { systemClock } from '@/app/shared/application/clock';
-import { findOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository';
+import { createFindOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository';
 import {
   createGenerateAccessToken,
   createJwtAccessTokenSigner,
 } from '@/app/shared/infrastructure/security/access-token';
-import { passwordHasher } from '@/app/shared/infrastructure/security/password/password-hasher';
-import { createVerifyPassword } from '@/app/shared/infrastructure/security/password/verify-password';
 import { validateRequest } from '@/composition/http/middleware';
+import { usersCollection } from '@/composition/persistence/mongodb';
+import { verifyPassword } from '@/composition/security/password';
 import { securityConfig } from '@/config/security';
 
 const signingKey = createSecretKey(Buffer.from(securityConfig.appKey.replace('base64:', ''), 'base64'));
@@ -26,7 +26,7 @@ const generateAccessToken = createGenerateAccessToken({
   sign: signAccessToken,
 });
 
-const verifyPassword = createVerifyPassword({ hasher: passwordHasher });
+const findOneByEmail = createFindOneByEmail({ usersCollection });
 
 export const loginUser = login({
   findOneByEmail,
