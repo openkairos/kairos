@@ -1,8 +1,8 @@
 import { createTestAgent } from '@koala-ts/framework';
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { describe, expect, test } from 'vitest';
-import { usersCollection } from '@/composition/persistence/mongodb';
-import { hashPassword } from '@/composition/security/password';
+import { usersCollection } from '@/composition/shared/persistence/mongodb';
+import { hashPassword } from '@/composition/shared/security/password';
 import { appConfig } from '@/config';
 
 describe('Login feature test', () => {

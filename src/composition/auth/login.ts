@@ -9,9 +9,9 @@ import {
   createJwtAccessTokenSigner,
   type SignAccessToken,
 } from '@/app/shared/infrastructure/security/access-token';
-import { validateRequest } from '@/composition/http/middleware';
-import { usersCollection } from '@/composition/persistence/mongodb';
-import { verifyPassword } from '@/composition/security/password';
+import { validateRequest } from '@/composition/shared/http/middleware';
+import { usersCollection } from '@/composition/shared/persistence/mongodb';
+import { verifyPassword } from '@/composition/shared/security/password';
 import { securityConfig } from '@/config/security';
 
 const signingKey = createSecretKey(Buffer.from(securityConfig.appKey.replace('base64:', ''), 'base64'));
