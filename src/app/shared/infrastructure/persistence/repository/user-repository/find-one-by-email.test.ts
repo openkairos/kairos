@@ -1,10 +1,10 @@
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { describe, expect, it } from 'vitest';
 import { invalidCredentialsError } from '@/app/authentication/domain/errors';
-import { createFindOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository';
+import { createFindOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository/find-one-by-email';
 import { usersCollection } from '@/composition/persistence/mongodb';
 
-describe('User Repository', () => {
+describe('Find One By Email Repository', () => {
   integrationTest();
 
   describe('find one by email', () => {
