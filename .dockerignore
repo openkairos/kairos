@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+.git
+.idea
+/.env.local
+/.env.*.local
+npm-debug.log*
+docker-compose.yml

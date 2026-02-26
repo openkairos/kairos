@@ -1,0 +1,46 @@
+services:
+  app: &base_app
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: development
+    working_dir: /app
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/app
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - kairos_network
+    container_name: kairos-app
+    ports:
+      - '${PORT:-3000}:${PORT:-3000}'
+
+  app_dev:
+    <<: *base_app
+    container_name: kairos-app-dev
+    ports: []
+
+  mongodb:
+    image: mongo:8
+    container_name: kairos-mongodb
+    restart: unless-stopped
+    ports:
+      - '${MONGODB_PORT:-27017}:27017'
+    volumes:
+      - kairos_mongodb_data:/data/db
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', 'db.adminCommand({ ping: 1 })']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      - kairos_network
+
+volumes:
+  kairos_mongodb_data:
+
+networks:
+  kairos_network:

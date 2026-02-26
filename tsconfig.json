@@ -12,7 +12,7 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noImplicitAny": true,
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "./dist",
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
@@ -25,8 +25,8 @@
       "@tests/*": ["tests/*"]
     }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "vitest.config.ts", "tests"],
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", "dist", "vitest.config.ts"],
   "tsc-alias": {
     "resolveFullPaths": true,
     "verbose": false

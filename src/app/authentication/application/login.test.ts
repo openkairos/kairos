@@ -12,6 +12,7 @@ describe('Authenticate use case', () => {
     username: 'admin',
     email: 'admin@example.com',
     password: 'hashed-password',
+    roles: ['ROLE_SUPER_ADMIN'],
   };
 
   const token: AccessToken = {
