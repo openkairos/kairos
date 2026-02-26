@@ -1,4 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
+import type { User } from '@/app/authentication/domain/user';
 import { createGenerateAccessToken } from '@/app/shared/infrastructure/security/access-token/generate-access-token';
 
 describe('Generate access token', () => {
@@ -11,11 +12,12 @@ describe('Generate access token', () => {
       sign,
     });
 
-    const user = {
+    const user: User = {
       id: 'user-id-123',
       username: 'testuser',
       email: 'john.doe@example.com',
       password: '',
+      roles: ['ROLE_SUPER_ADMIN'],
     };
 
     const accessToken = await generateAccessToken(user);

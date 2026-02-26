@@ -27,6 +27,7 @@ describe('Find One By Email Repository', () => {
           username: 'admin',
           email,
           password: '$hashed-password',
+          roles: ['ROLE_SUPER_ADMIN'],
         },
       });
     });

@@ -1,11 +1,8 @@
 import { type Collection, type ObjectId, type OptionalId } from 'mongodb';
+import type { User } from '@/app/authentication/domain/user';
 
-export interface UserCollectionSchema {
+export interface UserCollectionSchema extends Omit<User, 'id'> {
   _id: ObjectId;
-  username: string;
-  email: string;
-  password: string;
-  roles: string[];
 }
 
 export type UsersCollection = Collection<OptionalId<UserCollectionSchema>>;

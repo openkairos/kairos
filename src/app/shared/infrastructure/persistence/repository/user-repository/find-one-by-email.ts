@@ -17,6 +17,7 @@ export function createFindOneByEmail({ usersCollection }: CreateFindOneByEmailDe
       username: user.username,
       email: user.email,
       password: user.password,
+      roles: user.roles,
     });
   };
 }
