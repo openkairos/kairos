@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { startupRuntime } from '@/app/setup/application/startup-runtime';
+import { startupRuntime } from '@/app/shared/infrastructure/runtime/startup-runtime';
 
 describe('startupRuntime', () => {
   test('connects to mongodb and runs super admin setup', async () => {
