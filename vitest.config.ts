@@ -6,6 +6,8 @@ export default defineConfig({
     exclude: ['**/dist/**', '**/node_modules/**'],
     globalSetup: ['./tests/__vitest__/global.ts'],
     setupFiles: ['./tests/__vitest__/unit.ts'],
+    fileParallelism: false,
+    sequence: { concurrent: false },
     coverage: {
       exclude: [
         '**/*.config.*',
