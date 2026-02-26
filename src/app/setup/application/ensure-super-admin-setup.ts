@@ -11,13 +11,13 @@ interface EnsureSuperAdminSetupDependencies {
   hashPassword: (plainPassword: string) => Promise<string>;
 }
 
-interface EnsureSuperAdminSetupCommand {
+export interface EnsureSuperAdminSetupCommand {
   username: string;
   email: string;
   password: string;
 }
 
-type EnsureSuperAdminSetupResult = Result<{ created: boolean }, never>;
+export type EnsureSuperAdminSetupResult = Result<{ created: boolean }, never>;
 
 export function ensureSuperAdminSetup({
   existsSuperAdmin,
