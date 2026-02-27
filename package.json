@@ -17,8 +17,8 @@
   "scripts": {
     "start": "tsx watch src/index.ts | pino-pretty",
     "test": "vitest run --coverage",
-    "build": "tsc && tsc-alias",
-    "serve": "node dist/src/index.js",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
+    "serve": "node dist/index.js",
     "lint": "eslint . --ext .ts,.tsx,.js,.mjs,.cjs",
     "lint:fix": "eslint . --ext .ts,.tsx,.js,.mjs,.cjs --fix",
     "format": "prettier --write .",
