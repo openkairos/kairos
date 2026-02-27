@@ -27,7 +27,7 @@ ENV NODE_ENV=production
 
 COPY package*.json ./
 RUN npm ci --omit=dev
-# Copies only the compiled output from the build stage into the runtime image.
+# Copies only compiled application artifacts.
 COPY --from=build /app/dist ./dist
 
 CMD ["node", "dist/index.js"]
