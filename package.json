@@ -1,10 +1,10 @@
 {
-  "name": "koala-app",
+  "name": "kairos",
   "version": "1.0.0",
-  "description": "The skeleton application for Koala-Ts application",
+  "description": "Kairos is a customer data engine designed to collect, unify, and process customer data in real-time.",
   "keywords": [
-    "Koalats",
-    "Framework"
+    "kairos",
+    "Customer Data Engine"
   ],
   "license": "ISC",
   "author": "",

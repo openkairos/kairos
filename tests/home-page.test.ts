@@ -10,6 +10,6 @@ describe('Home Page', function () {
   });
 
   test('it should return welcome message', function () {
-    return agent.get('/').expect(200, 'KoalaTS: Effortlessly elegant, relentlessly efficient. 🎩🐨');
+    return agent.get('/').expect(200, 'Kairos: The right moment for customer data.');
   });
 });
