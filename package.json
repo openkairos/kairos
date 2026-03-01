@@ -32,7 +32,7 @@
     "remeda": "^2.33.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.38.0",
+    "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.5.0",
     "@vitest/coverage-v8": "^4.0.16",
     "eslint": "^9.39.1",
