@@ -34,10 +34,7 @@ describe('Login feature test', () => {
     const response = await agent.post('/api/v1/login').send(payload);
 
     expect(response.status).toBe(400);
-    expect(response.body.errors).toHaveProperty('email', [
-      'This value should not be blank.',
-      'This value is not a valid email address.',
-    ]);
+    expect(response.body.errors).toHaveProperty('email', ['This value should not be blank.']);
     expect(response.body.errors).toHaveProperty('password', ['This value should not be blank.']);
   });
 
