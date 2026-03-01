@@ -5,21 +5,6 @@ import type { User } from '@/app/authentication/domain/user';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
 import { isErr, ok, type Result } from '@/app/shared/application/result';
 
-export function login({ findOneByEmail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
-  return async function execute(command: LoginUserCommand): Promise<AuthenticateResult> {
-    const userResult = await findOneByEmail(command.email);
-    if (isErr(userResult)) return userResult;
-
-    const verifyPasswordResult = await verifyPassword(command.password, userResult.value.password);
-    if (isErr(verifyPasswordResult)) return verifyPasswordResult;
-
-    return ok({
-      user: userResult.value,
-      token: await generateAccessToken(userResult.value),
-    });
-  };
-}
-
 export interface LoginUserCommand {
   email: string;
   password: string;
@@ -38,4 +23,19 @@ interface AuthenticateDependencies {
   findOneByEmail: FindOneByEmail;
   verifyPassword: VerifyPassword;
   generateAccessToken: GenerateAccessToken;
+}
+
+export function createLogin({ findOneByEmail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
+  return async function login(command: LoginUserCommand): Promise<AuthenticateResult> {
+    const userResult = await findOneByEmail(command.email);
+    if (isErr(userResult)) return userResult;
+
+    const verifyPasswordResult = await verifyPassword(command.password, userResult.value.password);
+    if (isErr(verifyPasswordResult)) return verifyPasswordResult;
+
+    return ok({
+      user: userResult.value,
+      token: await generateAccessToken(userResult.value),
+    });
+  };
 }
