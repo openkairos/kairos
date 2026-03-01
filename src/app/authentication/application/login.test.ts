@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { type GenerateAccessToken, login, type VerifyPassword } from '@/app/authentication/application/login';
+import { type GenerateAccessToken, createLogin, type VerifyPassword } from '@/app/authentication/application/login';
 import { type AccessToken } from '@/app/authentication/domain/access-token';
 import { invalidCredentialsError } from '@/app/authentication/domain/errors';
 import type { User } from '@/app/authentication/domain/user';
@@ -25,7 +25,7 @@ describe('Authenticate use case', () => {
     const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(err(invalidCredentialsError));
     const verifyPassword: VerifyPassword = vi.fn();
     const generateAccessToken: GenerateAccessToken = vi.fn();
-    const execute = login({ findOneByEmail, verifyPassword, generateAccessToken });
+    const execute = createLogin({ findOneByEmail, verifyPassword, generateAccessToken });
 
     const result = await execute({
       email: 'invalid@example.com',
@@ -39,7 +39,7 @@ describe('Authenticate use case', () => {
     const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(ok(user));
     const verifyPassword: VerifyPassword = vi.fn().mockResolvedValue(err(invalidCredentialsError));
     const generateAccessToken: GenerateAccessToken = vi.fn();
-    const execute = login({ findOneByEmail, verifyPassword, generateAccessToken });
+    const execute = createLogin({ findOneByEmail, verifyPassword, generateAccessToken });
 
     const result = await execute({
       email: 'admin@example.com',
@@ -53,7 +53,7 @@ describe('Authenticate use case', () => {
     const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(ok(user));
     const verifyPassword: VerifyPassword = vi.fn().mockResolvedValue(ok(undefined));
     const generateAccessToken: GenerateAccessToken = vi.fn().mockResolvedValue(token);
-    const execute = login({ findOneByEmail, verifyPassword, generateAccessToken });
+    const execute = createLogin({ findOneByEmail, verifyPassword, generateAccessToken });
 
     const result = await execute({
       email: 'admin@example.com',

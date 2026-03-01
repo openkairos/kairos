@@ -1,5 +1,5 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
-import { type GenerateAccessToken, login } from '@/app/authentication/application/login';
+import { createLogin, type GenerateAccessToken } from '@/app/authentication/application/login';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
 import { loginRequestConstraints } from '@/app/authentication/interface/http/login-request';
 import { systemClock } from '@/app/shared/application/clock';
@@ -30,7 +30,7 @@ const generateAccessToken: GenerateAccessToken = createGenerateAccessToken({
 
 const findOneByEmail: FindOneByEmail = createFindOneByEmail({ usersCollection });
 
-export const loginUser = login({
+export const login = createLogin({
   findOneByEmail,
   verifyPassword,
   generateAccessToken,
