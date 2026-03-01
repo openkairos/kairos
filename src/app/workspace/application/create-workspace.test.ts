@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 import { err, ok } from '@/app/shared/application/result';
-import { createWorkspace } from '@/app/workspace/application/create-workspace';
+import { createCreateWorkspace } from '@/app/workspace/application/create-workspace';
 import { workspaceSlugConflictError } from '@/app/workspace/domain/errors';
 import type { SaveWorkspace } from '@/app/workspace/domain/workspace-repository';
 
@@ -13,7 +13,7 @@ describe('Create workspace use case', () => {
         slug: 'acme',
       }),
     );
-    const execute = createWorkspace({ saveWorkspace });
+    const execute = createCreateWorkspace({ saveWorkspace });
     const command = {
       name: 'Acme',
       slug: 'acme',
@@ -36,7 +36,7 @@ describe('Create workspace use case', () => {
 
   test('returns conflict when slug already exists', async () => {
     const saveWorkspace: SaveWorkspace = vi.fn().mockResolvedValue(err(workspaceSlugConflictError));
-    const execute = createWorkspace({ saveWorkspace });
+    const execute = createCreateWorkspace({ saveWorkspace });
     const command = {
       name: 'Acme',
       slug: 'acme',

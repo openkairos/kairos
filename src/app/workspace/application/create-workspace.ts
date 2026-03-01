@@ -11,8 +11,8 @@ export type CreateWorkspaceCommand = NewWorkspace;
 
 export type CreateWorkspaceResult = Result<Workspace, WorkspaceSlugConflictError>;
 
-export function createWorkspace({ saveWorkspace }: CreateWorkspaceDependencies) {
-  return async function execute(command: CreateWorkspaceCommand): Promise<CreateWorkspaceResult> {
+export function createCreateWorkspace({ saveWorkspace }: CreateWorkspaceDependencies) {
+  return async function createWorkspace(command: CreateWorkspaceCommand): Promise<CreateWorkspaceResult> {
     return saveWorkspace(command);
   };
 }
