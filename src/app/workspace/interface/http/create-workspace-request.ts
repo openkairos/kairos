@@ -9,5 +9,5 @@ export interface CreateWorkspaceRequest extends HttpRequest {
 
 export const createWorkspaceRequestConstraints = {
   name: ['notBlank'],
-  slug: ['notBlank'],
+  slug: ['notBlank', 'slug'],
 };
