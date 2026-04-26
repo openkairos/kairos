@@ -14,21 +14,18 @@ services:
         condition: service_healthy
     networks:
       - kairos_network
-    container_name: kairos-app
     ports:
-      - '${PORT:-3000}:${PORT:-3000}'
+      - '${HTTP_HOST_PORT:-3000}:${PORT:-3000}'
 
   app_dev:
     <<: *base_app
-    container_name: kairos-app-dev
     ports: []
 
   mongodb:
     image: mongo:8
-    container_name: kairos-mongodb
     restart: unless-stopped
     ports:
-      - '${MONGODB_PORT:-27017}:27017'
+      - '${MONGODB_HOST_PORT:-27017}:27017'
     volumes:
       - kairos_mongodb_data:/data/db
     healthcheck:

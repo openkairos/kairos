@@ -1,0 +1,7 @@
+interface:
+  display_name: 'Kairos Worktree'
+  short_description: 'Run isolated Kairos worktrees'
+  default_prompt: 'Use $worktree to start and validate this Kairos PR worktree.'
+
+policy:
+  allow_implicit_invocation: true
