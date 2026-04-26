@@ -6,3 +6,10 @@ Kairos is a customer data engine designed to collect, unify, and process custome
 
 The name Kairos comes from the Greek concept of "the right moment". Kairos helps teams capture the exact moment when
 data becomes valuable and actionable.
+
+
+---
+
+## Auto-generated contribution
+
+Added by bounty bot.
