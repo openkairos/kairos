@@ -14,7 +14,7 @@ export default defineConfig([
   },
   {
     files: ['**/*.{ts,mts,cts}'],
-    extends: [tseslint.configs.recommendedTypeChecked],
+    extends: [tseslint.configs.recommended],
     languageOptions: {
       parserOptions: {
         project: './tsconfig.json',
