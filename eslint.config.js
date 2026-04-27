@@ -7,10 +7,19 @@ import tseslint from 'typescript-eslint';
 export default defineConfig([
   { ignores: ['dist/**', 'node_modules/**', 'coverage/**', '*.config.js', '*.config.ts'] },
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    files: ['**/*.{js,mjs,cjs}'],
     plugins: { js },
     extends: ['js/recommended'],
     languageOptions: { globals: globals.node },
+  },
+  {
+    files: ['**/*.{ts,mts,cts}'],
+    extends: [tseslint.configs.recommendedTypeChecked],
+    languageOptions: {
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+    },
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -20,8 +29,8 @@ export default defineConfig([
           caughtErrorsIgnorePattern: '^_',
         },
       ],
+      '@typescript-eslint/no-deprecated': 'error',
     },
   },
-  tseslint.configs.recommended,
   prettier,
 ]);
