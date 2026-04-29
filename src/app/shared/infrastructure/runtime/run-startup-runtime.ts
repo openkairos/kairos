@@ -1,6 +1,6 @@
+import { setupSuperAdmin } from '@/app/setup/setup-composition';
+import { mongoDBClient } from '@/app/shared/infrastructure/persistence/mongodb';
 import { startupRuntime } from '@/app/shared/infrastructure/runtime/startup-runtime';
-import { setupSuperAdmin } from '@/composition/setup/super-admin-setup';
-import { mongoDBClient } from '@/composition/shared/persistence/mongodb';
 import { setupConfig } from '@/config/setup';
 
 const executeStartupRuntime = startupRuntime({

@@ -5,7 +5,7 @@ import { describe, expect, test, vi } from 'vitest';
 import type { WorkspacesCollection } from '@/app/shared/infrastructure/persistence/mongodb/workspaces-collection-schema';
 import { createSaveWorkspace } from '@/app/shared/infrastructure/persistence/repository/workspace-repository/save-workspace';
 import { workspaceSlugConflictError } from '@/app/workspace/domain/errors';
-import { workspacesCollection } from '@/composition/shared/persistence/mongodb';
+import { workspacesCollection } from '@/app/shared/infrastructure/persistence/mongodb';
 
 describe('Save Workspace Repository', () => {
   integrationTest();
