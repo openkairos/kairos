@@ -1,6 +1,7 @@
 ---
 name: module-architecture
 description: Use when working on Kairos module structure, Clean Architecture boundaries, composition files, shared module public APIs, route placement, handler boundaries, or reviewing architecture-related changes in the TypeScript backend.
+allowed-tools: functions.exec_command multi_tool_use.parallel
 ---
 
 # Kairos Module Architecture

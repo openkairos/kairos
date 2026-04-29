@@ -1,6 +1,7 @@
 ---
 name: worktree
 description: Use when working on Kairos in a Git worktree, preparing a PR worktree, starting local Docker Compose services, or validating code in an isolated parallel development environment.
+allowed-tools: functions.exec_command functions.write_stdin multi_tool_use.parallel
 ---
 
 # Kairos Worktree Development
