@@ -1,2 +1,1 @@
-export * from './password-hasher';
-export * from './verify-password';
+export { hashPassword, verifyPassword } from './password-composition';

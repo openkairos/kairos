@@ -1,8 +1,8 @@
 import { type KoalaConfig } from '@koala-ts/framework';
-import { apiRoutes, homeRoute } from '@/routes';
+import { routes } from '@/config/routes';
 
 export const appConfig: KoalaConfig = {
   controllers: [],
-  routes: [homeRoute, apiRoutes],
+  routes,
   globalMiddleware: [],
 };

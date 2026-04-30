@@ -1,0 +1,7 @@
+interface:
+  display_name: 'Kairos Module Architecture'
+  short_description: 'Follow Kairos module, composition, route, and public API boundaries.'
+  default_prompt: 'Apply the Kairos module architecture rules to this change.'
+
+policy:
+  allow_implicit_invocation: true

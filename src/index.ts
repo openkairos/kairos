@@ -2,7 +2,7 @@ import '@/bootstrap';
 import { create } from '@koala-ts/framework';
 import { appConfig, server } from './config';
 import { runStartupRuntime } from '@/app/shared/infrastructure/runtime/run-startup-runtime';
-import { appLogger } from '@/composition/shared/observability/logger';
+import { appLogger } from '@/app/shared/infrastructure/logger';
 
 async function main(): Promise<void> {
   await runStartupRuntime();
