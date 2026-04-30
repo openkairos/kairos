@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { type GenerateAccessToken, createLogin, type VerifyPassword } from '@/app/authentication/application/login';
 import { type AccessToken } from '@/app/authentication/domain/access-token';
 import { invalidCredentialsError } from '@/app/authentication/domain/errors';
-import type { User } from '@/app/authentication/domain/user';
+import type { User } from '@/app/user/domain/user';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
 import { err, ok } from '@/app/shared/application/result';
 

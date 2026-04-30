@@ -1,4 +1,4 @@
-import type { User } from '@/app/authentication/domain/user';
+import type { User } from '@/app/user/domain/user';
 
 export interface SuperAdminCredentials {
   username: string;

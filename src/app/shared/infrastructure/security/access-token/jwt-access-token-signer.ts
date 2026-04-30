@@ -1,6 +1,6 @@
 import { type KeyObject } from 'node:crypto';
 import { SignJWT } from 'jose';
-import type { User } from '@/app/authentication/domain/user';
+import type { User } from '@/app/user/domain/user';
 import { type Clock } from '@/app/shared/application/clock';
 
 interface AccessTokenSigningConfig {

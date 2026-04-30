@@ -1,4 +1,4 @@
-import { ROLE_SUPER_ADMIN, type User } from '@/app/authentication/domain/user';
+import { ROLE_SUPER_ADMIN, type User } from '@/app/user/domain/user';
 import { type CreateSuperAdmin } from '@/app/setup/domain/super-admin-setup-repository';
 import { type UsersCollection } from '@/app/shared/infrastructure/persistence/mongodb/users-collection-schema';
 

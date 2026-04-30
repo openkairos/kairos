@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import type { User } from '@/app/authentication/domain/user';
+import type { User } from '@/app/user/domain/user';
 import { createGenerateAccessToken } from '@/app/shared/infrastructure/security/access-token/generate-access-token';
 
 describe('Generate access token', () => {

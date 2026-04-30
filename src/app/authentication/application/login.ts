@@ -1,7 +1,7 @@
 import type { AccessToken } from '@/app/authentication/domain/access-token';
 import { type AuthenticatedUser } from '@/app/authentication/domain/authenticated-user';
 import { type InvalidCredentialsError } from '@/app/authentication/domain/errors';
-import type { User } from '@/app/authentication/domain/user';
+import type { User } from '@/app/user/domain/user';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
 import { isErr, ok, type Result } from '@/app/shared/application/result';
 

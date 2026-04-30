@@ -1,5 +1,5 @@
 import { type Collection, type ObjectId, type OptionalId } from 'mongodb';
-import type { User } from '@/app/authentication/domain/user';
+import type { User } from '@/app/user/domain/user';
 
 export interface UserCollectionSchema extends Omit<User, 'id'> {
   _id: ObjectId;

@@ -1,7 +1,7 @@
 import { createSecretKey } from 'node:crypto';
 import { decodeJwt } from 'jose';
 import { describe, expect, test, vi } from 'vitest';
-import type { User } from '@/app/authentication/domain/user';
+import type { User } from '@/app/user/domain/user';
 import { frozenClock } from '@/app/shared/application/clock';
 import { createJwtAccessTokenSigner } from '@/app/shared/infrastructure/security/access-token/jwt-access-token-signer';
 
