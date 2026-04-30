@@ -1,9 +1,9 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
 import { createLogin, type GenerateAccessToken } from '@/app/authentication/application/login';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
+import { createFindOneByEmail } from '@/app/authentication/infrastructure/repository/find-one-by-email';
 import { loginRequestConstraints } from '@/app/authentication/interface/http/login-request';
 import { systemClock } from '@/app/shared/application/clock';
-import { createFindOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository/find-one-by-email';
 import {
   createGenerateAccessToken,
   createJwtAccessTokenSigner,
@@ -12,6 +12,7 @@ import {
 import { usersCollection } from '@/app/shared/infrastructure/persistence/mongodb';
 import { verifyPassword } from '@/app/shared/infrastructure/security/password';
 import { validateRequest } from '@/app/shared/interface/http';
+import { createFindUserByEmail } from '@/app/user/infrastructure/repository/find-user-by-email';
 import { securityConfig } from '@/config/security';
 
 const signingKey = createSecretKey(Buffer.from(securityConfig.appKey.replace('base64:', ''), 'base64'));
@@ -28,7 +29,9 @@ const generateAccessToken: GenerateAccessToken = createGenerateAccessToken({
   sign: signAccessToken,
 });
 
-const findOneByEmail: FindOneByEmail = createFindOneByEmail({ usersCollection });
+const findUserByEmail = createFindUserByEmail({ usersCollection });
+
+const findOneByEmail: FindOneByEmail = createFindOneByEmail({ findUserByEmail });
 
 export const login = createLogin({
   findOneByEmail,
