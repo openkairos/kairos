@@ -99,12 +99,19 @@ If a file implements a business port, it belongs to the owning business module e
 Prefer this direction over time:
 
 ```text
-src/app/workspace/infrastructure/persistence/mongodb/
-src/app/authentication/infrastructure/persistence/mongodb/
-src/app/setup/infrastructure/persistence/mongodb/
+src/app/workspace/infrastructure/repository/
+src/app/authentication/infrastructure/repository/
+src/app/setup/infrastructure/repository/
 ```
 
-Do not put feature-specific repository adapters in `shared` long term.
+Rules:
+
+- Put business repository adapters in `<module>/infrastructure/repository`.
+- Do not put business-port implementations in shared infrastructure.
+- Keep shared MongoDB schemas in shared infrastructure as shared resources for now.
+- Resource modules own base persistence behavior for their resource.
+- Other modules may wrap resource persistence to express their own use-case language.
+- Keep each infrastructure migration small, mergeable, releasable, and behavior-preserving.
 
 ## Public API Rules
 
