@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import type { User } from '@/app/authentication/domain/user';
+import type { User } from '@/app/user/domain/user';
 import { ensureSuperAdminSetup } from '@/app/setup/application/ensure-super-admin-setup';
 import { type CreateSuperAdmin, type ExistsSuperAdmin } from '@/app/setup/domain/super-admin-setup-repository';
 

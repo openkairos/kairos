@@ -1,5 +1,5 @@
 import { type AccessToken, accessTokenSerializerMetadata } from '@/app/authentication/domain/access-token';
-import { type User, userMetadata } from '@/app/authentication/domain/user';
+import { type User, userMetadata } from '@/app/user/domain/user';
 
 export interface AuthenticatedUser {
   user: User;
