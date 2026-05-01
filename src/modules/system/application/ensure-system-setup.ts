@@ -5,17 +5,17 @@ import {
 } from '@/modules/system/domain/system-setup-repository';
 import { ok, type Result } from '@/modules/shared/kernel/result';
 
-interface EnsureSystemSetupDependencies {
+type EnsureSystemSetupDependencies = Readonly<{
   existsSuperAdmin: ExistsSuperAdmin;
   createSuperAdmin: CreateSuperAdmin;
   hashPassword: (plainPassword: string) => Promise<string>;
-}
+}>;
 
-export interface EnsureSystemSetupCommand {
+export type EnsureSystemSetupCommand = Readonly<{
   username: string;
   email: string;
   password: string;
-}
+}>;
 
 export type EnsureSystemSetupResult = Result<{ created: boolean }, never>;
 

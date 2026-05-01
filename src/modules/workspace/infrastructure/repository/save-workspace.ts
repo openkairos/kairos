@@ -4,9 +4,9 @@ import { type WorkspacesCollection } from '@/modules/shared/persistence/mongodb/
 import { workspaceSlugConflictError } from '@/modules/workspace/domain/errors';
 import { type SaveWorkspace } from '@/modules/workspace/domain/workspace-repository';
 
-interface SaveWorkspaceDependencies {
+type SaveWorkspaceDependencies = Readonly<{
   workspacesCollection: WorkspacesCollection;
-}
+}>;
 
 const DUPLICATE_KEY_ERROR_CODE = 11000;
 

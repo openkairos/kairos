@@ -3,16 +3,16 @@ import {
   type EnsureSystemSetupResult,
 } from '@/modules/system/application/ensure-system-setup';
 
-export interface StartupRuntimeCommand {
+export type StartupRuntimeCommand = Readonly<{
   superAdminUsername: string;
   superAdminEmail: string;
   superAdminPassword: string;
-}
+}>;
 
-interface StartupRuntimeDependencies {
+type StartupRuntimeDependencies = Readonly<{
   connectMongoDB: () => Promise<unknown>;
   setupSystem: (command: EnsureSystemSetupCommand) => Promise<EnsureSystemSetupResult>;
-}
+}>;
 
 export function startupRuntime({
   connectMongoDB,

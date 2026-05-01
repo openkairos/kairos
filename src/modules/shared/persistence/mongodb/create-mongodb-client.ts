@@ -1,9 +1,9 @@
 import { MongoClient } from 'mongodb';
 
-interface CreateMongodbClientDependencies {
+type CreateMongodbClientDependencies = Readonly<{
   uri: string;
   makeClient?: (uri: string) => MongoClient;
-}
+}>;
 
 export function createMongodbClient({
   uri,

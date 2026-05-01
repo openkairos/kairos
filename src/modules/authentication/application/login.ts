@@ -5,12 +5,12 @@ import type { User } from '@/modules/authentication/domain/user';
 import { type FindOneByEmail } from '@/modules/authentication/domain/user-credentials-repository';
 import { isErr, ok, type Result } from '@/modules/shared/kernel/result';
 
-export interface LoginUserCommand {
+export type LoginUserCommand = Readonly<{
   email: string;
   password: string;
-}
+}>;
 
-type AuthenticateResult = Result<AuthenticatedUser, InvalidCredentialsError>;
+type LoginResult = Result<AuthenticatedUser, InvalidCredentialsError>;
 
 export type VerifyPassword = (
   password: string,
@@ -19,14 +19,14 @@ export type VerifyPassword = (
 
 export type GenerateAccessToken = (user: User) => Promise<AccessToken>;
 
-interface AuthenticateDependencies {
+type LoginDependencies = Readonly<{
   findOneByEmail: FindOneByEmail;
   verifyPassword: VerifyPassword;
   generateAccessToken: GenerateAccessToken;
-}
+}>;
 
-export function createLogin({ findOneByEmail, verifyPassword, generateAccessToken }: AuthenticateDependencies) {
-  return async function login(command: LoginUserCommand): Promise<AuthenticateResult> {
+export function createLogin({ findOneByEmail, verifyPassword, generateAccessToken }: LoginDependencies) {
+  return async function login(command: LoginUserCommand): Promise<LoginResult> {
     const userResult = await findOneByEmail(command.email);
     if (isErr(userResult)) return userResult;
 

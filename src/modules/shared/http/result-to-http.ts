@@ -41,9 +41,9 @@ export interface ResultHttpMapping<T, E extends { type: string }> {
   };
 }
 
-interface CreateResultToHttpMapperDependencies {
+type CreateResultToHttpMapperDependencies = Readonly<{
   normalize: (input: unknown, options?: SerializeOptions) => unknown;
-}
+}>;
 
 type ResultToHttpMapper = <T, E extends { type: string }>(
   result: Result<T, E>,

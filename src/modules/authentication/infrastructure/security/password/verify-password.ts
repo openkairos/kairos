@@ -3,9 +3,9 @@ import { invalidCredentialsError } from '@/modules/authentication/domain/errors'
 import { err, ok } from '@/modules/shared/kernel/result';
 import { type PasswordHasher } from '@/modules/shared/security/password/password-hasher';
 
-interface CreateVerifyPasswordDependencies {
+type CreateVerifyPasswordDependencies = Readonly<{
   hasher: PasswordHasher;
-}
+}>;
 
 export function createVerifyPassword({ hasher }: CreateVerifyPasswordDependencies): VerifyPassword {
   return async (plainPassword: string, hashedPassword: string) => {
