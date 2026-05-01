@@ -1,20 +1,20 @@
 import { describe, expect, test, vi } from 'vitest';
-import { ensureSystemSetup } from '@/modules/system/application/ensure-system-setup';
-import { type CreateSuperAdmin, type ExistsSuperAdmin } from '@/modules/system/domain/system-setup-repository';
+import { createEnsureSuperAdminTask } from '@/modules/setup/application/ensure-super-admin';
+import { type CreateSuperAdmin, type ExistsSuperAdmin } from '@/modules/setup/domain/super-admin-repository';
 
-describe('ensureSystemSetup', () => {
+describe('createEnsureSuperAdminTask', () => {
   test('creates super admin when one does not exist', async () => {
     const existsSuperAdmin: ExistsSuperAdmin = vi.fn().mockResolvedValue(false);
     const createSuperAdmin: CreateSuperAdmin = vi.fn().mockResolvedValue(undefined);
     const hashPassword = vi.fn().mockResolvedValue('$hashed');
-    const execute = ensureSystemSetup({ existsSuperAdmin, createSuperAdmin, hashPassword });
+    const createSetupTask = createEnsureSuperAdminTask({ existsSuperAdmin, createSuperAdmin, hashPassword });
     const command = {
       username: 'admin',
       email: 'admin@example.com',
       password: 'secret',
     };
 
-    const result = await execute(command);
+    const result = await createSetupTask(command)();
 
     expect(existsSuperAdmin).toHaveBeenCalledTimes(1);
     expect(hashPassword).toHaveBeenCalledWith('secret');
@@ -30,14 +30,14 @@ describe('ensureSystemSetup', () => {
     const existsSuperAdmin: ExistsSuperAdmin = vi.fn().mockResolvedValue(true);
     const createSuperAdmin: CreateSuperAdmin = vi.fn();
     const hashPassword = vi.fn();
-    const execute = ensureSystemSetup({ existsSuperAdmin, createSuperAdmin, hashPassword });
+    const createSetupTask = createEnsureSuperAdminTask({ existsSuperAdmin, createSuperAdmin, hashPassword });
     const command = {
       username: 'admin',
       email: 'admin@example.com',
       password: 'secret',
     };
 
-    const result = await execute(command);
+    const result = await createSetupTask(command)();
 
     expect(existsSuperAdmin).toHaveBeenCalledTimes(1);
     expect(hashPassword).not.toHaveBeenCalled();

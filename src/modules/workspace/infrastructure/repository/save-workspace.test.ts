@@ -66,7 +66,6 @@ describe('Save Workspace Repository', () => {
     ],
   ])('it should throw non duplicate errors: %s', async (_, failure) => {
     const collectionMock = {
-      createIndex: vi.fn().mockResolvedValue('slug_1'),
       insertOne: vi.fn().mockRejectedValue(failure),
     };
     const saveWorkspace = createSaveWorkspace({
