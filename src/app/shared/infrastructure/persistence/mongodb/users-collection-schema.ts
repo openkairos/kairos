@@ -1,8 +1,13 @@
 import { type Collection, type ObjectId, type OptionalId } from 'mongodb';
-import type { User } from '@/app/authentication/domain/user';
 
-export interface UserCollectionSchema extends Omit<User, 'id'> {
+type UserRoleDocument = 'ROLE_SUPER_ADMIN';
+
+export interface UserCollectionSchema {
   _id: ObjectId;
+  username: string;
+  email: string;
+  password: string;
+  roles: UserRoleDocument[];
 }
 
 export type UsersCollection = Collection<OptionalId<UserCollectionSchema>>;

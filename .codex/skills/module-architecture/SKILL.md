@@ -69,6 +69,8 @@ src/app/shared/infrastructure/persistence/mongodb/
   index.ts
   mongodb-composition.ts
   create-mongodb-client.ts
+  users-collection-schema.ts
+  workspaces-collection-schema.ts
 
 src/app/shared/infrastructure/security/password/
   index.ts
@@ -91,20 +93,23 @@ Rules:
 - Do not create a root shared index that aggregates unrelated shared modules.
 - Business composition may import shared public APIs from these indexes.
 - Domain/application code may import pure shared primitives, but must not import composed infrastructure values.
+- MongoDB clients, typed collections, collection names, and collection schema types are valid shared persistence resources.
+- Shared technical modules must not import business modules. If shared code needs a business type, error, or port, the code belongs in that business module.
+- Shared MongoDB schema files should describe persistence documents directly instead of extending business domain entities.
 
 ## Feature-Specific Infrastructure
 
 If a file implements a business port, it belongs to the owning business module even if it uses shared infrastructure.
 
-Prefer this direction over time:
+Repository adapters belong under the owning module's repository infrastructure:
 
 ```text
-src/app/workspace/infrastructure/persistence/mongodb/
-src/app/authentication/infrastructure/persistence/mongodb/
-src/app/setup/infrastructure/persistence/mongodb/
+src/app/workspace/infrastructure/repository/
+src/app/authentication/infrastructure/repository/
+src/app/setup/infrastructure/repository/
 ```
 
-Do not put feature-specific repository adapters in `shared` long term.
+Do not put feature-specific repository adapters in `shared`.
 
 ## Public API Rules
 

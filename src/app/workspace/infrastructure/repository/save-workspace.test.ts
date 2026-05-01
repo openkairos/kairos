@@ -3,7 +3,7 @@ import { integrationTest } from '@tests/__vitest__/integration-test';
 import { MongoServerError } from 'mongodb';
 import { describe, expect, test, vi } from 'vitest';
 import type { WorkspacesCollection } from '@/app/shared/infrastructure/persistence/mongodb/workspaces-collection-schema';
-import { createSaveWorkspace } from '@/app/shared/infrastructure/persistence/repository/workspace-repository/save-workspace';
+import { createSaveWorkspace } from '@/app/workspace/infrastructure/repository/save-workspace';
 import { workspaceSlugConflictError } from '@/app/workspace/domain/errors';
 import { workspacesCollection } from '@/app/shared/infrastructure/persistence/mongodb';
 

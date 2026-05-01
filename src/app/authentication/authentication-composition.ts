@@ -1,9 +1,9 @@
 import { createSecretKey, randomUUID } from 'node:crypto';
 import { createLogin, type GenerateAccessToken } from '@/app/authentication/application/login';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
+import { createFindOneByEmail } from '@/app/authentication/infrastructure/repository/find-one-by-email';
 import { loginRequestConstraints } from '@/app/authentication/interface/http/login-request';
 import { systemClock } from '@/app/shared/application/clock';
-import { createFindOneByEmail } from '@/app/shared/infrastructure/persistence/repository/user-repository/find-one-by-email';
 import {
   createGenerateAccessToken,
   createJwtAccessTokenSigner,

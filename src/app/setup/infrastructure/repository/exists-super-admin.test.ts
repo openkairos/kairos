@@ -1,6 +1,6 @@
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { describe, expect, test } from 'vitest';
-import { createExistsSuperAdmin } from '@/app/shared/infrastructure/persistence/repository/user-repository/exists-super-admin';
+import { createExistsSuperAdmin } from '@/app/setup/infrastructure/repository/exists-super-admin';
 import { usersCollection } from '@/app/shared/infrastructure/persistence/mongodb';
 
 describe('Exists Super Admin Repository', () => {
