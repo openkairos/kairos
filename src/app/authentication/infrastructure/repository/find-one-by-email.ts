@@ -1,7 +1,7 @@
 import { invalidCredentialsError } from '@/app/authentication/domain/errors';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
-import { err, ok } from '@/app/shared/application/result';
-import { type UsersCollection } from '@/app/shared/infrastructure/persistence/mongodb/users-collection-schema';
+import { err, ok } from '@/app/shared/kernel/result';
+import { type UsersCollection } from '@/app/shared/persistence/mongodb/users-collection-schema';
 
 interface CreateFindOneByEmailDependencies {
   usersCollection: UsersCollection;

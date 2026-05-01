@@ -1,4 +1,4 @@
-import { assertIsNonEmptyString } from '@/app/shared/application/assert';
+import { assertIsNonEmptyString } from '@/app/shared/kernel/assert';
 
 const superAdminUsername = process.env.SUPER_ADMIN_USERNAME;
 const superAdminEmail = process.env.SUPER_ADMIN_EMAIL;

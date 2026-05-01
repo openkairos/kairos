@@ -1,5 +1,5 @@
-import { workspacesCollection } from '@/app/shared/infrastructure/persistence/mongodb';
-import { validateRequest } from '@/app/shared/interface/http';
+import { workspacesCollection } from '@/app/shared/persistence/mongodb';
+import { validateRequest } from '@/app/shared/http';
 import { createCreateWorkspace } from '@/app/workspace/application/create-workspace';
 import { type SaveWorkspace } from '@/app/workspace/domain/workspace-repository';
 import { createSaveWorkspace } from '@/app/workspace/infrastructure/repository/save-workspace';

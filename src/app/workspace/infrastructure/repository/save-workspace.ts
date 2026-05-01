@@ -1,6 +1,6 @@
 import { MongoServerError } from 'mongodb';
-import { err, ok } from '@/app/shared/application/result';
-import { type WorkspacesCollection } from '@/app/shared/infrastructure/persistence/mongodb/workspaces-collection-schema';
+import { err, ok } from '@/app/shared/kernel/result';
+import { type WorkspacesCollection } from '@/app/shared/persistence/mongodb/workspaces-collection-schema';
 import { workspaceSlugConflictError } from '@/app/workspace/domain/errors';
 import { type SaveWorkspace } from '@/app/workspace/domain/workspace-repository';
 

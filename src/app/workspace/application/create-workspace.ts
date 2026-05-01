@@ -1,4 +1,4 @@
-import type { Result } from '@/app/shared/application/result';
+import type { Result } from '@/app/shared/kernel/result';
 import type { WorkspaceSlugConflictError } from '@/app/workspace/domain/errors';
 import type { Workspace } from '@/app/workspace/domain/workspace';
 import { type NewWorkspace, type SaveWorkspace } from '@/app/workspace/domain/workspace-repository';

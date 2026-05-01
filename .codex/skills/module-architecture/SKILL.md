@@ -62,51 +62,47 @@ Handlers must not:
 
 Shared modules are first-class modules, not dumping grounds.
 
-Use focused shared module entry points:
+Use concern-first shared modules. A shared folder name should describe the reusable concern, not a broad architectural layer.
 
 ```text
-src/app/shared/infrastructure/persistence/mongodb/
+src/app/shared/<concern>/
   index.ts
-  mongodb-composition.ts
-  create-mongodb-client.ts
-  users-collection-schema.ts
-  workspaces-collection-schema.ts
+  ...
+```
 
-src/app/shared/infrastructure/security/password/
-  index.ts
-  password-composition.ts
+Examples:
 
-src/app/shared/infrastructure/logger/
-  index.ts
-  logger-composition.ts
-
-src/app/shared/interface/http/
-  index.ts
-  http-composition.ts
+```text
+src/app/shared/kernel/
+src/app/shared/http/
+src/app/shared/persistence/mongodb/
+src/app/shared/security/password/
 ```
 
 Rules:
 
-- `*-composition.ts` wires only that shared concern.
-- `index.ts` explicitly exports only the public API allowed outside the module.
-- Never use `export *` from composition files.
+- Files inside a shared concern may use the structure that best fits that concern.
+- `*-composition.ts` wires only its own concern.
+- `index.ts` explicitly exports only the public API allowed outside the concern.
+- Never use `export *` from shared public API files.
 - Do not create a root shared index that aggregates unrelated shared modules.
 - Business composition may import shared public APIs from these indexes.
 - Domain/application code may import pure shared primitives, but must not import composed infrastructure values.
 - MongoDB clients, typed collections, collection names, and collection schema types are valid shared persistence resources.
-- Shared technical modules must not import business modules. If shared code needs a business type, error, or port, the code belongs in that business module.
+- Shared modules must not import business modules. If shared code needs a business type, error, or port, the code belongs in that business module.
 - Shared MongoDB schema files should describe persistence documents directly instead of extending business domain entities.
+- Business-specific behavior belongs to the owning business module, even when it uses shared primitives.
+- App-level runtime orchestration belongs outside `shared` when it composes business modules.
+- Startup/runtime interfaces belong to the module whose use case they deliver.
 
 ## Feature-Specific Infrastructure
 
 If a file implements a business port, it belongs to the owning business module even if it uses shared infrastructure.
 
-Repository adapters belong under the owning module's repository infrastructure:
+Repository adapters belong under the owning module's infrastructure:
 
 ```text
-src/app/workspace/infrastructure/repository/
-src/app/authentication/infrastructure/repository/
-src/app/setup/infrastructure/repository/
+src/app/<module>/infrastructure/repository/
 ```
 
 Do not put feature-specific repository adapters in `shared`.

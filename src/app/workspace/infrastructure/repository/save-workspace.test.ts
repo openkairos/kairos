@@ -2,10 +2,10 @@ import { expectAsyncToThrow } from '@tests/__vitest__/expect-async-to-throw';
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { MongoServerError } from 'mongodb';
 import { describe, expect, test, vi } from 'vitest';
-import type { WorkspacesCollection } from '@/app/shared/infrastructure/persistence/mongodb/workspaces-collection-schema';
+import type { WorkspacesCollection } from '@/app/shared/persistence/mongodb/workspaces-collection-schema';
 import { createSaveWorkspace } from '@/app/workspace/infrastructure/repository/save-workspace';
 import { workspaceSlugConflictError } from '@/app/workspace/domain/errors';
-import { workspacesCollection } from '@/app/shared/infrastructure/persistence/mongodb';
+import { workspacesCollection } from '@/app/shared/persistence/mongodb';
 
 describe('Save Workspace Repository', () => {
   integrationTest();
