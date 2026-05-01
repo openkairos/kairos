@@ -21,7 +21,7 @@ Use this skill before planning, implementing, or reviewing changes that affect m
 Use this shape for business modules:
 
 ```text
-src/app/<module>/
+src/modules/<module>/
   <module>-composition.ts
   domain/
   application/
@@ -65,7 +65,7 @@ Shared modules are first-class modules, not dumping grounds.
 Use concern-first shared modules. A shared folder name should describe the reusable concern, not a broad architectural layer.
 
 ```text
-src/app/shared/<concern>/
+src/modules/shared/<concern>/
   index.ts
   ...
 ```
@@ -73,10 +73,10 @@ src/app/shared/<concern>/
 Examples:
 
 ```text
-src/app/shared/kernel/
-src/app/shared/http/
-src/app/shared/persistence/mongodb/
-src/app/shared/security/password/
+src/modules/shared/kernel/
+src/modules/shared/http/
+src/modules/shared/persistence/mongodb/
+src/modules/shared/security/password/
 ```
 
 Rules:
@@ -102,7 +102,7 @@ If a file implements a business port, it belongs to the owning business module e
 Repository adapters belong under the owning module's infrastructure:
 
 ```text
-src/app/<module>/infrastructure/repository/
+src/modules/<module>/infrastructure/repository/
 ```
 
 Do not put feature-specific repository adapters in `shared`.
