@@ -5,4 +5,11 @@ assertIsNonEmptyString(connectionString, 'MONGODB_CONNECTION_STRING is not defin
 
 export const mongodbConfig = {
   connectionString,
+  indexes: [
+    {
+      collectionName: 'workspaces',
+      keys: { slug: 1 },
+      options: { unique: true },
+    },
+  ],
 };

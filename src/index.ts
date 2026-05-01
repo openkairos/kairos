@@ -1,14 +1,16 @@
 import '@/bootstrap';
 import { create } from '@koala-ts/framework';
 import { appConfig, server } from './config';
-import { runStartupRuntime } from '@/modules/system/interface/runtime/run-startup-runtime';
+import { ensureRuntimeInfrastructure, executeSetup } from '@/modules/setup/setup-composition';
 import { appLogger } from '@/modules/shared/logger';
 
 async function main(): Promise<void> {
-  await runStartupRuntime();
-  const app = create(appConfig);
+  await ensureRuntimeInfrastructure();
+  await executeSetup();
 
+  const app = create(appConfig);
   app.listen(server.port);
+
   appLogger.info(`Server is running on http://localhost:${server.port}`);
 }
 

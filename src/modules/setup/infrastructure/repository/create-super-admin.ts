@@ -1,4 +1,4 @@
-import { type CreateSuperAdmin } from '@/modules/system/domain/system-setup-repository';
+import { type CreateSuperAdmin } from '@/modules/setup/domain/super-admin-repository';
 import { type UsersCollection } from '@/modules/shared/persistence/mongodb/users-collection-schema';
 
 type CreateSuperAdminDependencies = Readonly<{

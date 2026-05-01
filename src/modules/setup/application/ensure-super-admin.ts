@@ -2,29 +2,30 @@ import {
   type CreateSuperAdmin,
   type ExistsSuperAdmin,
   type SuperAdminCredentials,
-} from '@/modules/system/domain/system-setup-repository';
+} from '@/modules/setup/domain/super-admin-repository';
 import { ok, type Result } from '@/modules/shared/kernel/result';
+import { type SetupTask } from '@/modules/setup/application/run-setup';
 
-type EnsureSystemSetupDependencies = Readonly<{
+type EnsureSuperAdminDependencies = Readonly<{
   existsSuperAdmin: ExistsSuperAdmin;
   createSuperAdmin: CreateSuperAdmin;
   hashPassword: (plainPassword: string) => Promise<string>;
 }>;
 
-export type EnsureSystemSetupCommand = Readonly<{
+export type EnsureSuperAdminCommand = Readonly<{
   username: string;
   email: string;
   password: string;
 }>;
 
-export type EnsureSystemSetupResult = Result<{ created: boolean }, never>;
+export type EnsureSuperAdminResult = Result<{ created: boolean }, never>;
 
-export function ensureSystemSetup({
+export function createEnsureSuperAdminTask({
   existsSuperAdmin,
   createSuperAdmin,
   hashPassword,
-}: EnsureSystemSetupDependencies): (command: EnsureSystemSetupCommand) => Promise<EnsureSystemSetupResult> {
-  return async (command: EnsureSystemSetupCommand) => {
+}: EnsureSuperAdminDependencies): (command: EnsureSuperAdminCommand) => SetupTask {
+  return (command: EnsureSuperAdminCommand) => async (): Promise<EnsureSuperAdminResult> => {
     if (await existsSuperAdmin()) return ok({ created: false });
 
     const credentials: SuperAdminCredentials = {

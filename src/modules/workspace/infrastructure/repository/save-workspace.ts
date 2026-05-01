@@ -16,8 +16,6 @@ function isDuplicateError(error: unknown): boolean {
 
 export function createSaveWorkspace({ workspacesCollection }: SaveWorkspaceDependencies): SaveWorkspace {
   return async ({ name, slug }) => {
-    await workspacesCollection.createIndex({ slug: 1 }, { unique: true });
-
     try {
       const inserted = await workspacesCollection.insertOne({ name, slug });
 
