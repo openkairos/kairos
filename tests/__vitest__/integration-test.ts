@@ -1,5 +1,5 @@
 import { afterEach, beforeEach } from 'vitest';
-import { mongoDBClient } from '@/app/shared/persistence/mongodb';
+import { mongoDBClient } from '@/modules/shared/persistence/mongodb';
 
 export function integrationTest(): void {
   beforeEach(async () => {

@@ -1,7 +1,7 @@
 import { RouteGroup } from '@koala-ts/framework/routing';
-import { authenticationRoutes } from '@/app/authentication/interface/http/authentication-routes';
-import { homeRoute } from '@/app/system/interface/http/system-routes';
-import { workspaceRoutes } from '@/app/workspace/interface/http/workspace-routes';
+import { authenticationRoutes } from '@/modules/authentication/interface/http/authentication-routes';
+import { homeRoute } from '@/modules/system/interface/http/system-routes';
+import { workspaceRoutes } from '@/modules/workspace/interface/http/workspace-routes';
 
 const apiRoutes = RouteGroup({ prefix: '/api', namePrefix: 'api.' }, () => [
   RouteGroup({ prefix: '/v1', namePrefix: 'v1.' }, () => [authenticationRoutes, workspaceRoutes]),

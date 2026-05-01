@@ -1,0 +1,68 @@
+import { describe, expect, it, vi } from 'vitest';
+import { type GenerateAccessToken, createLogin, type VerifyPassword } from '@/modules/authentication/application/login';
+import { type AccessToken } from '@/modules/authentication/domain/access-token';
+import { invalidCredentialsError } from '@/modules/authentication/domain/errors';
+import type { User } from '@/modules/authentication/domain/user';
+import { type FindOneByEmail } from '@/modules/authentication/domain/user-credentials-repository';
+import { err, ok } from '@/modules/shared/kernel/result';
+
+describe('Authenticate use case', () => {
+  const user: User = {
+    id: '1',
+    username: 'admin',
+    email: 'admin@example.com',
+    password: 'hashed-password',
+    roles: ['ROLE_SUPER_ADMIN'],
+  };
+
+  const token: AccessToken = {
+    token_type: 'Bearer',
+    expires_in: 3600,
+    access_token: 'jwt-token',
+  };
+
+  it('should fail if user does not exist', async () => {
+    const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(err(invalidCredentialsError));
+    const verifyPassword: VerifyPassword = vi.fn();
+    const generateAccessToken: GenerateAccessToken = vi.fn();
+    const execute = createLogin({ findOneByEmail, verifyPassword, generateAccessToken });
+
+    const result = await execute({
+      email: 'invalid@example.com',
+      password: 'plain-password',
+    });
+
+    expect(result).toEqual(err(invalidCredentialsError));
+  });
+
+  it('should fail if password is invalid', async () => {
+    const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(ok(user));
+    const verifyPassword: VerifyPassword = vi.fn().mockResolvedValue(err(invalidCredentialsError));
+    const generateAccessToken: GenerateAccessToken = vi.fn();
+    const execute = createLogin({ findOneByEmail, verifyPassword, generateAccessToken });
+
+    const result = await execute({
+      email: 'admin@example.com',
+      password: 'plain-password',
+    });
+
+    expect(result).toEqual(err(invalidCredentialsError));
+  });
+
+  it('should authenticate user and return access token', async () => {
+    const findOneByEmail: FindOneByEmail = vi.fn().mockResolvedValue(ok(user));
+    const verifyPassword: VerifyPassword = vi.fn().mockResolvedValue(ok(undefined));
+    const generateAccessToken: GenerateAccessToken = vi.fn().mockResolvedValue(token);
+    const execute = createLogin({ findOneByEmail, verifyPassword, generateAccessToken });
+
+    const result = await execute({
+      email: 'admin@example.com',
+      password: 'plain-password',
+    });
+
+    expect(findOneByEmail).toHaveBeenCalledWith('admin@example.com');
+    expect(verifyPassword).toHaveBeenCalledWith('plain-password', 'hashed-password');
+    expect(generateAccessToken).toHaveBeenCalledWith(user);
+    expect(result).toEqual(ok({ user, token }));
+  });
+});
