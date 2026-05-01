@@ -3,8 +3,8 @@ import {
   authenticatedUserSerializerMetadata,
 } from '@/app/authentication/domain/authenticated-user';
 import { type InvalidCredentialsError } from '@/app/authentication/domain/errors';
-import { type ResultHttpMapping } from '@/app/shared/infrastructure/http/result-to-http';
-import { HTTP_OK, HTTP_UNAUTHORIZED } from '@/app/shared/interface/http/status-code';
+import { type ResultHttpMapping } from '@/app/shared/http/result-to-http';
+import { HTTP_OK, HTTP_UNAUTHORIZED } from '@/app/shared/http/status-code';
 
 export const loginResponse: ResultHttpMapping<AuthenticatedUser, InvalidCredentialsError> = {
   success: {

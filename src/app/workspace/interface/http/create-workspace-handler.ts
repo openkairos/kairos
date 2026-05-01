@@ -1,7 +1,7 @@
 import { type HttpScope } from '@koala-ts/framework';
 import { type CreateWorkspaceRequest } from '@/app/workspace/interface/http/create-workspace-request';
 import { createWorkspaceResponse } from '@/app/workspace/interface/http/create-workspace-response';
-import { mapResultToHttp } from '@/app/shared/interface/http';
+import { mapResultToHttp } from '@/app/shared/http';
 import { createWorkspace } from '@/app/workspace/workspace-composition';
 
 export async function createWorkspaceHandler({ response, request }: HttpScope): Promise<void> {

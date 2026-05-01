@@ -3,7 +3,7 @@ import { type AuthenticatedUser } from '@/app/authentication/domain/authenticate
 import { type InvalidCredentialsError } from '@/app/authentication/domain/errors';
 import type { User } from '@/app/authentication/domain/user';
 import { type FindOneByEmail } from '@/app/authentication/domain/user-credentials-repository';
-import { isErr, ok, type Result } from '@/app/shared/application/result';
+import { isErr, ok, type Result } from '@/app/shared/kernel/result';
 
 export interface LoginUserCommand {
   email: string;

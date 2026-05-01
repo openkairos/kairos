@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { err, ok } from '@/app/shared/application/result';
+import { err, ok } from '@/app/shared/kernel/result';
 import { createCreateWorkspace } from '@/app/workspace/application/create-workspace';
 import { workspaceSlugConflictError } from '@/app/workspace/domain/errors';
 import type { SaveWorkspace } from '@/app/workspace/domain/workspace-repository';
