@@ -3,11 +3,11 @@ import type { WorkspaceSlugConflictError } from '@/modules/workspace/domain/erro
 import type { Workspace } from '@/modules/workspace/domain/workspace';
 import { type NewWorkspace, type SaveWorkspace } from '@/modules/workspace/domain/workspace-repository';
 
-interface CreateWorkspaceDependencies {
+type CreateWorkspaceDependencies = Readonly<{
   saveWorkspace: SaveWorkspace;
-}
+}>;
 
-export type CreateWorkspaceCommand = NewWorkspace;
+export type CreateWorkspaceCommand = Readonly<NewWorkspace>;
 
 export type CreateWorkspaceResult = Result<Workspace, WorkspaceSlugConflictError>;
 

@@ -1,9 +1,9 @@
 import { type ExistsSuperAdmin } from '@/modules/system/domain/system-setup-repository';
 import { type UsersCollection } from '@/modules/shared/persistence/mongodb/users-collection-schema';
 
-interface ExistsSuperAdminDependencies {
+type ExistsSuperAdminDependencies = Readonly<{
   usersCollection: UsersCollection;
-}
+}>;
 
 const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
 

@@ -3,9 +3,9 @@ import { type FindOneByEmail } from '@/modules/authentication/domain/user-creden
 import { err, ok } from '@/modules/shared/kernel/result';
 import { type UsersCollection } from '@/modules/shared/persistence/mongodb/users-collection-schema';
 
-interface CreateFindOneByEmailDependencies {
+type CreateFindOneByEmailDependencies = Readonly<{
   usersCollection: UsersCollection;
-}
+}>;
 
 export function createFindOneByEmail({ usersCollection }: CreateFindOneByEmailDependencies): FindOneByEmail {
   return async (email: string) => {

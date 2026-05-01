@@ -6,10 +6,10 @@ interface AccessTokenConfig {
   ttl: number;
 }
 
-interface CreateGenerateAccessTokenDependencies {
+type CreateGenerateAccessTokenDependencies = Readonly<{
   accessTokenConfig: AccessTokenConfig;
   sign: SignAccessToken;
-}
+}>;
 
 export function createGenerateAccessToken({
   accessTokenConfig,

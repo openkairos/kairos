@@ -9,12 +9,12 @@ interface AccessTokenSigningConfig {
   issuer: string;
 }
 
-interface CreateJwtAccessTokenSignerDependencies {
+type CreateJwtAccessTokenSignerDependencies = Readonly<{
   key: KeyObject;
   accessTokenConfig: AccessTokenSigningConfig;
   clock: Clock;
   newJti: () => string;
-}
+}>;
 
 export type SignAccessToken = (user: User) => Promise<string>;
 
