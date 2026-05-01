@@ -1,5 +1,4 @@
 import { type CreateIndexesOptions, type Db, type IndexSpecification } from 'mongodb';
-import { type RuntimeInfrastructureTask } from '@/modules/setup/infrastructure/ensure-runtime-infrastructure';
 
 type MongoIndexConfig = Readonly<{
   collectionName: string;
@@ -12,7 +11,7 @@ type EnsureMongoIndexesDependencies = Readonly<{
   indexes: readonly MongoIndexConfig[];
 }>;
 
-export function ensureMongoIndexes({ database, indexes }: EnsureMongoIndexesDependencies): RuntimeInfrastructureTask {
+export function ensureMongoIndexes({ database, indexes }: EnsureMongoIndexesDependencies): () => Promise<void> {
   return async () => {
     await Promise.all(
       indexes.map(async ({ collectionName, keys, options }) => {
