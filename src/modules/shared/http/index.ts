@@ -1,4 +1,5 @@
 export { mapResultToHttp, validateRequest } from './http-composition';
+
 export {
   HTTP_BAD_REQUEST,
   HTTP_CONFLICT,
@@ -7,7 +8,9 @@ export {
   HTTP_OK,
   HTTP_UNAUTHORIZED,
 } from './status-code';
+
 export type { StatusCode } from './status-code';
+
 export type {
   HttpMiddleware,
   HttpRequest,
@@ -19,4 +22,3 @@ export type {
   Validator,
   ViolationMapper,
 } from './types';
-export { validationMiddleware } from './validation-middleware';
