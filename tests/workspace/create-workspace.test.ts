@@ -36,7 +36,7 @@ describe('Workspace feature test', () => {
     );
   });
 
-  test('it should default environments to empty array when omitted', async () => {
+  test('it should default environments to default when omitted', async () => {
     const agent = createTestAgent(appConfig);
     const payload = {
       name: 'Acme',
@@ -50,14 +50,43 @@ describe('Workspace feature test', () => {
     expect(response.body).toEqual({
       data: {
         id: expect.any(String),
-        environments: [],
+        environments: ['default'],
         name: 'Acme',
         slug: 'acme',
       },
     });
     expect(persistedWorkspace).toEqual(
       expect.objectContaining({
-        environments: [],
+        environments: ['default'],
+        name: 'Acme',
+        slug: 'acme',
+      }),
+    );
+  });
+
+  test('it should default environments to default when empty array is provided', async () => {
+    const agent = createTestAgent(appConfig);
+    const payload = {
+      environments: [],
+      name: 'Acme',
+      slug: 'acme',
+    };
+
+    const response = await agent.post('/api/v1/workspaces').send(payload);
+
+    const persistedWorkspace = await workspacesCollection.findOne({ slug: payload.slug });
+    expect(response.status).toBe(201);
+    expect(response.body).toEqual({
+      data: {
+        id: expect.any(String),
+        environments: ['default'],
+        name: 'Acme',
+        slug: 'acme',
+      },
+    });
+    expect(persistedWorkspace).toEqual(
+      expect.objectContaining({
+        environments: ['default'],
         name: 'Acme',
         slug: 'acme',
       }),
