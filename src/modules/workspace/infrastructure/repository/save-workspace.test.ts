@@ -13,6 +13,7 @@ describe('Save Workspace Repository', () => {
   test('creates workspace when slug does not exist', async () => {
     const saveWorkspace = createSaveWorkspace({ workspacesCollection });
     const command = {
+      environments: ['dev', 'prod'],
       name: 'Acme',
       slug: 'acme',
     };
@@ -24,12 +25,14 @@ describe('Save Workspace Repository', () => {
       isOk: true,
       value: {
         id: expect.any(String),
+        environments: ['dev', 'prod'],
         name: 'Acme',
         slug: 'acme',
       },
     });
     expect(persistedWorkspace).toEqual(
       expect.objectContaining({
+        environments: ['dev', 'prod'],
         name: 'Acme',
         slug: 'acme',
       }),
@@ -39,10 +42,12 @@ describe('Save Workspace Repository', () => {
   test('returns conflict when slug already exists', async () => {
     const saveWorkspace = createSaveWorkspace({ workspacesCollection });
     await saveWorkspace({
+      environments: ['dev'],
       name: 'Acme',
       slug: 'acme',
     });
     const command = {
+      environments: ['staging'],
       name: 'Another Acme',
       slug: 'acme',
     };
@@ -74,6 +79,7 @@ describe('Save Workspace Repository', () => {
 
     await expectAsyncToThrow(
       saveWorkspace({
+        environments: ['dev'],
         name: 'Test',
         slug: 'test',
       }),

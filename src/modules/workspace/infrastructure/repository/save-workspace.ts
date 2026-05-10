@@ -1,8 +1,8 @@
-import { MongoServerError } from 'mongodb';
 import { err, ok } from '@/modules/shared/kernel/result';
 import { type WorkspacesCollection } from '@/modules/shared/persistence/mongodb/workspaces-collection-schema';
 import { workspaceSlugConflictError } from '@/modules/workspace/domain/errors';
 import { type SaveWorkspace } from '@/modules/workspace/domain/workspace-repository';
+import { MongoServerError } from 'mongodb';
 
 type SaveWorkspaceDependencies = Readonly<{
   workspacesCollection: WorkspacesCollection;
@@ -15,12 +15,17 @@ function isDuplicateError(error: unknown): boolean {
 }
 
 export function createSaveWorkspace({ workspacesCollection }: SaveWorkspaceDependencies): SaveWorkspace {
-  return async ({ name, slug }) => {
+  return async ({ environments, name, slug }) => {
     try {
-      const inserted = await workspacesCollection.insertOne({ name, slug });
+      const inserted = await workspacesCollection.insertOne({
+        environments,
+        name,
+        slug,
+      });
 
       return ok({
         id: inserted.insertedId.toHexString(),
+        environments,
         name,
         slug,
       });
