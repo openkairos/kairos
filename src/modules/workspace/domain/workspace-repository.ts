@@ -3,6 +3,7 @@ import type { WorkspaceSlugConflictError } from '@/modules/workspace/domain/erro
 import type { Workspace } from '@/modules/workspace/domain/workspace';
 
 export interface NewWorkspace {
+  environments: string[];
   name: string;
   slug: string;
 }

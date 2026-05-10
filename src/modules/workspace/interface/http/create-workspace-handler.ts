@@ -5,7 +5,12 @@ import { mapResultToHttp } from '@/modules/shared/http';
 import { createWorkspace } from '@/modules/workspace/workspace-composition';
 
 export async function createWorkspaceHandler({ response, request }: HttpScope): Promise<void> {
-  const result = await createWorkspace(request.body as CreateWorkspaceRequest['body']);
+  const body = request.body as CreateWorkspaceRequest['body'];
+  const result = await createWorkspace({
+    environments: body.environments === undefined || body.environments.length === 0 ? ['default'] : body.environments,
+    name: body.name,
+    slug: body.slug,
+  });
 
   const http = mapResultToHttp(result, createWorkspaceResponse);
 

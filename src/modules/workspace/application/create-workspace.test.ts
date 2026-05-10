@@ -9,12 +9,14 @@ describe('Create workspace use case', () => {
     const saveWorkspace: SaveWorkspace = vi.fn().mockResolvedValue(
       ok({
         id: 'workspace-id',
+        environments: ['dev', 'prod'],
         name: 'Acme',
         slug: 'acme',
       }),
     );
     const execute = createCreateWorkspace({ saveWorkspace });
     const command = {
+      environments: ['dev', 'prod'],
       name: 'Acme',
       slug: 'acme',
     };
@@ -22,12 +24,14 @@ describe('Create workspace use case', () => {
     const result = await execute(command);
 
     expect(saveWorkspace).toHaveBeenCalledWith({
+      environments: ['dev', 'prod'],
       name: 'Acme',
       slug: 'acme',
     });
     expect(result).toEqual(
       ok({
         id: 'workspace-id',
+        environments: ['dev', 'prod'],
         name: 'Acme',
         slug: 'acme',
       }),
@@ -38,6 +42,7 @@ describe('Create workspace use case', () => {
     const saveWorkspace: SaveWorkspace = vi.fn().mockResolvedValue(err(workspaceSlugConflictError));
     const execute = createCreateWorkspace({ saveWorkspace });
     const command = {
+      environments: ['dev', 'prod'],
       name: 'Acme',
       slug: 'acme',
     };
@@ -45,6 +50,7 @@ describe('Create workspace use case', () => {
     const result = await execute(command);
 
     expect(saveWorkspace).toHaveBeenCalledWith({
+      environments: ['dev', 'prod'],
       name: 'Acme',
       slug: 'acme',
     });
