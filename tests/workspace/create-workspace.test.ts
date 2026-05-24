@@ -4,124 +4,170 @@ import { describe, expect, test } from 'vitest';
 import { workspacesCollection } from '@/modules/shared/persistence/mongodb';
 import { appConfig } from '@/config';
 
+type WorkspaceFields = {
+  environments: string[];
+  name: string;
+  slug: string;
+};
+
+async function expectWorkspaceCreated(response: { status: number; body: unknown }, expectedWorkspace: WorkspaceFields) {
+  const persistedWorkspace = await workspacesCollection.findOne({ slug: expectedWorkspace.slug });
+  expect(response.status).toBe(201);
+  expect(response.body).toEqual({
+    data: {
+      id: expect.any(String),
+      ...expectedWorkspace,
+    },
+  });
+  expect(persistedWorkspace).toEqual(expect.objectContaining(expectedWorkspace));
+}
+
 describe('Workspace feature test', () => {
   integrationTest();
 
-  test('it should create workspace', async () => {
-    const agent = createTestAgent(appConfig);
-    const payload = {
-      environments: ['dev', 'prod'],
-      name: 'Acme',
-      slug: 'acme',
-    };
-
-    const response = await agent.post('/api/v1/workspaces').send(payload);
-
-    const persistedWorkspace = await workspacesCollection.findOne({ slug: payload.slug });
-    expect(response.status).toBe(201);
-    expect(response.body).toEqual({
-      data: {
-        id: expect.any(String),
+  describe('creating a workspace', () => {
+    test('it should create workspace', async () => {
+      const agent = createTestAgent(appConfig);
+      const payload = {
         environments: ['dev', 'prod'],
         name: 'Acme',
         slug: 'acme',
-      },
-    });
-    expect(persistedWorkspace).toEqual(
-      expect.objectContaining({
+      };
+
+      const response = await agent.post('/api/v1/workspaces').send(payload);
+
+      await expectWorkspaceCreated(response, {
         environments: ['dev', 'prod'],
         name: 'Acme',
         slug: 'acme',
-      }),
-    );
-  });
-
-  test('it should default environments to default when omitted', async () => {
-    const agent = createTestAgent(appConfig);
-    const payload = {
-      name: 'Acme',
-      slug: 'acme',
-    };
-
-    const response = await agent.post('/api/v1/workspaces').send(payload);
-
-    const persistedWorkspace = await workspacesCollection.findOne({ slug: payload.slug });
-    expect(response.status).toBe(201);
-    expect(response.body).toEqual({
-      data: {
-        id: expect.any(String),
-        environments: ['default'],
-        name: 'Acme',
-        slug: 'acme',
-      },
-    });
-    expect(persistedWorkspace).toEqual(
-      expect.objectContaining({
-        environments: ['default'],
-        name: 'Acme',
-        slug: 'acme',
-      }),
-    );
-  });
-
-  test('it should default environments to default when empty array is provided', async () => {
-    const agent = createTestAgent(appConfig);
-    const payload = {
-      environments: [],
-      name: 'Acme',
-      slug: 'acme',
-    };
-
-    const response = await agent.post('/api/v1/workspaces').send(payload);
-
-    const persistedWorkspace = await workspacesCollection.findOne({ slug: payload.slug });
-    expect(response.status).toBe(201);
-    expect(response.body).toEqual({
-      data: {
-        id: expect.any(String),
-        environments: ['default'],
-        name: 'Acme',
-        slug: 'acme',
-      },
-    });
-    expect(persistedWorkspace).toEqual(
-      expect.objectContaining({
-        environments: ['default'],
-        name: 'Acme',
-        slug: 'acme',
-      }),
-    );
-  });
-
-  test('it should reject creating workspace with duplicated slug', async () => {
-    const agent = createTestAgent(appConfig);
-    await workspacesCollection.insertOne({
-      environments: ['dev'],
-      name: 'Acme',
-      slug: 'acme',
-    });
-    const payload = {
-      environments: ['prod'],
-      name: 'Another Acme',
-      slug: 'acme',
-    };
-
-    const response = await agent.post('/api/v1/workspaces').send(payload);
-
-    expect(response.status).toBe(409);
-    expect(response.body).toEqual({
-      type: 'WORKSPACE_SLUG_CONFLICT',
-      message: 'Workspace slug already exists',
+      });
     });
   });
 
-  test('it should validate create workspace request', async () => {
-    const agent = createTestAgent(appConfig);
+  describe('default environments', () => {
+    test('it should default environments to default when omitted', async () => {
+      const agent = createTestAgent(appConfig);
+      const payload = {
+        name: 'Acme',
+        slug: 'acme',
+      };
 
-    const response = await agent.post('/api/v1/workspaces').send({});
+      const response = await agent.post('/api/v1/workspaces').send(payload);
 
-    expect(response.status).toBe(400);
-    expect(response.body.errors).toHaveProperty('name', ['This value should not be blank.']);
-    expect(response.body.errors).toHaveProperty('slug', ['This value should not be blank.']);
+      await expectWorkspaceCreated(response, {
+        environments: ['default'],
+        name: 'Acme',
+        slug: 'acme',
+      });
+    });
+
+    test('it should default environments to default when empty array is provided', async () => {
+      const agent = createTestAgent(appConfig);
+      const payload = {
+        environments: [],
+        name: 'Acme',
+        slug: 'acme',
+      };
+
+      const response = await agent.post('/api/v1/workspaces').send(payload);
+
+      await expectWorkspaceCreated(response, {
+        environments: ['default'],
+        name: 'Acme',
+        slug: 'acme',
+      });
+    });
+  });
+
+  describe('conflicts', () => {
+    test('it should reject creating workspace with duplicated slug', async () => {
+      const agent = createTestAgent(appConfig);
+      await workspacesCollection.insertOne({
+        environments: ['dev'],
+        name: 'Acme',
+        slug: 'acme',
+      });
+      const payload = {
+        environments: ['prod'],
+        name: 'Another Acme',
+        slug: 'acme',
+      };
+
+      const response = await agent.post('/api/v1/workspaces').send(payload);
+
+      expect(response.status).toBe(409);
+      expect(response.body).toEqual({
+        type: 'WORKSPACE_SLUG_CONFLICT',
+        message: 'Workspace slug already exists',
+      });
+    });
+  });
+
+  describe('request validation', () => {
+    test('it should validate create workspace request', async () => {
+      const agent = createTestAgent(appConfig);
+
+      const response = await agent.post('/api/v1/workspaces').send({});
+
+      expect(response.status).toBe(400);
+      expect(response.body.errors).toHaveProperty('name', ['This value should not be blank.']);
+      expect(response.body.errors).toHaveProperty('slug', ['This value should not be blank.']);
+    });
+
+    test('it should reject blank environment names', async () => {
+      const agent = createTestAgent(appConfig);
+      const payload = {
+        environments: [''],
+        name: 'Acme',
+        slug: 'acme',
+      };
+
+      const response = await agent.post('/api/v1/workspaces').send(payload);
+
+      expect(response.status).toBe(400);
+      expect(response.body.errors).toHaveProperty('environments.0', ['This value should not be blank.']);
+    });
+
+    test('it should reject environments when it is not an array', async () => {
+      const agent = createTestAgent(appConfig);
+      const payload = {
+        environments: 'dev',
+        name: 'Acme',
+        slug: 'acme',
+      };
+
+      const response = await agent.post('/api/v1/workspaces').send(payload);
+
+      expect(response.status).toBe(400);
+      expect(response.body.errors).toHaveProperty('environments');
+    });
+
+    test('it should reject non-string environment names', async () => {
+      const agent = createTestAgent(appConfig);
+      const payload = {
+        environments: ['dev', 123],
+        name: 'Acme',
+        slug: 'acme',
+      };
+
+      const response = await agent.post('/api/v1/workspaces').send(payload);
+
+      expect(response.status).toBe(400);
+      expect(response.body.errors).toHaveProperty('environments.1');
+    });
+
+    test('it should reject duplicate environment names', async () => {
+      const agent = createTestAgent(appConfig);
+      const payload = {
+        environments: ['dev', 'dev'],
+        name: 'Acme',
+        slug: 'acme',
+      };
+
+      const response = await agent.post('/api/v1/workspaces').send(payload);
+
+      expect(response.status).toBe(400);
+      expect(response.body.errors).toHaveProperty('environments');
+    });
   });
 });
