@@ -1,5 +1,6 @@
 import { mongodbConfig } from '@/config/mongodb';
 import { setupConfig } from '@/config/setup';
+import { hashPassword } from '@/kairos/authentication/infrastructure/security/password/hash-password';
 import { createEnsureSuperAdminTask } from '@/kairos/setup/application/ensure-super-admin';
 import { runSetup, type SetupTask } from '@/kairos/setup/application/run-setup';
 import { type CreateSuperAdmin, type ExistsSuperAdmin } from '@/kairos/setup/domain/super-admin-repository';
@@ -12,7 +13,6 @@ import { createExistsSuperAdmin } from '@/kairos/setup/infrastructure/repository
 import { mongoDBClient } from '@/mongodb/client/client';
 import { usersCollection } from '@/mongodb/collection/users-collection';
 import { createEnsureIndexes } from '@/mongodb/index/create-ensure-indexes';
-import { hashPassword } from '@/kairos/shared/security/password';
 
 const existsSuperAdmin: ExistsSuperAdmin = createExistsSuperAdmin({ usersCollection });
 const createSuperAdmin: CreateSuperAdmin = createCreateSuperAdmin({ usersCollection });
