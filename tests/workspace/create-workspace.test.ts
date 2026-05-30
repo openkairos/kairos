@@ -1,7 +1,7 @@
 import { createTestAgent } from '@koala-ts/framework';
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { describe, expect, test } from 'vitest';
-import { workspacesCollection } from '@/modules/shared/persistence/mongodb';
+import { workspacesCollection } from '@/kairos/shared/persistence/mongodb';
 import { appConfig } from '@/config';
 
 type WorkspaceFields = {

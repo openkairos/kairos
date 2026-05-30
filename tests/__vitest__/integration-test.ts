@@ -1,6 +1,6 @@
 import { afterEach, beforeEach } from 'vitest';
 import { mongodbConfig } from '@/config/mongodb';
-import { ensureMongoIndexes, mongoDBClient } from '@/modules/shared/persistence/mongodb';
+import { ensureMongoIndexes, mongoDBClient } from '@/kairos/shared/persistence/mongodb';
 
 export function integrationTest(): void {
   beforeEach(async () => {
