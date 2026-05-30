@@ -3,7 +3,7 @@ import {
   authenticatedUserSerializerMetadata,
 } from '@/kairos/authentication/domain/authenticated-user';
 import { type InvalidCredentialsError } from '@/kairos/authentication/domain/errors';
-import { type ResultHttpMapping } from '@/kairos/shared/http/result-to-http';
+import { type ResultHttpMapping } from '@/interface/http/result-to-http';
 import { HTTP_OK, HTTP_UNAUTHORIZED } from '@/kairos/shared/http/status-code';
 
 export const loginResponse: ResultHttpMapping<AuthenticatedUser, InvalidCredentialsError> = {

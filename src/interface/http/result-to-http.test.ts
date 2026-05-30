@@ -1,4 +1,4 @@
-import { createResultToHttpMapper, type ResultHttpMapping } from '@/kairos/shared/http/result-to-http';
+import { createResultToHttpMapper, type ResultHttpMapping } from '@/interface/http/result-to-http';
 import { HTTP_CREATED, HTTP_INTERNAL_SERVER_ERROR, HTTP_UNAUTHORIZED } from '@/kairos/shared/http/status-code';
 import { err, ok } from '@/kairos/shared/result/result';
 import { describe, expect, it } from 'vitest';

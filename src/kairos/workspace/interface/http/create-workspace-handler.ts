@@ -1,4 +1,4 @@
-import { mapResultToHttp } from '@/kairos/shared/http/map-result-to-http';
+import { mapResultToHttp } from '@/interface/http/map-result-to-http';
 import { type CreateWorkspaceRequest } from '@/kairos/workspace/interface/http/create-workspace-request';
 import { createWorkspaceResponse } from '@/kairos/workspace/interface/http/create-workspace-response';
 import { createWorkspace } from '@/kairos/workspace/workspace-composition';
