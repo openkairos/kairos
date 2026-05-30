@@ -7,11 +7,11 @@ import {
   createJwtAccessTokenSigner,
   type SignAccessToken,
 } from '@/kairos/authentication/infrastructure/security/access-token';
+import { passwordHasher } from '@/kairos/authentication/infrastructure/security/password/password-hasher';
 import { createVerifyPassword } from '@/kairos/authentication/infrastructure/security/password/verify-password';
 import { loginRequestConstraints } from '@/kairos/authentication/interface/http/login-request';
 import { systemClock } from '@/kairos/shared/clock';
 import { validateRequest } from '@/kairos/shared/http';
-import { passwordHasher } from '@/kairos/shared/security/password/password-hasher';
 
 import { usersCollection } from '@/mongodb/collection/users-collection';
 import { createSecretKey, randomUUID } from 'node:crypto';
