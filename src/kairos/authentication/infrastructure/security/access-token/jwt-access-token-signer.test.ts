@@ -2,7 +2,7 @@ import { createSecretKey } from 'node:crypto';
 import { decodeJwt } from 'jose';
 import { describe, expect, test, vi } from 'vitest';
 import type { User } from '@/kairos/authentication/domain/user';
-import { frozenClock } from '@/kairos/shared/clock';
+import { frozenClock } from '@/kairos/shared/clock/clock';
 import { createJwtAccessTokenSigner } from '@/kairos/authentication/infrastructure/security/access-token/jwt-access-token-signer';
 
 describe('JWT access token signer', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { frozenClock, systemClock } from '@/kairos/shared/clock';
+import { frozenClock, systemClock } from '@/kairos/shared/clock/clock';
 
 describe('Clock', () => {
   test('system clock should return current date', () => {
