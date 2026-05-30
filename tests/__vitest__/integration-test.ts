@@ -1,6 +1,6 @@
 import { mongodbConfig } from '@/config/mongodb';
-import { mongoDBClient } from '@/kairos/shared/infrastructure/mongodb/client/client';
-import { createEnsureIndexes } from '@/kairos/shared/infrastructure/mongodb/index/create-ensure-indexes';
+import { mongoDBClient } from '@/mongodb/client/client';
+import { createEnsureIndexes } from '@/mongodb/index/create-ensure-indexes';
 import { afterEach, beforeEach } from 'vitest';
 
 export function integrationTest(): void {

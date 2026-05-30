@@ -1,4 +1,4 @@
-import { workspacesCollectionName } from '@/kairos/shared/infrastructure/mongodb/schema/workspaces-collection-schema';
+import { workspacesCollectionName } from '@/mongodb/schema/workspaces-collection-schema';
 import { assertIsNonEmptyString } from '@/kairos/shared/kernel/assert';
 
 const connectionString = process.env.MONGODB_CONNECTION_STRING;

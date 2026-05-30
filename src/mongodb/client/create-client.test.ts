@@ -1,4 +1,4 @@
-import { createClient } from '@/kairos/shared/infrastructure/mongodb/client/create-client';
+import { createClient } from '@/mongodb/client/create-client';
 import { type MongoClient } from 'mongodb';
 import { describe, expect, it, vi } from 'vitest';
 

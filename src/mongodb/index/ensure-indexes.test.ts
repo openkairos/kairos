@@ -1,4 +1,4 @@
-import { createEnsureIndexes } from '@/kairos/shared/infrastructure/mongodb/index/create-ensure-indexes';
+import { createEnsureIndexes } from '@/mongodb/index/create-ensure-indexes';
 import { describe, expect, test, vi } from 'vitest';
 
 describe('ensureMongoIndexes', () => {

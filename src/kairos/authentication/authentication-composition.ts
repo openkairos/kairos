@@ -12,7 +12,7 @@ import { loginRequestConstraints } from '@/kairos/authentication/interface/http/
 import { systemClock } from '@/kairos/shared/clock';
 import { validateRequest } from '@/kairos/shared/http';
 
-import { usersCollection } from '@/kairos/shared/infrastructure/mongodb/collection/users-collection';
+import { usersCollection } from '@/mongodb/collection/users-collection';
 import { passwordHasher } from '@/kairos/shared/security/password';
 import { createSecretKey, randomUUID } from 'node:crypto';
 

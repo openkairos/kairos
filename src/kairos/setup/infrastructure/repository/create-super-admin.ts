@@ -1,5 +1,5 @@
 import { type CreateSuperAdmin } from '@/kairos/setup/domain/super-admin-repository';
-import { type UsersCollection } from '@/kairos/shared/infrastructure/mongodb/schema/users-collection-schema';
+import { type UsersCollection } from '@/mongodb/schema/users-collection-schema';
 
 type CreateSuperAdminDependencies = Readonly<{
   usersCollection: UsersCollection;

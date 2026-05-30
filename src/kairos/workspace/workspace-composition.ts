@@ -1,6 +1,6 @@
 import { validateRequest } from '@/kairos/shared/http';
 
-import { workspacesCollection } from '@/kairos/shared/infrastructure/mongodb/collection/workspaces-collection';
+import { workspacesCollection } from '@/mongodb/collection/workspaces-collection';
 import { createCreateWorkspace } from '@/kairos/workspace/application/create-workspace';
 import { type SaveWorkspace } from '@/kairos/workspace/domain/workspace-repository';
 import { createSaveWorkspace } from '@/kairos/workspace/infrastructure/repository/save-workspace';

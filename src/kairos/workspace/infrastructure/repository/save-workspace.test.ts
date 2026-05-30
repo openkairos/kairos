@@ -1,5 +1,5 @@
-import { workspacesCollection } from '@/kairos/shared/infrastructure/mongodb/collection/workspaces-collection';
-import type { WorkspacesCollection } from '@/kairos/shared/infrastructure/mongodb/schema/workspaces-collection-schema';
+import { workspacesCollection } from '@/mongodb/collection/workspaces-collection';
+import type { WorkspacesCollection } from '@/mongodb/schema/workspaces-collection-schema';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 import { createSaveWorkspace } from '@/kairos/workspace/infrastructure/repository/save-workspace';
 import { expectAsyncToThrow } from '@tests/__vitest__/expect-async-to-throw';
