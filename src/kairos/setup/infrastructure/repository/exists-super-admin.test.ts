@@ -1,7 +1,7 @@
+import { createExistsSuperAdmin } from '@/kairos/setup/infrastructure/repository/exists-super-admin';
+import { usersCollection } from '@/kairos/shared/persistence/mongodb/mongodb-composition';
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { describe, expect, test } from 'vitest';
-import { createExistsSuperAdmin } from '@/kairos/setup/infrastructure/repository/exists-super-admin';
-import { usersCollection } from '@/kairos/shared/persistence/mongodb';
 
 describe('Exists Super Admin Repository', () => {
   integrationTest();

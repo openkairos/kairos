@@ -1,9 +1,9 @@
+import { appConfig } from '@/config';
+import { usersCollection } from '@/kairos/shared/persistence/mongodb/mongodb-composition';
+import { hashPassword } from '@/kairos/shared/security/password';
 import { createTestAgent } from '@koala-ts/framework';
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { describe, expect, test } from 'vitest';
-import { usersCollection } from '@/kairos/shared/persistence/mongodb';
-import { hashPassword } from '@/kairos/shared/security/password';
-import { appConfig } from '@/config';
 
 describe('Login feature test', () => {
   integrationTest();

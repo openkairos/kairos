@@ -1,5 +1,5 @@
-import { workspacesCollection } from '@/kairos/shared/persistence/mongodb';
 import { validateRequest } from '@/kairos/shared/http';
+import { workspacesCollection } from '@/kairos/shared/persistence/mongodb/mongodb-composition';
 import { createCreateWorkspace } from '@/kairos/workspace/application/create-workspace';
 import { type SaveWorkspace } from '@/kairos/workspace/domain/workspace-repository';
 import { createSaveWorkspace } from '@/kairos/workspace/infrastructure/repository/save-workspace';

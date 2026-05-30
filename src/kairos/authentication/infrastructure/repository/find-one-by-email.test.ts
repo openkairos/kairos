@@ -1,8 +1,8 @@
-import { integrationTest } from '@tests/__vitest__/integration-test';
-import { describe, expect, it } from 'vitest';
 import { invalidCredentialsError } from '@/kairos/authentication/domain/errors';
 import { createFindOneByEmail } from '@/kairos/authentication/infrastructure/repository/find-one-by-email';
-import { usersCollection } from '@/kairos/shared/persistence/mongodb';
+import { usersCollection } from '@/kairos/shared/persistence/mongodb/mongodb-composition';
+import { integrationTest } from '@tests/__vitest__/integration-test';
+import { describe, expect, it } from 'vitest';
 
 describe('Find One By Email Repository', () => {
   integrationTest();

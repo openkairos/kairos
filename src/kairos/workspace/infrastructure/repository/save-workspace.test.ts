@@ -1,11 +1,11 @@
+import { workspacesCollection } from '@/kairos/shared/persistence/mongodb/mongodb-composition';
+import type { WorkspacesCollection } from '@/kairos/shared/persistence/mongodb/workspaces-collection-schema';
+import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
+import { createSaveWorkspace } from '@/kairos/workspace/infrastructure/repository/save-workspace';
 import { expectAsyncToThrow } from '@tests/__vitest__/expect-async-to-throw';
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { MongoServerError } from 'mongodb';
 import { describe, expect, test, vi } from 'vitest';
-import type { WorkspacesCollection } from '@/kairos/shared/persistence/mongodb/workspaces-collection-schema';
-import { createSaveWorkspace } from '@/kairos/workspace/infrastructure/repository/save-workspace';
-import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
-import { workspacesCollection } from '@/kairos/shared/persistence/mongodb';
 
 describe('Save Workspace Repository', () => {
   integrationTest();
