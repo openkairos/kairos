@@ -1,5 +1,6 @@
 import { appConfig } from '@/config';
-import { usersCollection } from '@/kairos/shared/persistence/mongodb/mongodb-composition';
+
+import { usersCollection } from '@/kairos/shared/infrastructure/mongodb/collection/users-collection';
 import { hashPassword } from '@/kairos/shared/security/password';
 import { createTestAgent } from '@koala-ts/framework';
 import { integrationTest } from '@tests/__vitest__/integration-test';
