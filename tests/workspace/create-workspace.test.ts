@@ -1,5 +1,6 @@
 import { appConfig } from '@/config';
-import { workspacesCollection } from '@/kairos/shared/persistence/mongodb/mongodb-composition';
+
+import { workspacesCollection } from '@/kairos/shared/infrastructure/mongodb/collection/workspaces-collection';
 import { createTestAgent } from '@koala-ts/framework';
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { describe, expect, test } from 'vitest';
