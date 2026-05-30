@@ -1,7 +1,8 @@
+import { createResultToHttpMapper, type ResultHttpMapping } from '@/interface/http/result-to-http';
+import { HTTP_CREATED, HTTP_INTERNAL_SERVER_ERROR, HTTP_UNAUTHORIZED } from '@/interface/http/status-code';
+import { err } from '@/kairos/shared/result/err';
+import { ok } from '@/kairos/shared/result/ok';
 import { describe, expect, it } from 'vitest';
-import { err, ok } from '@/kairos/shared/kernel/result';
-import { createResultToHttpMapper, type ResultHttpMapping } from '@/kairos/shared/http/result-to-http';
-import { HTTP_CREATED, HTTP_INTERNAL_SERVER_ERROR, HTTP_UNAUTHORIZED } from '@/kairos/shared/http/status-code';
 
 describe('Result to HTTP mapper', () => {
   it('should map success results using the configured status and serializer options', () => {

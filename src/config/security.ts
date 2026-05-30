@@ -1,4 +1,4 @@
-import { assertIsNonEmptyString } from '@/kairos/shared/kernel/assert';
+import { assertIsNonEmptyString } from '@/kairos/shared/assert/string-assertions';
 
 const appKey = process.env.APP_KEY;
 assertIsNonEmptyString(appKey, 'APP_KEY is not defined in environment variables');

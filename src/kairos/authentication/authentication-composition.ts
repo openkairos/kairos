@@ -1,4 +1,7 @@
 import { securityConfig } from '@/config/security';
+import { validateRequest } from '@/framework/http/validator';
+
+import { usersCollection } from '@/framework/mongodb/collection/users-collection';
 import { createLogin, type GenerateAccessToken } from '@/kairos/authentication/application/login';
 import { type FindOneByEmail } from '@/kairos/authentication/domain/user-credentials-repository';
 import { createFindOneByEmail } from '@/kairos/authentication/infrastructure/repository/find-one-by-email';
@@ -10,10 +13,7 @@ import {
 import { passwordHasher } from '@/kairos/authentication/infrastructure/security/password/password-hasher';
 import { createVerifyPassword } from '@/kairos/authentication/infrastructure/security/password/verify-password';
 import { loginRequestConstraints } from '@/kairos/authentication/interface/http/login-request';
-import { systemClock } from '@/kairos/shared/clock';
-import { validateRequest } from '@/kairos/shared/http';
-
-import { usersCollection } from '@/framework/mongodb/collection/users-collection';
+import { systemClock } from '@/kairos/shared/clock/clock';
 import { createSecretKey, randomUUID } from 'node:crypto';
 
 const signingKey = createSecretKey(Buffer.from(securityConfig.appKey.replace('base64:', ''), 'base64'));

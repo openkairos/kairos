@@ -1,10 +1,11 @@
+import { type SetupTask } from '@/kairos/setup/application/run-setup';
 import {
   type CreateSuperAdmin,
   type ExistsSuperAdmin,
   type SuperAdminCredentials,
 } from '@/kairos/setup/domain/super-admin-repository';
-import { ok, type Result } from '@/kairos/shared/kernel/result';
-import { type SetupTask } from '@/kairos/setup/application/run-setup';
+import { ok } from '@/kairos/shared/result/ok';
+import { Result } from '@/kairos/shared/result/result.type';
 
 type EnsureSuperAdminDependencies = Readonly<{
   existsSuperAdmin: ExistsSuperAdmin;

@@ -1,5 +1,7 @@
-import { isErr, type Result } from '@/kairos/shared/kernel/result';
-import { HTTP_INTERNAL_SERVER_ERROR, type StatusCode } from '@/kairos/shared/http/status-code';
+import { type Normalizer, type SerializeOptions } from '@/interface/http/normalizer.type';
+import { HTTP_INTERNAL_SERVER_ERROR, type StatusCode } from '@/interface/http/status-code';
+import { isErr } from '@/kairos/shared/result/err';
+import { Result } from '@/kairos/shared/result/result.type';
 
 export interface HttpResponsePayload {
   status: StatusCode;
@@ -7,19 +9,6 @@ export interface HttpResponsePayload {
 }
 
 type StatusResolver<T> = StatusCode | ((value: T) => StatusCode);
-interface PropertyMetadata {
-  ignore?: boolean;
-  groups?: string[];
-  serializedName?: string;
-  metadata?: Metadata;
-}
-
-type Metadata = Record<string, PropertyMetadata>;
-
-interface SerializeOptions {
-  groups?: string[];
-  metadata?: Metadata;
-}
 type SerializeOptionsResolver<T> = SerializeOptions | ((value: T) => SerializeOptions | undefined);
 
 interface ErrorHttpResponse<E> {
@@ -42,10 +31,10 @@ export interface ResultHttpMapping<T, E extends { type: string }> {
 }
 
 type CreateResultToHttpMapperDependencies = Readonly<{
-  normalize: (input: unknown, options?: SerializeOptions) => unknown;
+  normalize: Normalizer;
 }>;
 
-type ResultToHttpMapper = <T, E extends { type: string }>(
+export type ResultToHttpMapper = <T, E extends { type: string }>(
   result: Result<T, E>,
   mapping: ResultHttpMapping<T, E>,
 ) => HttpResponsePayload;

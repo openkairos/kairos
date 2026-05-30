@@ -1,5 +1,5 @@
-import { type ResultHttpMapping } from '@/kairos/shared/http/result-to-http';
-import { HTTP_CONFLICT, HTTP_CREATED } from '@/kairos/shared/http/status-code';
+import { type ResultHttpMapping } from '@/interface/http/result-to-http';
+import { HTTP_CONFLICT, HTTP_CREATED } from '@/interface/http/status-code';
 import type { WorkspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 import type { Workspace } from '@/kairos/workspace/domain/workspace';
 

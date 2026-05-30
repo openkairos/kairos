@@ -1,5 +1,5 @@
 import { workspacesCollectionName } from '@/framework/mongodb/schema/workspaces-collection-schema';
-import { assertIsNonEmptyString } from '@/kairos/shared/kernel/assert';
+import { assertIsNonEmptyString } from '@/kairos/shared/assert/string-assertions';
 
 const connectionString = process.env.MONGODB_CONNECTION_STRING;
 assertIsNonEmptyString(connectionString, 'MONGODB_CONNECTION_STRING is not defined in environment variables');

@@ -1,4 +1,4 @@
-import { assertIsNonEmptyString } from '@/kairos/shared/kernel/assert';
+import { assertIsNonEmptyString } from '@/kairos/shared/assert/string-assertions';
 
 const superAdminUsername = process.env.SUPER_ADMIN_USERNAME;
 const superAdminEmail = process.env.SUPER_ADMIN_EMAIL;

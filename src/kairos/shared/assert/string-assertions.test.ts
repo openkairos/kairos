@@ -1,5 +1,5 @@
+import { assertIsNonEmptyString, assertIsString } from '@/kairos/shared/assert/string-assertions';
 import { describe, expect, it } from 'vitest';
-import { assertIsNonEmptyString, assertIsString } from '@/kairos/shared/kernel/assert';
 
 describe('String assertions', () => {
   it('assertIsString accepts strings', () => {

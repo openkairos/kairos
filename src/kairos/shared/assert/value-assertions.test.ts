@@ -1,5 +1,5 @@
+import { assertOneOf } from '@/kairos/shared/assert/value-assertions';
 import { describe, expect, it } from 'vitest';
-import { assertOneOf } from '@/kairos/shared/kernel/assert';
 
 const validLogLevels = ['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent'] as const;
 
