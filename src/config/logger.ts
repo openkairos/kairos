@@ -1,4 +1,4 @@
-import { assertOneOf } from '@/kairos/shared/kernel/assert';
+import { assertOneOf } from '@/kairos/shared/assert/value-assertions';
 import { type LogLevel } from '@/kairos/shared/logger.type';
 
 const logLevel = process.env.LOG_LEVEL ?? 'info';
