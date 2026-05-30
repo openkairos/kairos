@@ -1,4 +1,4 @@
-import { mongoDBClient } from '@/kairos/shared/persistence/mongodb/mongodb-composition';
+import { mongoDBClient } from '@/kairos/shared/infrastructure/mongodb/client/client';
 import {
   WorkspacesCollection,
   workspacesCollectionName,

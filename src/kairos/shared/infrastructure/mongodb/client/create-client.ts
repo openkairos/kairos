@@ -5,7 +5,7 @@ type CreateMongodbClientDependencies = Readonly<{
   makeClient?: (uri: string) => MongoClient;
 }>;
 
-export function createMongodbClient({
+export function createClient({
   uri,
   makeClient = (connectionUri: string): MongoClient => new MongoClient(connectionUri),
 }: CreateMongodbClientDependencies): MongoClient {
