@@ -1,8 +1,8 @@
-import { type HttpScope } from '@koala-ts/framework';
+import { login } from '@/kairos/authentication/authentication-composition';
 import { type LoginRequest } from '@/kairos/authentication/interface/http/login-request';
 import { loginResponse } from '@/kairos/authentication/interface/http/login-response';
-import { login } from '@/kairos/authentication/authentication-composition';
-import { mapResultToHttp } from '@/kairos/shared/http/http-composition';
+import { mapResultToHttp } from '@/kairos/shared/http/map-result-to-http';
+import { type HttpScope } from '@koala-ts/framework';
 
 export async function loginHandler({ response, request }: HttpScope): Promise<void> {
   const result = await login(request.body as LoginRequest['body']);

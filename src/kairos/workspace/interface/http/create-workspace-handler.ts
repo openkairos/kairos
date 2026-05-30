@@ -1,8 +1,8 @@
-import { type HttpScope } from '@koala-ts/framework';
+import { mapResultToHttp } from '@/kairos/shared/http/map-result-to-http';
 import { type CreateWorkspaceRequest } from '@/kairos/workspace/interface/http/create-workspace-request';
 import { createWorkspaceResponse } from '@/kairos/workspace/interface/http/create-workspace-response';
-import { mapResultToHttp } from '@/kairos/shared/http/http-composition';
 import { createWorkspace } from '@/kairos/workspace/workspace-composition';
+import { type HttpScope } from '@koala-ts/framework';
 
 export async function createWorkspaceHandler({ response, request }: HttpScope): Promise<void> {
   const body = request.body as CreateWorkspaceRequest['body'];
