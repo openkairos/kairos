@@ -16,7 +16,7 @@ type WorkspaceContextRequest = Readonly<{
 }>;
 
 function firstHeaderValue(value: HeaderValue): string | undefined {
-  return Array.isArray(value) ? value[0] : value;
+  return typeof value === 'string' ? value : value?.[0];
 }
 
 function contextFromWorkspaceId(workspaceId: string | undefined): WorkspaceContext | undefined {
