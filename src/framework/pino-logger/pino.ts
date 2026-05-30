@@ -1,4 +1,4 @@
-import { type Logger, type LoggerOptions } from '@/kairos/shared/logger/logger.type';
+import { type Logger, type LoggerOptions } from '@/kairos/shared/logger.type';
 import { type DestinationStream, type Logger as Pino, type LoggerOptions as PinoOptions, pino } from 'pino';
 
 export function createLogger(options: LoggerOptions, stream?: DestinationStream): Logger {
