@@ -3,7 +3,9 @@ import { type AuthenticatedUser } from '@/kairos/authentication/domain/authentic
 import { type InvalidCredentialsError } from '@/kairos/authentication/domain/errors';
 import type { User } from '@/kairos/authentication/domain/user';
 import { type FindOneByEmail } from '@/kairos/authentication/domain/user-credentials-repository';
-import { isErr, ok, type Result } from '@/kairos/shared/result/result';
+import { isErr } from '@/kairos/shared/result/err';
+import { ok } from '@/kairos/shared/result/ok';
+import { Result } from '@/kairos/shared/result/result.type';
 
 export type LoginUserCommand = Readonly<{
   email: string;

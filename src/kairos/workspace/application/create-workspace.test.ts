@@ -1,4 +1,5 @@
-import { err, ok } from '@/kairos/shared/result/result';
+import { err } from '@/kairos/shared/result/err';
+import { ok } from '@/kairos/shared/result/ok';
 import { createCreateWorkspace } from '@/kairos/workspace/application/create-workspace';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 import type { SaveWorkspace } from '@/kairos/workspace/domain/workspace-repository';

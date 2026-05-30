@@ -3,7 +3,8 @@ import { type AccessToken } from '@/kairos/authentication/domain/access-token';
 import { invalidCredentialsError } from '@/kairos/authentication/domain/errors';
 import type { User } from '@/kairos/authentication/domain/user';
 import { type FindOneByEmail } from '@/kairos/authentication/domain/user-credentials-repository';
-import { err, ok } from '@/kairos/shared/result/result';
+import { err } from '@/kairos/shared/result/err';
+import { ok } from '@/kairos/shared/result/ok';
 import { describe, expect, it, vi } from 'vitest';
 
 describe('Authenticate use case', () => {

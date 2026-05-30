@@ -1,6 +1,7 @@
 import { type VerifyPassword } from '@/kairos/authentication/application/login';
 import { invalidCredentialsError } from '@/kairos/authentication/domain/errors';
-import { err, ok } from '@/kairos/shared/result/result';
+import { err } from '@/kairos/shared/result/err';
+import { ok } from '@/kairos/shared/result/ok';
 import { type PasswordHasher } from '@koala-ts/framework';
 
 type CreateVerifyPasswordDependencies = Readonly<{

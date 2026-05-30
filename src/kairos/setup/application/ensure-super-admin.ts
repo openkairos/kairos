@@ -4,7 +4,8 @@ import {
   type ExistsSuperAdmin,
   type SuperAdminCredentials,
 } from '@/kairos/setup/domain/super-admin-repository';
-import { ok, type Result } from '@/kairos/shared/result/result';
+import { ok } from '@/kairos/shared/result/ok';
+import { Result } from '@/kairos/shared/result/result.type';
 
 type EnsureSuperAdminDependencies = Readonly<{
   existsSuperAdmin: ExistsSuperAdmin;
