@@ -1,4 +1,4 @@
-import { createEnsureIndexes } from '@/mongodb/index/create-ensure-indexes';
+import { createEnsureIndexes } from '@/framework/mongodb/index/create-ensure-indexes';
 import { describe, expect, test, vi } from 'vitest';
 
 describe('ensureMongoIndexes', () => {
