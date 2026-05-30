@@ -1,8 +1,8 @@
 import '@/bootstrap';
 import { create } from '@koala-ts/framework';
 import { appConfig, server } from './config';
-import { ensureRuntimeInfrastructure, executeSetup } from '@/modules/setup/setup-composition';
-import { appLogger } from '@/modules/shared/logger';
+import { ensureRuntimeInfrastructure, executeSetup } from '@/kairos/setup/setup-composition';
+import { appLogger } from '@/kairos/shared/logger';
 
 async function main(): Promise<void> {
   await ensureRuntimeInfrastructure();
