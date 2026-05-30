@@ -11,12 +11,12 @@ type EnsureMongoIndexesDependencies = Readonly<{
   indexes: readonly MongoIndexConfig[];
 }>;
 
-export function ensureMongoIndexes({ database, indexes }: EnsureMongoIndexesDependencies): () => Promise<void> {
-  return async () => {
+export const createEnsureIndexes =
+  ({ database, indexes }: EnsureMongoIndexesDependencies): (() => Promise<void>) =>
+  async () => {
     await Promise.all(
       indexes.map(async ({ collectionName, keys, options }) => {
         await database.collection(collectionName).createIndex(keys, options);
       }),
     );
   };
-}

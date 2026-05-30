@@ -1,5 +1,5 @@
+import { createEnsureIndexes } from '@/kairos/shared/infrastructure/mongodb/index/create-ensure-indexes';
 import { describe, expect, test, vi } from 'vitest';
-import { ensureMongoIndexes } from '@/kairos/shared/persistence/mongodb/ensure-mongo-indexes';
 
 describe('ensureMongoIndexes', () => {
   test('creates configured indexes on their collections', async () => {
@@ -15,7 +15,7 @@ describe('ensureMongoIndexes', () => {
       },
     ];
 
-    const ensureIndexes = ensureMongoIndexes({ database, indexes });
+    const ensureIndexes = createEnsureIndexes({ database, indexes });
 
     await ensureIndexes();
 

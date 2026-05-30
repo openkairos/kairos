@@ -1,7 +1,7 @@
 import { invalidCredentialsError } from '@/kairos/authentication/domain/errors';
 import { type FindOneByEmail } from '@/kairos/authentication/domain/user-credentials-repository';
+import { type UsersCollection } from '@/kairos/shared/infrastructure/mongodb/schema/users-collection-schema';
 import { err, ok } from '@/kairos/shared/kernel/result';
-import { type UsersCollection } from '@/kairos/shared/persistence/mongodb/users-collection-schema';
 
 type CreateFindOneByEmailDependencies = Readonly<{
   usersCollection: UsersCollection;
