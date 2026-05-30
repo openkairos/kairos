@@ -11,7 +11,7 @@ import { passwordHasher } from '@/kairos/authentication/infrastructure/security/
 import { createVerifyPassword } from '@/kairos/authentication/infrastructure/security/password/verify-password';
 import { loginRequestConstraints } from '@/kairos/authentication/interface/http/login-request';
 import { systemClock } from '@/kairos/shared/clock';
-import { validateRequest } from '@/kairos/shared/http';
+import { validateRequest } from '@/kairos/shared/http/http-composition';
 
 import { usersCollection } from '@/framework/mongodb/collection/users-collection';
 import { createSecretKey, randomUUID } from 'node:crypto';

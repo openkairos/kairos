@@ -1,4 +1,4 @@
-import { validateRequest } from '@/kairos/shared/http';
+import { validateRequest } from '@/kairos/shared/http/http-composition';
 
 import { workspacesCollection } from '@/framework/mongodb/collection/workspaces-collection';
 import { createCreateWorkspace } from '@/kairos/workspace/application/create-workspace';
