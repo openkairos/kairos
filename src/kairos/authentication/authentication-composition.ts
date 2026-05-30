@@ -11,9 +11,9 @@ import { createVerifyPassword } from '@/kairos/authentication/infrastructure/sec
 import { loginRequestConstraints } from '@/kairos/authentication/interface/http/login-request';
 import { systemClock } from '@/kairos/shared/clock';
 import { validateRequest } from '@/kairos/shared/http';
+import { passwordHasher } from '@/kairos/shared/security/password/password-hasher';
 
 import { usersCollection } from '@/mongodb/collection/users-collection';
-import { passwordHasher } from '@/kairos/shared/security/password';
 import { createSecretKey, randomUUID } from 'node:crypto';
 
 const signingKey = createSecretKey(Buffer.from(securityConfig.appKey.replace('base64:', ''), 'base64'));

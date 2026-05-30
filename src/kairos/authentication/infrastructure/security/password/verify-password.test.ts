@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
-import { createVerifyPassword } from './verify-password';
 import { invalidCredentialsError } from '@/kairos/authentication/domain/errors';
 import { passwordHasher } from '@/kairos/shared/security/password/password-hasher';
+import { describe, expect, it } from 'vitest';
+import { createVerifyPassword } from './verify-password';
 
 describe('Password verifier', () => {
   it('returns invalid credentials when the password does not match', async () => {
