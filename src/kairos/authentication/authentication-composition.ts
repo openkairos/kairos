@@ -13,7 +13,7 @@ import { loginRequestConstraints } from '@/kairos/authentication/interface/http/
 import { systemClock } from '@/kairos/shared/clock';
 import { validateRequest } from '@/kairos/shared/http';
 
-import { usersCollection } from '@/mongodb/collection/users-collection';
+import { usersCollection } from '@/framework/mongodb/collection/users-collection';
 import { createSecretKey, randomUUID } from 'node:crypto';
 
 const signingKey = createSecretKey(Buffer.from(securityConfig.appKey.replace('base64:', ''), 'base64'));

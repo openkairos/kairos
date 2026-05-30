@@ -1,4 +1,4 @@
-import { type WorkspacesCollection } from '@/mongodb/schema/workspaces-collection-schema';
+import { type WorkspacesCollection } from '@/framework/mongodb/schema/workspaces-collection-schema';
 import { err, ok } from '@/kairos/shared/kernel/result';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 import { type SaveWorkspace } from '@/kairos/workspace/domain/workspace-repository';

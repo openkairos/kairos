@@ -1,6 +1,6 @@
 import { mongodbConfig } from '@/config/mongodb';
-import { mongoDBClient } from '@/mongodb/client/client';
-import { createEnsureIndexes } from '@/mongodb/index/create-ensure-indexes';
+import { mongoDBClient } from '@/framework/mongodb/client/client';
+import { createEnsureIndexes } from '@/framework/mongodb/index/create-ensure-indexes';
 import { afterEach, beforeEach } from 'vitest';
 
 export function integrationTest(): void {

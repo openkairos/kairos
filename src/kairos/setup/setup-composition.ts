@@ -10,9 +10,9 @@ import {
 } from '@/kairos/setup/infrastructure/ensure-runtime-infrastructure';
 import { createCreateSuperAdmin } from '@/kairos/setup/infrastructure/repository/create-super-admin';
 import { createExistsSuperAdmin } from '@/kairos/setup/infrastructure/repository/exists-super-admin';
-import { mongoDBClient } from '@/mongodb/client/client';
-import { usersCollection } from '@/mongodb/collection/users-collection';
-import { createEnsureIndexes } from '@/mongodb/index/create-ensure-indexes';
+import { mongoDBClient } from '@/framework/mongodb/client/client';
+import { usersCollection } from '@/framework/mongodb/collection/users-collection';
+import { createEnsureIndexes } from '@/framework/mongodb/index/create-ensure-indexes';
 
 const existsSuperAdmin: ExistsSuperAdmin = createExistsSuperAdmin({ usersCollection });
 const createSuperAdmin: CreateSuperAdmin = createCreateSuperAdmin({ usersCollection });
