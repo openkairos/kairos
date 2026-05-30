@@ -1,5 +1,5 @@
-import { isErr, type Result } from '@/kairos/shared/kernel/result';
 import { HTTP_INTERNAL_SERVER_ERROR, type StatusCode } from '@/kairos/shared/http/status-code';
+import { isErr, type Result } from '@/kairos/shared/result/result';
 
 export interface HttpResponsePayload {
   status: StatusCode;

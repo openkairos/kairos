@@ -3,7 +3,7 @@ import {
   type HttpResponsePayload,
   type ResultHttpMapping,
 } from '@/kairos/shared/http/result-to-http';
-import type { Result } from '@/kairos/shared/kernel/result';
+import type { Result } from '@/kairos/shared/result/result';
 import { createNormalizer, type Normalizer } from '@koala-ts/framework';
 
 export const normalize: Normalizer = createNormalizer([]);

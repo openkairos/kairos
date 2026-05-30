@@ -1,5 +1,5 @@
+import { err, isErr, isOk, ok } from '@/kairos/shared/result/result';
 import { describe, expect, test } from 'vitest';
-import { err, isErr, isOk, ok } from '@/kairos/shared/kernel/result';
 
 describe('Result module', () => {
   test('Ok constructor', () => {

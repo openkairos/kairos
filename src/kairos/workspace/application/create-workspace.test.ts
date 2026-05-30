@@ -1,8 +1,8 @@
-import { describe, expect, test, vi } from 'vitest';
-import { err, ok } from '@/kairos/shared/kernel/result';
+import { err, ok } from '@/kairos/shared/result/result';
 import { createCreateWorkspace } from '@/kairos/workspace/application/create-workspace';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 import type { SaveWorkspace } from '@/kairos/workspace/domain/workspace-repository';
+import { describe, expect, test, vi } from 'vitest';
 
 describe('Create workspace use case', () => {
   test('creates workspace when slug does not exist', async () => {
