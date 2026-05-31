@@ -1,9 +1,6 @@
-export interface WorkspaceSlugConflictError {
-  type: 'WORKSPACE_SLUG_CONFLICT';
-  message: 'Workspace slug already exists';
-}
-
-export const workspaceSlugConflictError: WorkspaceSlugConflictError = {
+export const workspaceSlugConflictError = {
   type: 'WORKSPACE_SLUG_CONFLICT',
   message: 'Workspace slug already exists',
-};
+} as const;
+
+export type WorkspaceSlugConflictError = typeof workspaceSlugConflictError;
