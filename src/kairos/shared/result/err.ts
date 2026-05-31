@@ -1,4 +1,4 @@
-import { Err, Result } from '@/kairos/shared/result/result.type';
+import type { Err, Result } from '@/kairos/shared/result/result.type';
 
 export function err<E>(error: E): Err<E> {
   return { isOk: false, error };

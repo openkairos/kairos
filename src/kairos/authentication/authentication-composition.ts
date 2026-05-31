@@ -3,7 +3,7 @@ import { validateRequest } from '@/framework/http/validator';
 
 import { usersCollection } from '@/framework/mongodb/collection/users-collection';
 import { createLogin, type GenerateAccessToken } from '@/kairos/authentication/application/login';
-import { type FindOneByEmail } from '@/kairos/authentication/domain/user-credentials-repository';
+import type { FindOneByEmail } from '@/kairos/authentication/domain/user-credentials-repository';
 import { createFindOneByEmail } from '@/kairos/authentication/infrastructure/repository/find-one-by-email';
 import {
   createGenerateAccessToken,

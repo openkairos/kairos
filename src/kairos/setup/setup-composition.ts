@@ -3,7 +3,7 @@ import { setupConfig } from '@/config/setup';
 import { hashPassword } from '@/kairos/authentication/infrastructure/security/password/hash-password';
 import { createEnsureSuperAdminTask } from '@/kairos/setup/application/ensure-super-admin';
 import { runSetup, type SetupTask } from '@/kairos/setup/application/run-setup';
-import { type CreateSuperAdmin, type ExistsSuperAdmin } from '@/kairos/setup/domain/super-admin-repository';
+import type { CreateSuperAdmin, ExistsSuperAdmin } from '@/kairos/setup/domain/super-admin-repository';
 import {
   createEnsureRuntimeInfrastructure,
   type RuntimeInfrastructureTask,

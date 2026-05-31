@@ -1,6 +1,6 @@
-import { type GenerateAccessToken } from '@/kairos/authentication/application/login';
+import type { GenerateAccessToken } from '@/kairos/authentication/application/login';
 import type { User } from '@/kairos/authentication/domain/user';
-import { type SignAccessToken } from '@/kairos/authentication/infrastructure/security/access-token/jwt-access-token-signer';
+import type { SignAccessToken } from '@/kairos/authentication/infrastructure/security/access-token/jwt-access-token-signer';
 
 interface AccessTokenConfig {
   ttl: number;

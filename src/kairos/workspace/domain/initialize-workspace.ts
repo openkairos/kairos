@@ -1,4 +1,4 @@
-import { Workspace } from '@/kairos/workspace/domain/workspace.type';
+import type { Workspace } from '@/kairos/workspace/domain/workspace.type';
 
 export type InitialWorkspace = Readonly<Omit<Workspace, 'id'>>;
 
