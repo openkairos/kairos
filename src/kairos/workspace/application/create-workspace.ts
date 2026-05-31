@@ -1,7 +1,7 @@
 import { Result } from '@/kairos/shared/result/result.type';
 import { type InsertWorkspace, type WorkspaceToInsert } from '@/kairos/workspace/application/insert-workspace.type';
 import type { WorkspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
-import type { Workspace } from '@/kairos/workspace/domain/workspace';
+import type { Workspace } from '@/kairos/workspace/domain/workspace.type';
 
 export type CreateWorkspaceCommand = Readonly<WorkspaceToInsert>;
 
