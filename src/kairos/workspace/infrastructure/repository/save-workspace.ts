@@ -1,3 +1,4 @@
+import { DUPLICATE_KEY_ERROR_CODE } from '@/framework/mongodb/error-code';
 import { type WorkspacesCollection } from '@/framework/mongodb/schema/workspaces-collection-schema';
 import { err } from '@/kairos/shared/result/err';
 import { ok } from '@/kairos/shared/result/ok';
@@ -8,8 +9,6 @@ import { MongoServerError } from 'mongodb';
 type SaveWorkspaceDependencies = Readonly<{
   workspacesCollection: WorkspacesCollection;
 }>;
-
-const DUPLICATE_KEY_ERROR_CODE = 11000;
 
 function isDuplicateError(error: unknown): boolean {
   return error instanceof MongoServerError && error.code === DUPLICATE_KEY_ERROR_CODE;
