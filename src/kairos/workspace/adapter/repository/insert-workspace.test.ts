@@ -1,7 +1,7 @@
 import { workspacesCollection } from '@/framework/mongodb/collection/workspaces-collection';
 import type { WorkspacesCollection } from '@/framework/mongodb/schema/workspaces-collection-schema';
+import { makeInsertWorkspace } from '@/kairos/workspace/adapter/repository/insert-workspace';
 import { workspaceSlugConflictError } from '@/kairos/workspace/errors';
-import { makeInsertWorkspace } from '@/kairos/workspace/infrastructure/repository/insert-workspace';
 import { expectAsyncToThrow } from '@tests/__vitest__/expect-async-to-throw';
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { MongoServerError } from 'mongodb';

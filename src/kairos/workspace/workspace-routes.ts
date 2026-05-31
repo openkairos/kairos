@@ -1,6 +1,6 @@
 import { validateRequest } from '@/framework/http/validator';
-import { createWorkspaceController } from '@/kairos/workspace/interface/http/create-workspace-controller';
-import { createWorkspaceRules } from '@/kairos/workspace/interface/http/create-workspace-request';
+import { createWorkspaceController } from '@/kairos/workspace/adapter/http/controller/create-workspace-controller';
+import { createWorkspaceRules } from '@/kairos/workspace/adapter/http/request/create-workspace-request';
 import { Post, RouteGroup } from '@koala-ts/framework/routing';
 
 export const workspaceRoutes = RouteGroup({ prefix: '/workspaces', namePrefix: 'workspaces.' }, () => [
