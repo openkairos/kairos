@@ -1,7 +1,7 @@
 import { workspacesCollection } from '@/framework/mongodb/collection/workspaces-collection';
 import type { WorkspacesCollection } from '@/framework/mongodb/schema/workspaces-collection-schema';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
-import { createSaveWorkspace } from '@/kairos/workspace/infrastructure/repository/save-workspace';
+import { makeInsertWorkspace } from '@/kairos/workspace/infrastructure/repository/insert-workspace';
 import { expectAsyncToThrow } from '@tests/__vitest__/expect-async-to-throw';
 import { integrationTest } from '@tests/__vitest__/integration-test';
 import { MongoServerError } from 'mongodb';
@@ -11,7 +11,7 @@ describe('Save Workspace Repository', () => {
   integrationTest();
 
   test('creates workspace when slug does not exist', async () => {
-    const saveWorkspace = createSaveWorkspace({ workspacesCollection });
+    const saveWorkspace = makeInsertWorkspace({ workspacesCollection });
     const command = {
       environments: ['dev', 'prod'],
       name: 'Acme',
@@ -40,7 +40,7 @@ describe('Save Workspace Repository', () => {
   });
 
   test('returns conflict when slug already exists', async () => {
-    const saveWorkspace = createSaveWorkspace({ workspacesCollection });
+    const saveWorkspace = makeInsertWorkspace({ workspacesCollection });
     await saveWorkspace({
       environments: ['dev'],
       name: 'Acme',
@@ -73,7 +73,7 @@ describe('Save Workspace Repository', () => {
     const collectionMock = {
       insertOne: vi.fn().mockRejectedValue(failure),
     };
-    const saveWorkspace = createSaveWorkspace({
+    const saveWorkspace = makeInsertWorkspace({
       workspacesCollection: collectionMock as unknown as WorkspacesCollection,
     });
 

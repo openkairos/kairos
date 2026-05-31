@@ -5,12 +5,13 @@ import { ok } from '@/kairos/shared/result/ok';
 import { type InsertWorkspace } from '@/kairos/workspace/application/insert-workspace.type';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 
-type SaveWorkspaceDependencies = Readonly<{
+type Dependencies = Readonly<{
   workspacesCollection: WorkspacesCollection;
 }>;
 
-export function createSaveWorkspace({ workspacesCollection }: SaveWorkspaceDependencies): InsertWorkspace {
-  return async ({ environments, name, slug }) => {
+export const makeInsertWorkspace =
+  ({ workspacesCollection }: Dependencies): InsertWorkspace =>
+  async ({ environments, name, slug }) => {
     try {
       const inserted = await workspacesCollection.insertOne({
         environments,
@@ -30,4 +31,3 @@ export function createSaveWorkspace({ workspacesCollection }: SaveWorkspaceDepen
       throw error;
     }
   };
-}
