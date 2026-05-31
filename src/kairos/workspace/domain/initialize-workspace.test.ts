@@ -1,4 +1,4 @@
-import { initializeWorkspace } from '@/kairos/workspace/domain/workspace';
+import { initializeWorkspace } from '@/kairos/workspace/domain/initialize-workspace';
 import { describe, expect, test } from 'vitest';
 
 describe('Workspace', () => {

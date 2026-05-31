@@ -2,8 +2,8 @@ import type { Result } from '@/kairos/shared/result/result.type';
 import type { CreateWorkspaceCommand } from '@/kairos/workspace/create-workspace/create-workspace-command.type';
 import { type InsertWorkspace } from '@/kairos/workspace/create-workspace/insert-workspace.type';
 import type { WorkspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
-import type { Workspace } from '@/kairos/workspace/domain/workspace';
-import { initializeWorkspace } from '@/kairos/workspace/domain/workspace';
+import { initializeWorkspace } from '@/kairos/workspace/domain/initialize-workspace';
+import { Workspace } from '@/kairos/workspace/domain/workspace.type';
 
 export type CreateWorkspaceResult = Result<Workspace, WorkspaceSlugConflictError>;
 
