@@ -1,6 +1,6 @@
 import { mapResultToHttp } from '@/interface/http/map-result-to-http';
-import { type CreateWorkspaceRequest } from '@/kairos/workspace/adapter/http/request/create-workspace-request';
-import { createWorkspaceResponse } from '@/kairos/workspace/adapter/http/response/create-workspace-response';
+import { type CreateWorkspaceRequest } from '@/kairos/workspace/adapter/http/create-workspace/create-workspace-request';
+import { createWorkspaceResponse } from '@/kairos/workspace/adapter/http/create-workspace/create-workspace-response';
 import { createWorkspace } from '@/kairos/workspace/create-workspace/create-worskpace.compose';
 import { type HttpScope } from '@koala-ts/framework';
 
