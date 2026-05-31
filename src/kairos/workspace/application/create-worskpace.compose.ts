@@ -5,4 +5,4 @@ import { makeInsertWorkspace } from '@/kairos/workspace/infrastructure/repositor
 
 const insertWorkspace: InsertWorkspace = makeInsertWorkspace({ workspacesCollection });
 
-export const createWorkspace = makeCreateWorkspace({ insertWorkspace });
+export const createWorkspace = makeCreateWorkspace(insertWorkspace);

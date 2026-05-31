@@ -15,7 +15,7 @@ describe('Create workspace use case', () => {
         slug: 'acme',
       }),
     );
-    const execute = makeCreateWorkspace({ insertWorkspace });
+    const execute = makeCreateWorkspace(insertWorkspace);
     const command = {
       environments: ['dev', 'prod'],
       name: 'Acme',
@@ -41,7 +41,7 @@ describe('Create workspace use case', () => {
 
   test('returns conflict when slug already exists', async () => {
     const insertWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(err(workspaceSlugConflictError));
-    const execute = makeCreateWorkspace({ insertWorkspace });
+    const execute = makeCreateWorkspace(insertWorkspace);
     const command = {
       environments: ['dev', 'prod'],
       name: 'Acme',

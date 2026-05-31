@@ -3,16 +3,12 @@ import { type InsertWorkspace, type WorkspaceToInsert } from '@/kairos/workspace
 import type { WorkspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 import type { Workspace } from '@/kairos/workspace/domain/workspace';
 
-type CreateWorkspaceDependencies = Readonly<{
-  insertWorkspace: InsertWorkspace;
-}>;
-
 export type CreateWorkspaceCommand = Readonly<WorkspaceToInsert>;
 
 export type CreateWorkspaceResult = Result<Workspace, WorkspaceSlugConflictError>;
 
-export function makeCreateWorkspace({ insertWorkspace }: CreateWorkspaceDependencies) {
-  return async function createWorkspace(command: CreateWorkspaceCommand): Promise<CreateWorkspaceResult> {
+export const makeCreateWorkspace =
+  (insertWorkspace: InsertWorkspace) =>
+  async (command: CreateWorkspaceCommand): Promise<CreateWorkspaceResult> => {
     return insertWorkspace(command);
   };
-}
