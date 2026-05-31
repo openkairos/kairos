@@ -1,7 +1,7 @@
-import { type KeyObject } from 'node:crypto';
+import type { KeyObject } from 'node:crypto';
 import { SignJWT } from 'jose';
 import type { User } from '@/kairos/authentication/domain/user';
-import { type Clock } from '@/kairos/shared/clock/clock';
+import type { Clock } from '@/kairos/shared/clock/clock';
 
 interface AccessTokenSigningConfig {
   ttl: number;

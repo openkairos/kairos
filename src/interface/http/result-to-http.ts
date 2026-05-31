@@ -1,7 +1,7 @@
-import { type Normalizer, type SerializeOptions } from '@/interface/http/normalizer.type';
+import type { Normalizer, SerializeOptions } from '@/interface/http/normalizer.type';
 import { HTTP_INTERNAL_SERVER_ERROR, type StatusCode } from '@/interface/http/status-code';
 import { isErr } from '@/kairos/shared/result/err';
-import { Result } from '@/kairos/shared/result/result.type';
+import type { Result } from '@/kairos/shared/result/result.type';
 
 export interface HttpResponsePayload {
   status: StatusCode;

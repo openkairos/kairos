@@ -1,4 +1,4 @@
-import { type Collection, type ObjectId, type OptionalId } from 'mongodb';
+import type { Collection, ObjectId, OptionalId } from 'mongodb';
 
 export interface WorkspaceCollectionSchema {
   _id: ObjectId;

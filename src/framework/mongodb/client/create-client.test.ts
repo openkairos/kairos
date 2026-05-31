@@ -1,5 +1,5 @@
 import { createClient } from '@/framework/mongodb/client/create-client';
-import { type MongoClient } from 'mongodb';
+import type { MongoClient } from 'mongodb';
 import { describe, expect, it, vi } from 'vitest';
 
 describe('createMongodbClient', () => {

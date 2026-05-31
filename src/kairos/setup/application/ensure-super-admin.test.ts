@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 import { createEnsureSuperAdminTask } from '@/kairos/setup/application/ensure-super-admin';
-import { type CreateSuperAdmin, type ExistsSuperAdmin } from '@/kairos/setup/domain/super-admin-repository';
+import type { CreateSuperAdmin, ExistsSuperAdmin } from '@/kairos/setup/domain/super-admin-repository';
 
 describe('createEnsureSuperAdminTask', () => {
   test('creates super admin when one does not exist', async () => {

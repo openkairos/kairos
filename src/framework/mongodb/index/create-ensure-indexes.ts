@@ -1,4 +1,4 @@
-import { type CreateIndexesOptions, type Db, type IndexSpecification } from 'mongodb';
+import type { CreateIndexesOptions, Db, IndexSpecification } from 'mongodb';
 
 type MongoIndexConfig = Readonly<{
   collectionName: string;
