@@ -1,5 +1,8 @@
 import { Result } from '@/kairos/shared/result/result.type';
-import { type InsertWorkspace, type WorkspaceToInsert } from '@/kairos/workspace/application/insert-workspace.type';
+import {
+  type InsertWorkspace,
+  type WorkspaceToInsert,
+} from '@/kairos/workspace/create-workspace/insert-workspace.type';
 import type { WorkspaceSlugConflictError } from '@/kairos/workspace/errors';
 import type { Workspace } from '@/kairos/workspace/workspace.type';
 
