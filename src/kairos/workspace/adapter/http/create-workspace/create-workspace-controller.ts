@@ -6,11 +6,7 @@ import { type HttpScope } from '@koala-ts/framework';
 
 export async function createWorkspaceController({ response, request }: HttpScope): Promise<void> {
   const body = request.body as CreateWorkspaceRequest['body'];
-  const result = await createWorkspace({
-    environments: body.environments === undefined || body.environments.length === 0 ? ['default'] : body.environments,
-    name: body.name,
-    slug: body.slug,
-  });
+  const result = await createWorkspace(body);
 
   const http = mapResultToHttp(result, createWorkspaceResponse);
 

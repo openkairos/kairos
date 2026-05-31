@@ -22,7 +22,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "watch:test": "vitest watch",
+    "watch:build": "tsc -p tsconfig.build.json --noEmit --watch"
   },
   "dependencies": {
     "@koala-ts/framework": "^2.18.0",

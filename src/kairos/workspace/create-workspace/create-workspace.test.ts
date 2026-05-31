@@ -39,6 +39,71 @@ describe('Create workspace use case', () => {
     );
   });
 
+  test('creates workspace with default environment when environments are missing', async () => {
+    const insertWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(
+      ok({
+        id: 'workspace-id',
+        environments: ['default'],
+        name: 'Acme',
+        slug: 'acme',
+      }),
+    );
+    const execute = makeCreateWorkspace(insertWorkspace);
+    const command = {
+      name: 'Acme',
+      slug: 'acme',
+    };
+
+    const result = await execute(command);
+
+    expect(insertWorkspace).toHaveBeenCalledWith({
+      environments: ['default'],
+      name: 'Acme',
+      slug: 'acme',
+    });
+    expect(result).toEqual(
+      ok({
+        id: 'workspace-id',
+        environments: ['default'],
+        name: 'Acme',
+        slug: 'acme',
+      }),
+    );
+  });
+
+  test('creates workspace with default environment when environments are empty', async () => {
+    const insertWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(
+      ok({
+        id: 'workspace-id',
+        environments: ['default'],
+        name: 'Acme',
+        slug: 'acme',
+      }),
+    );
+    const execute = makeCreateWorkspace(insertWorkspace);
+    const command = {
+      environments: [],
+      name: 'Acme',
+      slug: 'acme',
+    };
+
+    const result = await execute(command);
+
+    expect(insertWorkspace).toHaveBeenCalledWith({
+      environments: ['default'],
+      name: 'Acme',
+      slug: 'acme',
+    });
+    expect(result).toEqual(
+      ok({
+        id: 'workspace-id',
+        environments: ['default'],
+        name: 'Acme',
+        slug: 'acme',
+      }),
+    );
+  });
+
   test('returns conflict when slug already exists', async () => {
     const insertWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(err(workspaceSlugConflictError));
     const execute = makeCreateWorkspace(insertWorkspace);
