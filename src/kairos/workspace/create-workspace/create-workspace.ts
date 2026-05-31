@@ -1,27 +1,16 @@
 import { Result } from '@/kairos/shared/result/result.type';
+import { CreateWorkspaceCommand } from '@/kairos/workspace/create-workspace/create-workspace-command.type';
 import { type InsertWorkspace } from '@/kairos/workspace/create-workspace/insert-workspace.type';
 import type { WorkspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
-import { initializeWorkspace, type InitializeWorkspaceProps } from '@/kairos/workspace/domain/workspace';
 import type { Workspace } from '@/kairos/workspace/domain/workspace';
-
-export type CreateWorkspaceCommand = Readonly<{
-  environments?: string[];
-  name: string;
-  slug: string;
-}>;
+import { initializeWorkspace } from '@/kairos/workspace/domain/workspace';
 
 export type CreateWorkspaceResult = Result<Workspace, WorkspaceSlugConflictError>;
-
-const toInitializeWorkspaceProps = (command: CreateWorkspaceCommand): InitializeWorkspaceProps => ({
-  environments: command.environments,
-  name: command.name,
-  slug: command.slug,
-});
 
 export const makeCreateWorkspace =
   (insertWorkspace: InsertWorkspace) =>
   async (command: CreateWorkspaceCommand): Promise<CreateWorkspaceResult> => {
-    const workspace = initializeWorkspace(toInitializeWorkspaceProps(command));
+    const workspace = initializeWorkspace(command);
 
     return insertWorkspace(workspace);
   };
