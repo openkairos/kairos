@@ -1,8 +1,8 @@
 import { type WorkspacesCollection } from '@/framework/mongodb/schema/workspaces-collection-schema';
 import { err } from '@/kairos/shared/result/err';
 import { ok } from '@/kairos/shared/result/ok';
+import { type InsertWorkspace } from '@/kairos/workspace/application/insert-workspace.type';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
-import { type InsertWorkspace } from '@/kairos/workspace/domain/workspace-repository';
 import { MongoServerError } from 'mongodb';
 
 type SaveWorkspaceDependencies = Readonly<{

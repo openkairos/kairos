@@ -8,4 +8,6 @@ export interface WorkspaceToInsert {
   slug: string;
 }
 
-export type InsertWorkspace = (workspace: WorkspaceToInsert) => Promise<Result<Workspace, WorkspaceSlugConflictError>>;
+type InsertWorkspaceResult = Result<Workspace, WorkspaceSlugConflictError>;
+
+export type InsertWorkspace = (workspace: WorkspaceToInsert) => Promise<InsertWorkspaceResult>;
