@@ -11,7 +11,7 @@ describe('Save Workspace Repository', () => {
   integrationTest();
 
   test('creates workspace when slug does not exist', async () => {
-    const saveWorkspace = makeInsertWorkspace({ workspacesCollection });
+    const saveWorkspace = makeInsertWorkspace(workspacesCollection);
     const command = {
       environments: ['dev', 'prod'],
       name: 'Acme',
@@ -40,7 +40,7 @@ describe('Save Workspace Repository', () => {
   });
 
   test('returns conflict when slug already exists', async () => {
-    const saveWorkspace = makeInsertWorkspace({ workspacesCollection });
+    const saveWorkspace = makeInsertWorkspace(workspacesCollection);
     await saveWorkspace({
       environments: ['dev'],
       name: 'Acme',
@@ -73,9 +73,7 @@ describe('Save Workspace Repository', () => {
     const collectionMock = {
       insertOne: vi.fn().mockRejectedValue(failure),
     };
-    const saveWorkspace = makeInsertWorkspace({
-      workspacesCollection: collectionMock as unknown as WorkspacesCollection,
-    });
+    const saveWorkspace = makeInsertWorkspace(collectionMock as unknown as WorkspacesCollection);
 
     await expectAsyncToThrow(
       saveWorkspace({

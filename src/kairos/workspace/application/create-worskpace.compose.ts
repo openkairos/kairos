@@ -3,6 +3,6 @@ import { makeCreateWorkspace } from '@/kairos/workspace/application/create-works
 import type { InsertWorkspace } from '@/kairos/workspace/application/insert-workspace.type';
 import { makeInsertWorkspace } from '@/kairos/workspace/infrastructure/repository/insert-workspace';
 
-const insertWorkspace: InsertWorkspace = makeInsertWorkspace({ workspacesCollection });
+const insertWorkspace: InsertWorkspace = makeInsertWorkspace(workspacesCollection);
 
 export const createWorkspace = makeCreateWorkspace(insertWorkspace);
