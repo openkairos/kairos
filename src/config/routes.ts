@@ -1,7 +1,7 @@
-import { RouteGroup } from '@koala-ts/framework/routing';
 import { authenticationRoutes } from '@/kairos/authentication/interface/http/authentication-routes';
 import { homeRoute } from '@/kairos/system/interface/http/system-routes';
-import { workspaceRoutes } from '@/kairos/workspace/interface/http/workspace-routes';
+import { workspaceRoutes } from '@/kairos/workspace/workspace-routes';
+import { RouteGroup } from '@koala-ts/framework/routing';
 
 const apiRoutes = RouteGroup({ prefix: '/api', namePrefix: 'api.' }, () => [
   RouteGroup({ prefix: '/v1', namePrefix: 'v1.' }, () => [authenticationRoutes, workspaceRoutes]),

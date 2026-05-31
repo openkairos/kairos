@@ -8,7 +8,7 @@ export interface CreateWorkspaceRequest extends HttpRequest {
   };
 }
 
-export const createWorkspaceRequestConstraints = {
+export const createWorkspaceRules = {
   environments: ['unique', { all: { constraints: [{ type: { type: 'string' } }, 'notBlank'] } }],
   name: ['notBlank'],
   slug: ['notBlank', 'slug'],
