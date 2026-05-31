@@ -2,7 +2,7 @@ import { type WorkspacesCollection } from '@/framework/mongodb/schema/workspaces
 import { err } from '@/kairos/shared/result/err';
 import { ok } from '@/kairos/shared/result/ok';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
-import { type SaveWorkspace } from '@/kairos/workspace/domain/workspace-repository';
+import { type InsertWorkspace } from '@/kairos/workspace/domain/workspace-repository';
 import { MongoServerError } from 'mongodb';
 
 type SaveWorkspaceDependencies = Readonly<{
@@ -15,7 +15,7 @@ function isDuplicateError(error: unknown): boolean {
   return error instanceof MongoServerError && error.code === DUPLICATE_KEY_ERROR_CODE;
 }
 
-export function createSaveWorkspace({ workspacesCollection }: SaveWorkspaceDependencies): SaveWorkspace {
+export function createSaveWorkspace({ workspacesCollection }: SaveWorkspaceDependencies): InsertWorkspace {
   return async ({ environments, name, slug }) => {
     try {
       const inserted = await workspacesCollection.insertOne({

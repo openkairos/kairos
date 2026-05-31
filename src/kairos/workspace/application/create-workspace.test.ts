@@ -2,12 +2,12 @@ import { err } from '@/kairos/shared/result/err';
 import { ok } from '@/kairos/shared/result/ok';
 import { createCreateWorkspace } from '@/kairos/workspace/application/create-workspace';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
-import type { SaveWorkspace } from '@/kairos/workspace/domain/workspace-repository';
+import type { InsertWorkspace } from '@/kairos/workspace/domain/workspace-repository';
 import { describe, expect, test, vi } from 'vitest';
 
 describe('Create workspace use case', () => {
   test('creates workspace when slug does not exist', async () => {
-    const saveWorkspace: SaveWorkspace = vi.fn().mockResolvedValue(
+    const saveWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(
       ok({
         id: 'workspace-id',
         environments: ['dev', 'prod'],
@@ -40,7 +40,7 @@ describe('Create workspace use case', () => {
   });
 
   test('returns conflict when slug already exists', async () => {
-    const saveWorkspace: SaveWorkspace = vi.fn().mockResolvedValue(err(workspaceSlugConflictError));
+    const saveWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(err(workspaceSlugConflictError));
     const execute = createCreateWorkspace({ saveWorkspace });
     const command = {
       environments: ['dev', 'prod'],
