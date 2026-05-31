@@ -1,4 +1,4 @@
-import { Result } from '@/kairos/shared/result/result.type';
+import type { Result } from '@/kairos/shared/result/result.type';
 import type { WorkspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 import type { InitialWorkspace, Workspace } from '@/kairos/workspace/domain/workspace';
 

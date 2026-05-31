@@ -7,18 +7,18 @@ import { integrationTest } from '@tests/__vitest__/integration-test';
 import { MongoServerError } from 'mongodb';
 import { describe, expect, test, vi } from 'vitest';
 
-describe('Save Workspace Repository', () => {
+describe('Insert workspace into MongoDB', () => {
   integrationTest();
 
   test('creates workspace when slug does not exist', async () => {
-    const saveWorkspace = makeInsertWorkspace(workspacesCollection);
+    const insertWorkspace = makeInsertWorkspace(workspacesCollection);
     const command = {
       environments: ['dev', 'prod'],
       name: 'Acme',
       slug: 'acme',
     };
 
-    const result = await saveWorkspace(command);
+    const result = await insertWorkspace(command);
 
     const persistedWorkspace = await workspacesCollection.findOne({ slug: command.slug });
     expect(result).toEqual({
@@ -40,8 +40,8 @@ describe('Save Workspace Repository', () => {
   });
 
   test('returns conflict when slug already exists', async () => {
-    const saveWorkspace = makeInsertWorkspace(workspacesCollection);
-    await saveWorkspace({
+    const insertWorkspace = makeInsertWorkspace(workspacesCollection);
+    await insertWorkspace({
       environments: ['dev'],
       name: 'Acme',
       slug: 'acme',
@@ -52,7 +52,7 @@ describe('Save Workspace Repository', () => {
       slug: 'acme',
     };
 
-    const result = await saveWorkspace(command);
+    const result = await insertWorkspace(command);
 
     expect(result).toEqual({
       isOk: false,
@@ -73,10 +73,10 @@ describe('Save Workspace Repository', () => {
     const collectionMock = {
       insertOne: vi.fn().mockRejectedValue(failure),
     };
-    const saveWorkspace = makeInsertWorkspace(collectionMock as unknown as WorkspacesCollection);
+    const insertWorkspace = makeInsertWorkspace(collectionMock as unknown as WorkspacesCollection);
 
     await expectAsyncToThrow(
-      saveWorkspace({
+      insertWorkspace({
         environments: ['dev'],
         name: 'Test',
         slug: 'test',

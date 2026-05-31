@@ -1,5 +1,5 @@
 import { isDuplicateError } from '@/framework/mongodb/error/is-duplicate-error';
-import { WorkspacesCollection } from '@/framework/mongodb/schema/workspaces-collection-schema';
+import type { WorkspacesCollection } from '@/framework/mongodb/schema/workspaces-collection-schema';
 import { err } from '@/kairos/shared/result/err';
 import { ok } from '@/kairos/shared/result/ok';
 import { type InsertWorkspace } from '@/kairos/workspace/create-workspace/insert-workspace.type';

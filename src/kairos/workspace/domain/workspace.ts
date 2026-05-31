@@ -17,10 +17,10 @@ export type InitialWorkspace = Readonly<{
   slug: string;
 }>;
 
-const DEFAULT_ENVIRONMENTS = ['default'];
+const DEFAULT_ENVIRONMENTS = ['default'] as const;
 
 const environmentsFrom = ({ environments }: InitializeWorkspaceProps): string[] =>
-  environments === undefined || environments.length === 0 ? DEFAULT_ENVIRONMENTS : environments;
+  environments === undefined || environments.length === 0 ? [...DEFAULT_ENVIRONMENTS] : [...environments];
 
 export const initializeWorkspace = (props: InitializeWorkspaceProps): InitialWorkspace => ({
   environments: environmentsFrom(props),
