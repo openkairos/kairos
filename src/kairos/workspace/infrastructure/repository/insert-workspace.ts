@@ -5,10 +5,10 @@ import { ok } from '@/kairos/shared/result/ok';
 import { type InsertWorkspace } from '@/kairos/workspace/application/insert-workspace.type';
 import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 
-export function makeInsertWorkspace(workspacesCollection: WorkspacesCollection): InsertWorkspace {
+export function makeInsertWorkspace(collection: WorkspacesCollection): InsertWorkspace {
   return async function insertWorkspace({ environments, name, slug }) {
     try {
-      const inserted = await workspacesCollection.insertOne({
+      const inserted = await collection.insertOne({
         environments,
         name,
         slug,
