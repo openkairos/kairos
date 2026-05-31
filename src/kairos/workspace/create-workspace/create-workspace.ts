@@ -19,8 +19,11 @@ const DEFAULT_ENVIRONMENTS = ['default'];
 const hasEnvironments = (command: CreateWorkspaceCommand): boolean =>
   command.environments !== undefined && command.environments.length > 0;
 
+const environmentsFrom = (command: CreateWorkspaceCommand): string[] =>
+  hasEnvironments(command) ? command.environments! : DEFAULT_ENVIRONMENTS;
+
 const toWorkspaceToInsert = (command: CreateWorkspaceCommand): WorkspaceToInsert => ({
-  environments: hasEnvironments(command) ? command.environments! : DEFAULT_ENVIRONMENTS,
+  environments: environmentsFrom(command),
   name: command.name,
   slug: command.slug,
 });
