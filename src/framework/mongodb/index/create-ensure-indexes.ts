@@ -1,6 +1,6 @@
 import type { CreateIndexesOptions, Db, IndexSpecification } from 'mongodb';
 
-type MongoIndexConfig = Readonly<{
+export type MongoIndexConfig = Readonly<{
   collectionName: string;
   keys: IndexSpecification;
   options?: CreateIndexesOptions;
