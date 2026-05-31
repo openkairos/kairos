@@ -4,15 +4,15 @@ import type { WorkspaceSlugConflictError } from '@/kairos/workspace/domain/error
 import type { Workspace } from '@/kairos/workspace/domain/workspace';
 
 type CreateWorkspaceDependencies = Readonly<{
-  saveWorkspace: InsertWorkspace;
+  insertWorkspace: InsertWorkspace;
 }>;
 
 export type CreateWorkspaceCommand = Readonly<WorkspaceToInsert>;
 
 export type CreateWorkspaceResult = Result<Workspace, WorkspaceSlugConflictError>;
 
-export function createCreateWorkspace({ saveWorkspace }: CreateWorkspaceDependencies) {
+export function createCreateWorkspace({ insertWorkspace }: CreateWorkspaceDependencies) {
   return async function createWorkspace(command: CreateWorkspaceCommand): Promise<CreateWorkspaceResult> {
-    return saveWorkspace(command);
+    return insertWorkspace(command);
   };
 }

@@ -7,7 +7,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 describe('Create workspace use case', () => {
   test('creates workspace when slug does not exist', async () => {
-    const saveWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(
+    const insertWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(
       ok({
         id: 'workspace-id',
         environments: ['dev', 'prod'],
@@ -15,7 +15,7 @@ describe('Create workspace use case', () => {
         slug: 'acme',
       }),
     );
-    const execute = createCreateWorkspace({ saveWorkspace });
+    const execute = createCreateWorkspace({ insertWorkspace });
     const command = {
       environments: ['dev', 'prod'],
       name: 'Acme',
@@ -24,7 +24,7 @@ describe('Create workspace use case', () => {
 
     const result = await execute(command);
 
-    expect(saveWorkspace).toHaveBeenCalledWith({
+    expect(insertWorkspace).toHaveBeenCalledWith({
       environments: ['dev', 'prod'],
       name: 'Acme',
       slug: 'acme',
@@ -40,8 +40,8 @@ describe('Create workspace use case', () => {
   });
 
   test('returns conflict when slug already exists', async () => {
-    const saveWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(err(workspaceSlugConflictError));
-    const execute = createCreateWorkspace({ saveWorkspace });
+    const insertWorkspace: InsertWorkspace = vi.fn().mockResolvedValue(err(workspaceSlugConflictError));
+    const execute = createCreateWorkspace({ insertWorkspace });
     const command = {
       environments: ['dev', 'prod'],
       name: 'Acme',
@@ -50,7 +50,7 @@ describe('Create workspace use case', () => {
 
     const result = await execute(command);
 
-    expect(saveWorkspace).toHaveBeenCalledWith({
+    expect(insertWorkspace).toHaveBeenCalledWith({
       environments: ['dev', 'prod'],
       name: 'Acme',
       slug: 'acme',

@@ -5,8 +5,8 @@ import { type InsertWorkspace } from '@/kairos/workspace/application/insert-work
 import { createSaveWorkspace } from '@/kairos/workspace/infrastructure/repository/save-workspace';
 import { createWorkspaceRequestConstraints } from '@/kairos/workspace/interface/http/create-workspace-request';
 
-const saveWorkspace: InsertWorkspace = createSaveWorkspace({ workspacesCollection });
+const insertWorkspace: InsertWorkspace = createSaveWorkspace({ workspacesCollection });
 
-export const createWorkspace = createCreateWorkspace({ saveWorkspace });
+export const createWorkspace = createCreateWorkspace({ insertWorkspace });
 
 export const validateCreateWorkspaceRequest = validateRequest(createWorkspaceRequestConstraints);
