@@ -1,13 +1,7 @@
 import { Result } from '@/kairos/shared/result/result.type';
-import type { WorkspaceSlugConflictError } from '@/kairos/workspace/errors';
-import type { Workspace } from '@/kairos/workspace/workspace.type';
-
-export interface WorkspaceToInsert {
-  environments: string[];
-  name: string;
-  slug: string;
-}
+import type { WorkspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
+import type { InitialWorkspace, Workspace } from '@/kairos/workspace/domain/workspace';
 
 type InsertWorkspaceResult = Result<Workspace, WorkspaceSlugConflictError>;
 
-export type InsertWorkspace = (workspace: WorkspaceToInsert) => Promise<InsertWorkspaceResult>;
+export type InsertWorkspace = (workspace: InitialWorkspace) => Promise<InsertWorkspaceResult>;

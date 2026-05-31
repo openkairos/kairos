@@ -2,7 +2,7 @@ import { err } from '@/kairos/shared/result/err';
 import { ok } from '@/kairos/shared/result/ok';
 import { makeCreateWorkspace } from '@/kairos/workspace/create-workspace/create-workspace';
 import type { InsertWorkspace } from '@/kairos/workspace/create-workspace/insert-workspace.type';
-import { workspaceSlugConflictError } from '@/kairos/workspace/errors';
+import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 import { describe, expect, test, vi } from 'vitest';
 
 describe('Create workspace use case', () => {

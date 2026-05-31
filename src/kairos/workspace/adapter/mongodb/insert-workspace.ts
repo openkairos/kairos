@@ -3,7 +3,7 @@ import { WorkspacesCollection } from '@/framework/mongodb/schema/workspaces-coll
 import { err } from '@/kairos/shared/result/err';
 import { ok } from '@/kairos/shared/result/ok';
 import { type InsertWorkspace } from '@/kairos/workspace/create-workspace/insert-workspace.type';
-import { workspaceSlugConflictError } from '@/kairos/workspace/errors';
+import { workspaceSlugConflictError } from '@/kairos/workspace/domain/errors';
 
 export const makeInsertWorkspace =
   (collection: WorkspacesCollection): InsertWorkspace =>
