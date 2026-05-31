@@ -11,7 +11,7 @@ export type CreateWorkspaceCommand = Readonly<WorkspaceToInsert>;
 
 export type CreateWorkspaceResult = Result<Workspace, WorkspaceSlugConflictError>;
 
-export function createCreateWorkspace({ insertWorkspace }: CreateWorkspaceDependencies) {
+export function makeCreateWorkspace({ insertWorkspace }: CreateWorkspaceDependencies) {
   return async function createWorkspace(command: CreateWorkspaceCommand): Promise<CreateWorkspaceResult> {
     return insertWorkspace(command);
   };
