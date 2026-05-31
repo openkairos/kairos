@@ -9,9 +9,8 @@ type Dependencies = Readonly<{
   workspacesCollection: WorkspacesCollection;
 }>;
 
-export const makeInsertWorkspace =
-  ({ workspacesCollection }: Dependencies): InsertWorkspace =>
-  async ({ environments, name, slug }) => {
+export function makeInsertWorkspace({ workspacesCollection }: Dependencies): InsertWorkspace {
+  return async function insertWorkspace({ environments, name, slug }) {
     try {
       const inserted = await workspacesCollection.insertOne({
         environments,
@@ -31,3 +30,4 @@ export const makeInsertWorkspace =
       throw error;
     }
   };
+}
