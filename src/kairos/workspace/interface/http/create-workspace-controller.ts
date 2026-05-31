@@ -4,7 +4,7 @@ import { createWorkspaceResponse } from '@/kairos/workspace/interface/http/creat
 import { createWorkspace } from '@/kairos/workspace/workspace-composition';
 import { type HttpScope } from '@koala-ts/framework';
 
-export async function createWorkspaceHandler({ response, request }: HttpScope): Promise<void> {
+export async function createWorkspaceController({ response, request }: HttpScope): Promise<void> {
   const body = request.body as CreateWorkspaceRequest['body'];
   const result = await createWorkspace({
     environments: body.environments === undefined || body.environments.length === 0 ? ['default'] : body.environments,
