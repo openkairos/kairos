@@ -1,7 +1,4 @@
-import type {
-  SourceCollectionSchema,
-  SourcesCollection,
-} from '@/framework/mongodb/schema/sources-collection-schema';
+import type { SourceCollectionSchema, SourcesCollection } from '@/framework/mongodb/schema/sources-collection-schema';
 import type { FindSourcesByWorkspace } from '@/kairos/source/find-sources-by-workspace/find-sources-by-workspace.type';
 import type { Source } from '@/kairos/source/domain/source';
 import { ObjectId } from 'mongodb';

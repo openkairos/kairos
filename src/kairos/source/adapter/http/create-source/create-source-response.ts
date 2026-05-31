@@ -2,6 +2,7 @@ import { type ResultHttpMapping } from '@/interface/http/result-to-http';
 import { HTTP_CONFLICT, HTTP_CREATED } from '@/interface/http/status-code';
 import type { CreatedSource } from '@/kairos/source/create-source/create-source';
 import type { SourceNameConflictError } from '@/kairos/source/domain/errors';
+import { sourceNameConflictError } from '@/kairos/source/domain/errors';
 
 export const createSourceResponse: ResultHttpMapping<CreatedSource, SourceNameConflictError> = {
   success: {
@@ -9,7 +10,7 @@ export const createSourceResponse: ResultHttpMapping<CreatedSource, SourceNameCo
   },
   error: {
     byType: {
-      SOURCE_NAME_CONFLICT: {
+      [sourceNameConflictError.type]: {
         status: HTTP_CONFLICT,
       },
     },

@@ -6,6 +6,7 @@ import { type HttpScope } from '@koala-ts/framework';
 
 export async function createSourceController({ request, response }: HttpScope): Promise<void> {
   const { body, params } = request as CreateSourceRequest;
+
   const result = await createSource({
     description: body.description,
     environments: body.environments,
