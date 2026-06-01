@@ -1,5 +1,5 @@
 import { appConfig } from '@/config';
-import { hashPassword } from '@/kairos/authentication/infrastructure/security/password/hash-password';
+import { hashPassword } from '@/framework/security/password';
 
 import { usersCollection } from '@/framework/mongodb/collection/users-collection';
 import { createTestAgent } from '@koala-ts/framework';

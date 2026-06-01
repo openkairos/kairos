@@ -1,5 +1,5 @@
 import { invalidCredentialsError } from '@/kairos/authentication/domain/errors';
-import { passwordHasher } from '@/kairos/authentication/infrastructure/security/password/password-hasher';
+import { passwordHasher } from '@/framework/security/password';
 import { describe, expect, it } from 'vitest';
 import { createVerifyPassword } from './verify-password';
 

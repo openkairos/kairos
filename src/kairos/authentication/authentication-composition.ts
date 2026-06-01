@@ -10,7 +10,7 @@ import {
   createJwtAccessTokenSigner,
   type SignAccessToken,
 } from '@/kairos/authentication/infrastructure/security/access-token';
-import { passwordHasher } from '@/kairos/authentication/infrastructure/security/password/password-hasher';
+import { passwordHasher } from '@/framework/security/password';
 import { createVerifyPassword } from '@/kairos/authentication/infrastructure/security/password/verify-password';
 import { loginRequestConstraints } from '@/kairos/authentication/interface/http/login-request';
 import { systemClock } from '@/kairos/shared/clock/clock';
