@@ -35,7 +35,7 @@ flowchart TB
 Legend:
 
 | Color                      | Meaning               |
-|----------------------------|-----------------------|
+| -------------------------- | --------------------- |
 | Orange                     | Domain events         |
 | Light blue                 | Commands              |
 | Yellow                     | Aggregates            |
