@@ -44,7 +44,7 @@
     "pino-test": "^2.0.0",
     "prettier": "^3.7.4",
     "tsc-alias": "^1.8.17",
-    "tsx": "^4.20.6",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.0",
     "vitest": "^4.0.16"
