@@ -1,26 +1,4 @@
 services:
-  app: &base_app
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-      target: development
-    working_dir: /app
-    tty: true
-    stdin_open: true
-    volumes:
-      - .:/app
-    depends_on:
-      mongodb:
-        condition: service_healthy
-    networks:
-      - kairos_network
-    ports:
-      - '${HTTP_HOST_PORT:-3000}:${PORT:-3000}'
-
-  app_dev:
-    <<: *base_app
-    ports: []
-
   mongodb:
     image: mongo:8
     restart: unless-stopped
