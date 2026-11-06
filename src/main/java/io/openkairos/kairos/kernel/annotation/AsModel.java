@@ -7,10 +7,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Excludes a class from the application service scan in services.xml.
+ * Marks an application data or domain object whose instances are created by application code.
+ * The application service scan in services.xml excludes annotated classes.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface NotService {
+public @interface AsModel {
 }

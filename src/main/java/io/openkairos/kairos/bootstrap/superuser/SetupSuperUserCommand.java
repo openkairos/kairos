@@ -1,11 +1,11 @@
 package io.openkairos.kairos.bootstrap.superuser;
 
-import io.openkairos.kairos.kernel.annotation.NotService;
+import io.openkairos.kairos.kernel.annotation.AsModel;
 
 import java.security.SecureRandom;
 import java.util.Base64;
 
-@NotService
+@AsModel
 public final class SetupSuperUserCommand {
     private final String username;
     private final String password;
