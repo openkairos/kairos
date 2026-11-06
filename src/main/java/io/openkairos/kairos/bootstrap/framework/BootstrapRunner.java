@@ -3,23 +3,23 @@ package io.openkairos.kairos.bootstrap.framework;
 import io.openkairos.kairos.bootstrap.superuser.SetupSuperUser;
 import io.openkairos.kairos.bootstrap.superuser.SetupSuperUserCommand;
 import org.jspecify.annotations.NonNull;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
+@EnableConfigurationProperties(SuperUserSettings.class)
 public final class BootstrapRunner implements ApplicationRunner {
     private final SetupSuperUser setupSuperUser;
     private final SetupSuperUserCommand command;
 
     public BootstrapRunner(
             SetupSuperUser setupSuperUser,
-            @Value("${kairos.username:kairos}") String username,
-            @Value("${kairos.password:#{null}}") String password
+            SuperUserSettings settings
     ) {
         this.setupSuperUser = setupSuperUser;
-        this.command = SetupSuperUserCommand.of(username, password);
+        this.command = SetupSuperUserCommand.of(settings.username(), settings.password());
     }
 
     @Override
