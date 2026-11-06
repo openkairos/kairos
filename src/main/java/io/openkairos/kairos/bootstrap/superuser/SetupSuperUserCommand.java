@@ -1,6 +1,6 @@
 package io.openkairos.kairos.bootstrap.superuser;
 
-import io.openkairos.kairos.kernel.NotService;
+import io.openkairos.kairos.kernel.annotation.NotService;
 
 import java.security.SecureRandom;
 import java.util.Base64;

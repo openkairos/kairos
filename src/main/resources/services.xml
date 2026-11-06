@@ -12,7 +12,7 @@
     <context:component-scan base-package="io.openkairos.kairos" use-default-filters="false">
         <context:include-filter type="regex" expression="io\.openkairos\.kairos\..*"/>
         <!-- Exclude these packages, annotations, and types from this scan. -->
-        <context:exclude-filter type="annotation" expression="io.openkairos.kairos.kernel.NotService"/>
+        <context:exclude-filter type="annotation" expression="io.openkairos.kairos.kernel.annotation.NotService"/>
         <context:exclude-filter type="regex" expression="io\.openkairos\.kairos\.(?:[^.]+\.)*model\..*"/>
         <context:exclude-filter type="regex" expression="io\.openkairos\.kairos\.(?:[^.]+\.)*framework\..*"/>
         <context:exclude-filter type="annotation" expression="org.springframework.context.annotation.Configuration"/>

@@ -1,6 +1,6 @@
-package io.openkairos.kairos.kernel.framework;
+package io.openkairos.kairos.kernel.framework.security;
 
-import io.openkairos.kairos.kernel.PasswordHasherInterface;
+import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
@@ -46,7 +46,7 @@ final class Argon2PasswordHasherTest {
     @Test
     void it_makes_a_working_password_hasher_available_through_spring_component_scanning() {
         try (var context = new AnnotationConfigApplicationContext()) {
-            context.scan("io.openkairos.kairos.kernel.framework");
+            context.scan("io.openkairos.kairos.kernel.framework.security");
             context.refresh();
             var hasher = context.getBean(PasswordHasherInterface.class);
 

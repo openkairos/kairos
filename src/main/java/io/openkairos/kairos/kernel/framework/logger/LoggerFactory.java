@@ -1,6 +1,6 @@
-package io.openkairos.kairos.kernel.framework;
+package io.openkairos.kairos.kernel.framework.logger;
 
-import io.openkairos.kairos.kernel.LoggerInterface;
+import io.openkairos.kairos.kernel.logger.LoggerInterface;
 import org.springframework.beans.factory.InjectionPoint;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;

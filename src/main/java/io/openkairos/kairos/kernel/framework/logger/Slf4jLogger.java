@@ -1,6 +1,6 @@
-package io.openkairos.kairos.kernel.framework;
+package io.openkairos.kairos.kernel.framework.logger;
 
-import io.openkairos.kairos.kernel.LoggerInterface;
+import io.openkairos.kairos.kernel.logger.LoggerInterface;
 import org.slf4j.Logger;
 
 public final class Slf4jLogger implements LoggerInterface {

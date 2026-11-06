@@ -1,4 +1,4 @@
-package io.openkairos.kairos.kernel;
+package io.openkairos.kairos.kernel.framework;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;

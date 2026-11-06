@@ -1,7 +1,7 @@
 package io.openkairos.kairos.bootstrap.superuser;
 
-import io.openkairos.kairos.kernel.LoggerInterface;
-import io.openkairos.kairos.kernel.PasswordHasherInterface;
+import io.openkairos.kairos.kernel.logger.LoggerInterface;
+import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

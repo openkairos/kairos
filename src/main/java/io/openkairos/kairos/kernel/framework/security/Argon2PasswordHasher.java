@@ -1,6 +1,6 @@
-package io.openkairos.kairos.kernel.framework;
+package io.openkairos.kairos.kernel.framework.security;
 
-import io.openkairos.kairos.kernel.PasswordHasherInterface;
+import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Component;
 

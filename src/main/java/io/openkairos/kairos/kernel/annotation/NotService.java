@@ -1,4 +1,4 @@
-package io.openkairos.kairos.kernel;
+package io.openkairos.kairos.kernel.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

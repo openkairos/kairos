@@ -1,4 +1,4 @@
-package io.openkairos.kairos.kernel;
+package io.openkairos.kairos.kernel.logger;
 
 public interface LoggerInterface {
 
