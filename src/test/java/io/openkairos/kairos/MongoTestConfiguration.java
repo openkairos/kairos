@@ -11,6 +11,6 @@ class MongoTestConfiguration {
     @Bean
     @ServiceConnection
     MongoDBContainer testMongoContainer() {
-        return new MongoDBContainer("mongo:8.0.16");
+        return new MongoDBContainer("mongo:9.0.4");
     }
 }
