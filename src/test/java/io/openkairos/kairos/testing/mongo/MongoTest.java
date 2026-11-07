@@ -1,6 +1,7 @@
 package io.openkairos.kairos.testing.mongo;
 
 import io.openkairos.kairos.testing.mongo.assertion.MongoAssertions;
+import org.bson.Document;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -24,9 +25,9 @@ public abstract class MongoTest {
     protected MongoAssertions mongoAssertions;
 
     @AfterEach
-    void drop_collections() {
+    void clear_collections() {
         for (String collection : mongoTemplate.getCollectionNames()) {
-            mongoTemplate.dropCollection(collection);
+            mongoTemplate.getCollection(collection).deleteMany(new Document());
         }
     }
 }
