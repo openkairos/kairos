@@ -1,6 +1,7 @@
 package io.openkairos.kairos.bootstrap.superuser.framework;
 
 import io.openkairos.kairos.MongoTest;
+import io.openkairos.kairos.kernel.framework.persistence.UserDocument;
 import org.bson.Document;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,7 @@ final class SuperUserRepositoryTest extends MongoTest {
 
     @Test
     void it_returns_true_when_any_user_exists() {
-        mongoTemplate.getCollection("users").insertOne(new Document("username", "existing-user")
-                .append("passwordHash", "existing-hash"));
+        mongoTemplate.insert(new UserDocument(null, "existing-user", "existing-hash"));
 
         boolean exists = sut.exists();
 
@@ -41,7 +41,7 @@ final class SuperUserRepositoryTest extends MongoTest {
         sut.create(username, passwordHash);
 
         var user = mongoTemplate.getCollection("users")
-                .find(new Document("username", username).append("passwordHash", passwordHash))
+                .find(new Document("username", username).append("password", passwordHash))
                 .first();
         assertNotNull(user);
     }
