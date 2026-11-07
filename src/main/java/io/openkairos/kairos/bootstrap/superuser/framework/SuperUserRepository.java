@@ -1,28 +1,26 @@
 package io.openkairos.kairos.bootstrap.superuser.framework;
 
 import io.openkairos.kairos.bootstrap.superuser.SuperUserRepositoryInterface;
-import org.bson.Document;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Query;
+import io.openkairos.kairos.kernel.framework.persistence.UserDocument;
+import io.openkairos.kairos.kernel.framework.persistence.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public final class SuperUserRepository implements SuperUserRepositoryInterface {
 
-    private final MongoTemplate mongoTemplate;
+    private final UserRepository userRepository;
 
-    public SuperUserRepository(MongoTemplate mongoTemplate) {
-        this.mongoTemplate = mongoTemplate;
+    public SuperUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public boolean exists() {
-        return mongoTemplate.exists(new Query(), "users");
+        return userRepository.existsAny();
     }
 
     @Override
     public void create(String username, String passwordHash) {
-        mongoTemplate.insert(new Document("username", username)
-                .append("passwordHash", passwordHash), "users");
+        userRepository.insert(new UserDocument(null, username, passwordHash));
     }
 }
