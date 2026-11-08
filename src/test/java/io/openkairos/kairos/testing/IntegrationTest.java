@@ -1,7 +1,7 @@
-package io.openkairos.kairos.testing.mongo;
+package io.openkairos.kairos.testing;
 
+import io.openkairos.kairos.kernel.framework.security.Argon2PasswordHasher;
 import io.openkairos.kairos.testing.mongo.assertion.MongoAssertions;
-import org.bson.Document;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -10,24 +10,21 @@ import org.junit.jupiter.api.parallel.ResourceLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.mongodb.test.autoconfigure.DataMongoTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.mongodb.core.MongoTemplate;
 
 @DataMongoTest
-@Import({MongoTestConfiguration.class, MongoAssertions.class})
+@Import({IntegrationTestConfiguration.class, MongoAssertions.class, Argon2PasswordHasher.class, TearDown.class})
 @Execution(ExecutionMode.SAME_THREAD)
 @ResourceLock(value = "mongo-tests", mode = ResourceAccessMode.READ_WRITE)
-public abstract class MongoTest {
-
-    @Autowired
-    protected MongoTemplate mongoTemplate;
+public abstract class IntegrationTest {
 
     @Autowired
     protected MongoAssertions mongoAssertions;
 
+    @Autowired
+    private TearDown tearDown;
+
     @AfterEach
-    void clear_collections() {
-        for (String collection : mongoTemplate.getCollectionNames()) {
-            mongoTemplate.getCollection(collection).deleteMany(new Document());
-        }
+    void tearDown() {
+        tearDown.clearMongoCollections();
     }
 }

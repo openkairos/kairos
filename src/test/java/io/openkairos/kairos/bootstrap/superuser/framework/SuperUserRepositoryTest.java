@@ -1,6 +1,6 @@
 package io.openkairos.kairos.bootstrap.superuser.framework;
 
-import io.openkairos.kairos.testing.mongo.MongoTest;
+import io.openkairos.kairos.testing.IntegrationTest;
 import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Import({SuperUserRepository.class, UserPopulator.class})
-final class SuperUserRepositoryTest extends MongoTest {
+final class SuperUserRepositoryTest extends IntegrationTest {
 
     @Autowired
     private SuperUserRepository sut;
