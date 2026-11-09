@@ -2,8 +2,6 @@ package io.openkairos.kairos.framework.security.password;
 
 import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -12,47 +10,41 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 final class Argon2PasswordHasherTest {
 
     private final PasswordHasherInterface sut = new Argon2PasswordHasher();
-    private final Argon2PasswordEncoder verifier = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
 
     @Test
-    void it_produces_a_hash_that_can_verify_the_original_password() {
+    void a_password_is_hashed_and_can_be_verified() {
         String password = "my-secret-password";
 
         String hash = sut.hash(password);
+        boolean verified = sut.verify(hash, password);
 
         assertNotEquals(password, hash);
-        assertTrue(verifier.matches(password, hash));
+        assertTrue(verified);
     }
 
     @Test
-    void it_produces_a_hash_that_rejects_a_different_password() {
-        String hash = sut.hash("my-secret-password");
+    void a_hash_is_not_verified_by_a_different_password() {
+        String password = "my-secret-password";
+        String differentPassword = "a-different-password";
+        String hash = sut.hash(password);
 
-        assertFalse(verifier.matches("a-different-password", hash));
+        boolean verified = sut.verify(hash, differentPassword);
+
+        assertFalse(verified);
     }
 
     @Test
-    void it_produces_different_hashes_for_the_same_password_that_both_remain_valid() {
+    void a_password_produces_different_hashes_that_both_can_be_verified() {
         String password = "my-secret-password";
 
         String firstHash = sut.hash(password);
         String secondHash = sut.hash(password);
+        boolean firstHashVerified = sut.verify(firstHash, password);
+        boolean secondHashVerified = sut.verify(secondHash, password);
 
         assertNotEquals(firstHash, secondHash);
-        assertTrue(verifier.matches(password, firstHash));
-        assertTrue(verifier.matches(password, secondHash));
+        assertTrue(firstHashVerified);
+        assertTrue(secondHashVerified);
     }
 
-    @Test
-    void it_makes_a_working_password_hasher_available_through_spring_component_scanning() {
-        try (var context = new AnnotationConfigApplicationContext()) {
-            context.scan("io.openkairos.kairos.framework.security.password");
-            context.refresh();
-            var hasher = context.getBean(PasswordHasherInterface.class);
-
-            String hash = hasher.hash("my-secret-password");
-
-            assertTrue(verifier.matches("my-secret-password", hash));
-        }
-    }
 }

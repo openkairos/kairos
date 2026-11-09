@@ -23,4 +23,9 @@ public final class Argon2PasswordHasher implements PasswordHasherInterface {
     public String hash(String plainPassword) {
         return encoder.encode(plainPassword);
     }
+
+    @Override
+    public boolean verify(String hashedPassword, String plainPassword) {
+        return encoder.matches(plainPassword, hashedPassword);
+    }
 }
