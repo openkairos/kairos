@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
@@ -24,7 +25,8 @@ final class PasswordCredentialsVerifierTest {
         var repository = mock(UserRepository.class);
         var passwordHasher = mock(PasswordHasherInterface.class);
         var credentials = new PasswordCredentials("jane", "my-secret-password");
-        var document = new UserDocument(new ObjectId(), "jane", "hashed-password");
+        var id = new ObjectId();
+        var document = new UserDocument(id, "jane", "hashed-password");
         when(repository.findByUsername("jane")).thenReturn(Optional.of(document));
         when(passwordHasher.verify("hashed-password", "my-secret-password")).thenReturn(true);
         var sut = new PasswordCredentialsVerifier(repository, passwordHasher);
@@ -32,6 +34,8 @@ final class PasswordCredentialsVerifierTest {
         var user = sut.verify(credentials);
 
         assertNotNull(user);
+        assertEquals(id.toHexString(), user.id());
+        assertEquals("jane", user.username());
         verify(repository).findByUsername("jane");
         verify(passwordHasher).verify("hashed-password", "my-secret-password");
     }

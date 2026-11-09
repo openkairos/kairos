@@ -28,6 +28,6 @@ public final class PasswordCredentialsVerifier implements PasswordCredentialsVer
             throw new InvalidCredentialsException();
         }
 
-        return new User();
+        return new User(user.id().toHexString(), user.username());
     }
 }

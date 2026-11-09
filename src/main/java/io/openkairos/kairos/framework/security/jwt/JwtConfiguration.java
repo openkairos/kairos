@@ -13,11 +13,18 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import java.time.Clock;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(JwtSettings.class)
 public final class JwtConfiguration {
+
+    @Bean
+    Clock clock() {
+        return Clock.systemUTC();
+    }
 
     @Bean
     JwtEncoder jwtEncoder(JwtSettings settings) {

@@ -1,14 +1,21 @@
 package io.openkairos.kairos.security.auth.login;
 
-import java.time.Duration;
-
 public final class PasswordLogin {
 
-    public AccessToken execute(PasswordCredentials credentials) {
-        return AccessToken.bearer(
-                Duration.ofSeconds(900),
-                "hard-coded-access-token",
-                "hard-coded-refresh-token"
-        );
+    private final PasswordCredentialsVerifierInterface credentialsVerifier;
+    private final AccessTokenIssuerInterface accessTokenIssuer;
+
+    public PasswordLogin(
+            PasswordCredentialsVerifierInterface credentialsVerifier,
+            AccessTokenIssuerInterface accessTokenIssuer
+    ) {
+        this.credentialsVerifier = credentialsVerifier;
+        this.accessTokenIssuer = accessTokenIssuer;
+    }
+
+    public AccessToken execute(PasswordCredentials credentials) throws InvalidCredentialsException {
+        var user = credentialsVerifier.verify(credentials);
+
+        return accessTokenIssuer.issue(user);
     }
 }
