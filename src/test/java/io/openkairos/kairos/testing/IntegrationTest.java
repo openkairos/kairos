@@ -1,6 +1,6 @@
 package io.openkairos.kairos.testing;
 
-import io.openkairos.kairos.kernel.framework.security.Argon2PasswordHasher;
+import io.openkairos.kairos.framework.security.password.Argon2PasswordHasher;
 import io.openkairos.kairos.testing.mongo.assertion.MongoAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.parallel.Execution;
