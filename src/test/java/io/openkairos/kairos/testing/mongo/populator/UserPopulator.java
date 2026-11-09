@@ -1,6 +1,6 @@
 package io.openkairos.kairos.testing.mongo.populator;
 
-import io.openkairos.kairos.framework.persistence.UserDocument;
+import io.openkairos.kairos.adapters.framework.persistence.UserDocument;
 import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
