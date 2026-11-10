@@ -1,8 +1,8 @@
 package io.openkairos.kairos.adapters.framework.bootstrap;
 
-import io.openkairos.kairos.bootstrap.superuser.SetupSuperUser;
-import io.openkairos.kairos.bootstrap.superuser.SetupSuperUserCommand;
-import io.openkairos.kairos.bootstrap.superuser.SetupSuperUserOutcome;
+import io.openkairos.kairos.bootstrap.superuser.application.SetupSuperUser;
+import io.openkairos.kairos.bootstrap.superuser.application.SetupSuperUserCommand;
+import io.openkairos.kairos.bootstrap.superuser.application.SetupSuperUserOutcome;
 import org.jspecify.annotations.NonNull;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

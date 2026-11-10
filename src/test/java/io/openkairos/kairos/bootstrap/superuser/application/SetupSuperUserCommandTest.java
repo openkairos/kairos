@@ -1,4 +1,4 @@
-package io.openkairos.kairos.bootstrap.superuser;
+package io.openkairos.kairos.bootstrap.superuser.application;
 
 import org.junit.jupiter.api.Test;
 

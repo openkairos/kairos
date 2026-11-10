@@ -1,4 +1,6 @@
-package io.openkairos.kairos.adapters.framework.persistence;
+package io.openkairos.kairos.adapters.framework.persistence.repository.springdata;
+
+import io.openkairos.kairos.adapters.framework.persistence.document.UserDocument;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;

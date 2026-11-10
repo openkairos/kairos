@@ -1,8 +1,8 @@
 package io.openkairos.kairos.adapters.framework.security.jwt;
 
-import io.openkairos.kairos.security.auth.User;
-import io.openkairos.kairos.security.auth.login.AccessToken;
-import io.openkairos.kairos.security.auth.login.AccessTokenIssuerInterface;
+import io.openkairos.kairos.auth.application.login.AccessToken;
+import io.openkairos.kairos.auth.application.login.AccessTokenIssuerInterface;
+import io.openkairos.kairos.auth.domain.User;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -30,7 +30,7 @@ public final class JwtAccessTokenIssuer implements AccessTokenIssuerInterface {
         var expiresAt = issuedAt.plus(settings.accessTokenTtl());
         var claims = JwtClaimsSet.builder()
                 .issuer(settings.issuer())
-                .subject(user.id())
+                .subject(user.id().value())
                 .issuedAt(issuedAt)
                 .expiresAt(expiresAt)
                 .id(UUID.randomUUID().toString())

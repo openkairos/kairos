@@ -1,4 +1,4 @@
-package io.openkairos.kairos.security.auth.login;
+package io.openkairos.kairos.auth.application.login;
 
 import io.openkairos.kairos.kernel.annotation.AsModel;
 

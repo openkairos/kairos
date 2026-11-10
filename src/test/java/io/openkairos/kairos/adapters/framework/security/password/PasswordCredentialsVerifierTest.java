@@ -1,10 +1,11 @@
 package io.openkairos.kairos.adapters.framework.security.password;
 
-import io.openkairos.kairos.adapters.framework.persistence.UserDocument;
-import io.openkairos.kairos.adapters.framework.persistence.UserRepository;
+import io.openkairos.kairos.adapters.framework.persistence.document.UserDocument;
+import io.openkairos.kairos.adapters.framework.persistence.repository.springdata.UserRepository;
+import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
 import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
-import io.openkairos.kairos.security.auth.login.InvalidCredentialsException;
-import io.openkairos.kairos.security.auth.login.PasswordCredentials;
+import io.openkairos.kairos.auth.application.login.PasswordCredentials;
+import io.openkairos.kairos.auth.application.login.exception.InvalidCredentialsException;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ final class PasswordCredentialsVerifierTest {
         var passwordHasher = mock(PasswordHasherInterface.class);
         var credentials = new PasswordCredentials("jane", "my-secret-password");
         var id = new ObjectId();
-        var document = new UserDocument(id, "jane", "hashed-password");
+        var document = UserDocument.from(new SuperUser(() -> id.toHexString(), "jane", "hashed-password"));
         when(repository.findByUsername("jane")).thenReturn(Optional.of(document));
         when(passwordHasher.verify("hashed-password", "my-secret-password")).thenReturn(true);
         var sut = new PasswordCredentialsVerifier(repository, passwordHasher);
@@ -34,7 +35,7 @@ final class PasswordCredentialsVerifierTest {
         var user = sut.verify(credentials);
 
         assertNotNull(user);
-        assertEquals(id.toHexString(), user.id());
+        assertEquals(id.toHexString(), user.id().value());
         assertEquals("jane", user.username());
         verify(repository).findByUsername("jane");
         verify(passwordHasher).verify("hashed-password", "my-secret-password");
@@ -59,7 +60,8 @@ final class PasswordCredentialsVerifierTest {
         var repository = mock(UserRepository.class);
         var passwordHasher = mock(PasswordHasherInterface.class);
         var credentials = new PasswordCredentials("jane", "my-secret-password");
-        var document = new UserDocument(new ObjectId(), "jane", "hashed-password");
+        var id = new ObjectId();
+        var document = UserDocument.from(new SuperUser(() -> id.toHexString(), "jane", "hashed-password"));
         when(repository.findByUsername("jane")).thenReturn(Optional.of(document));
         when(passwordHasher.verify("hashed-password", "my-secret-password")).thenReturn(false);
         var sut = new PasswordCredentialsVerifier(repository, passwordHasher);

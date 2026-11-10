@@ -1,7 +1,9 @@
 package io.openkairos.kairos.testing.mongo.populator;
 
-import io.openkairos.kairos.adapters.framework.persistence.UserDocument;
+import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
+import io.openkairos.kairos.adapters.framework.persistence.document.UserDocument;
 import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 public final class UserPopulator {
@@ -19,6 +21,11 @@ public final class UserPopulator {
     }
 
     public void superUser(String username, String plainPassword) {
-        mongoTemplate.insert(new UserDocument(null, username, passwordHasher.hash(plainPassword)));
+        var superUser = new SuperUser(
+                () -> new ObjectId().toHexString(),
+                username,
+                passwordHasher.hash(plainPassword)
+        );
+        mongoTemplate.insert(UserDocument.from(superUser));
     }
 }

@@ -1,6 +1,7 @@
-package io.openkairos.kairos.security.auth.login;
+package io.openkairos.kairos.auth.application.login;
 
-import io.openkairos.kairos.security.auth.User;
+import io.openkairos.kairos.auth.application.login.exception.InvalidCredentialsException;
+import io.openkairos.kairos.auth.domain.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -21,7 +22,7 @@ final class PasswordLoginTest {
         var credentialsVerifier = mock(PasswordCredentialsVerifierInterface.class);
         var accessTokenIssuer = mock(AccessTokenIssuerInterface.class);
         var credentials = new PasswordCredentials("jane", "my-secret-password");
-        var user = new User("507f1f77bcf86cd799439011", "jane");
+        var user = new User(() -> "507f1f77bcf86cd799439011", "jane");
         var accessToken = AccessToken.bearer(
                 Duration.ofMinutes(15),
                 "access-token",

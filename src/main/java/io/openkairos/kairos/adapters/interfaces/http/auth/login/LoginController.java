@@ -1,7 +1,7 @@
 package io.openkairos.kairos.adapters.interfaces.http.auth.login;
 
 import io.openkairos.kairos.adapters.interfaces.http.ProblemDetailMapper;
-import io.openkairos.kairos.security.auth.login.PasswordLogin;
+import io.openkairos.kairos.auth.application.login.PasswordLogin;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
