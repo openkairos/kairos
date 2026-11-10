@@ -1,5 +1,6 @@
 package io.openkairos.kairos.adapters.interfaces.http;
 
+import io.openkairos.kairos.kernel.result.Problem;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.FieldError;
@@ -15,6 +16,12 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public final class ApiExceptionHandler {
 
+    private final ProblemDetailMapper problemDetailMapper;
+
+    public ApiExceptionHandler(ProblemDetailMapper problemDetailMapper) {
+        this.problemDetailMapper = problemDetailMapper;
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ProblemDetail validationFailed(MethodArgumentNotValidException exception) {
         Map<String, List<String>> errors = exception.getBindingResult()
@@ -25,14 +32,12 @@ public final class ApiExceptionHandler {
                         Collectors.mapping(FieldError::getDefaultMessage, Collectors.toList())
                 ));
 
-        ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-                HttpStatus.BAD_REQUEST,
-                "One or more fields are invalid."
-        );
-        problem.setType(URI.create("urn:openkairos:problem:validation-failed"));
-        problem.setTitle("Validation failed");
-        problem.setProperty("errors", errors);
-
-        return problem;
+        return problemDetailMapper.map(new Problem(
+                URI.create("urn:openkairos:problem:validation-failed"),
+                "Validation failed",
+                HttpStatus.BAD_REQUEST.value(),
+                "One or more fields are invalid.",
+                errors
+        ));
     }
 }

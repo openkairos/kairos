@@ -24,7 +24,7 @@ final class ApiExceptionHandlerTest {
                 new FieldError("request", "fieldOne", "second message"),
                 new FieldError("request", "fieldTwo", "third message")
         );
-        ApiExceptionHandler handler = new ApiExceptionHandler();
+        ApiExceptionHandler handler = new ApiExceptionHandler(new ProblemDetailMapper());
 
         ProblemDetail problem = handler.validationFailed(exception);
 
