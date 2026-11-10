@@ -1,6 +1,15 @@
 package io.openkairos.kairos.security.auth.login;
 
+import io.openkairos.kairos.kernel.result.Problem;
+import io.openkairos.kairos.kernel.result.Result;
+
+import java.net.URI;
+import java.util.Map;
+
 public final class PasswordLogin {
+
+    private static final URI INVALID_CREDENTIALS_TYPE = URI.create("urn:openkairos:problem:invalid-credentials");
+    private static final int UNAUTHORIZED_STATUS = 401;
 
     private final PasswordCredentialsVerifierInterface credentialsVerifier;
     private final AccessTokenIssuerInterface accessTokenIssuer;
@@ -13,9 +22,23 @@ public final class PasswordLogin {
         this.accessTokenIssuer = accessTokenIssuer;
     }
 
-    public AccessToken execute(PasswordCredentials credentials) throws InvalidCredentialsException {
-        var user = credentialsVerifier.verify(credentials);
+    public Result<AccessToken> execute(PasswordCredentials credentials) {
+        try {
+            var user = credentialsVerifier.verify(credentials);
 
-        return accessTokenIssuer.issue(user);
+            return Result.success(accessTokenIssuer.issue(user));
+        } catch (InvalidCredentialsException exception) {
+            return Result.failure(invalidCredentials());
+        }
+    }
+
+    private Problem invalidCredentials() {
+        return new Problem(
+                INVALID_CREDENTIALS_TYPE,
+                "Invalid credentials",
+                UNAUTHORIZED_STATUS,
+                "The username or password is incorrect.",
+                Map.of()
+        );
     }
 }

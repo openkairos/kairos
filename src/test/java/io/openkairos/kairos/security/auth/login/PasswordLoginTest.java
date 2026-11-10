@@ -4,9 +4,11 @@ import io.openkairos.kairos.security.auth.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
+import java.net.URI;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -29,9 +31,10 @@ final class PasswordLoginTest {
         when(accessTokenIssuer.issue(user)).thenReturn(accessToken);
         var sut = new PasswordLogin(credentialsVerifier, accessTokenIssuer);
 
-        var issuedAccessToken = sut.execute(credentials);
+        var result = sut.execute(credentials);
 
-        assertSame(accessToken, issuedAccessToken);
+        assertTrue(result.isSuccess());
+        assertSame(accessToken, result.value());
         verify(credentialsVerifier).verify(credentials);
         verify(accessTokenIssuer).issue(user);
     }
@@ -44,8 +47,13 @@ final class PasswordLoginTest {
         when(credentialsVerifier.verify(credentials)).thenThrow(new InvalidCredentialsException());
         var sut = new PasswordLogin(credentialsVerifier, accessTokenIssuer);
 
-        assertThrows(InvalidCredentialsException.class, () -> sut.execute(credentials));
+        var result = sut.execute(credentials);
 
+        assertTrue(result.isFailure());
+        assertEquals(URI.create("urn:openkairos:problem:invalid-credentials"), result.problem().type());
+        assertEquals("Invalid credentials", result.problem().title());
+        assertEquals(401, result.problem().status());
+        assertEquals("The username or password is incorrect.", result.problem().detail());
         verify(credentialsVerifier).verify(credentials);
         verifyNoInteractions(accessTokenIssuer);
     }
