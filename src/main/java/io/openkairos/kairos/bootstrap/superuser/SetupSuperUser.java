@@ -1,6 +1,7 @@
 package io.openkairos.kairos.bootstrap.superuser;
 
 import io.openkairos.kairos.kernel.logger.LoggerInterface;
+import io.openkairos.kairos.kernel.result.Result;
 import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
 
 public final class SetupSuperUser {
@@ -19,14 +20,14 @@ public final class SetupSuperUser {
         this.passwordHasher = passwordHasher;
     }
 
-    public boolean execute(SetupSuperUserCommand command) {
+    public Result<SetupSuperUserOutcome> execute(SetupSuperUserCommand command) {
         if (superUserRepository.exists()) {
             logger.info("Super user already exists; skipping setup.");
-            return false;
+            return Result.success(SetupSuperUserOutcome.ALREADY_EXISTS);
         }
 
         superUserRepository.create(command.username(), passwordHasher.hash(command.password()));
         logger.info("Super user created successfully.");
-        return true;
+        return Result.success(SetupSuperUserOutcome.CREATED);
     }
 }

@@ -4,7 +4,7 @@ import io.openkairos.kairos.kernel.logger.LoggerInterface;
 import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atMostOnce;
@@ -24,9 +24,10 @@ final class SetupSuperUserTest {
         var sut = new SetupSuperUser(logger, repository, passwordHasher);
         var command = SetupSuperUserCommand.of("kairos", "test-password");
 
-        var created = sut.execute(command);
+        var result = sut.execute(command);
 
-        assertFalse(created);
+        assertTrue(result.isSuccess());
+        assertEquals(SetupSuperUserOutcome.ALREADY_EXISTS, result.value());
         verify(repository, atMostOnce()).exists();
         verify(repository, never()).create(any(), any());
         verify(passwordHasher, never()).hash(any());
@@ -42,9 +43,10 @@ final class SetupSuperUserTest {
         var sut = new SetupSuperUser(logger, repository, passwordHasher);
         var command = SetupSuperUserCommand.of("kairos", "test-password");
 
-        var created = sut.execute(command);
+        var result = sut.execute(command);
 
-        assertTrue(created);
+        assertTrue(result.isSuccess());
+        assertEquals(SetupSuperUserOutcome.CREATED, result.value());
         verify(passwordHasher).hash("test-password");
         verify(repository).create("kairos", "hashed-password");
     }
