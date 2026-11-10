@@ -1,6 +1,7 @@
 package io.openkairos.kairos.adapters.interfaces.http.auth.login;
 
 import io.openkairos.kairos.security.auth.login.PasswordLogin;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ public final class LoginController {
     }
 
     @PostMapping(path = "/auth/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    PasswordLoginResponse passwordLogin(@RequestBody PasswordLoginRequest request) {
+    PasswordLoginResponse passwordLogin(@Valid @RequestBody PasswordLoginRequest request) {
         return PasswordLoginResponse.from(
                 passwordLogin.execute(request.toPasswordCredentials())
         );
