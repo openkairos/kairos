@@ -1,7 +1,8 @@
 package io.openkairos.kairos.adapters.framework.bootstrap;
 
-import io.openkairos.kairos.bootstrap.superuser.SetupSuperUser;
-import io.openkairos.kairos.bootstrap.superuser.SetupSuperUserCommand;
+import io.openkairos.kairos.bootstrap.superuser.application.SetupSuperUser;
+import io.openkairos.kairos.bootstrap.superuser.application.SetupSuperUserCommand;
+import io.openkairos.kairos.bootstrap.superuser.application.SetupSuperUserOutcome;
 import org.jspecify.annotations.NonNull;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -25,9 +26,13 @@ public final class BootstrapRunner implements ApplicationRunner {
     }
 
     private void setupSuperUser() {
-        boolean created = setupSuperUser.execute(command);
+        var result = setupSuperUser.execute(command);
 
-        if (!created || !command.passwordGenerated()) {
+        if (result.isFailure()) {
+            throw new IllegalStateException(result.problem().detail());
+        }
+
+        if (result.value() != SetupSuperUserOutcome.CREATED || !command.passwordGenerated()) {
             return;
         }
 

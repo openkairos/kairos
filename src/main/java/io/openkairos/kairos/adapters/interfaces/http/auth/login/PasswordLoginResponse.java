@@ -1,9 +1,7 @@
 package io.openkairos.kairos.adapters.interfaces.http.auth.login;
 
-import io.openkairos.kairos.kernel.annotation.AsModel;
-import io.openkairos.kairos.security.auth.login.AccessToken;
+import io.openkairos.kairos.auth.application.login.AccessToken;
 
-@AsModel
 public record PasswordLoginResponse(
         String accessToken,
         String refreshToken,

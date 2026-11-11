@@ -10,7 +10,7 @@ final class WelcomeFeatureTest extends FeatureTest {
 
     @Test
     void returns_welcome_message() throws Exception {
-        getJson("/")
+        mockMvc.perform(getJson("/"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Kairos: The right moment for customer data."));
     }

@@ -1,6 +1,6 @@
 package io.openkairos.kairos.adapters.framework.security.jwt;
 
-import io.openkairos.kairos.security.auth.User;
+import io.openkairos.kairos.auth.domain.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.Clock;
@@ -21,14 +21,14 @@ final class JwtAccessTokenIssuerTest {
         var configuration = new JwtConfiguration();
         var encoder = configuration.jwtEncoder(settings);
         var decoder = configuration.jwtDecoder(settings);
-        var user = new User("507f1f77bcf86cd799439011", "jane");
+        var user = new User(() -> "507f1f77bcf86cd799439011", "jane");
         var sut = new JwtAccessTokenIssuer(encoder, settings, Clock.fixed(issuedAt, ZoneOffset.UTC));
 
         var accessToken = sut.issue(user);
         var jwt = decoder.decode(accessToken.value());
 
         assertEquals(settings.issuer(), jwt.getIssuer().toString());
-        assertEquals(user.id(), jwt.getSubject());
+        assertEquals(user.id().value(), jwt.getSubject());
         assertEquals(user.username(), jwt.getClaimAsString("username"));
         assertEquals(issuedAt, jwt.getIssuedAt());
         assertFalse(jwt.getId().isBlank());
@@ -41,7 +41,7 @@ final class JwtAccessTokenIssuerTest {
         var configuration = new JwtConfiguration();
         var encoder = configuration.jwtEncoder(settings);
         var decoder = configuration.jwtDecoder(settings);
-        var user = new User("507f1f77bcf86cd799439011", "jane");
+        var user = new User(() -> "507f1f77bcf86cd799439011", "jane");
         var sut = new JwtAccessTokenIssuer(encoder, settings, Clock.fixed(issuedAt, ZoneOffset.UTC));
 
         var accessToken = sut.issue(user);
