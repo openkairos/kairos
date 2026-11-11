@@ -7,6 +7,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 
 import java.net.URI;
 import java.util.List;
@@ -38,6 +39,17 @@ public final class ApiExceptionHandler {
                 HttpStatus.BAD_REQUEST.value(),
                 "One or more fields are invalid.",
                 errors
+        ));
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    ProblemDetail requestBodyIsInvalid(HttpMessageNotReadableException ignored) {
+        return problemDetailMapper.map(new Problem(
+                URI.create("urn:openkairos:problem:invalid-request-body"),
+                "Invalid request body",
+                HttpStatus.BAD_REQUEST.value(),
+                "The request body cannot be read as the expected JSON format.",
+                Map.of()
         ));
     }
 }
