@@ -21,12 +21,11 @@ final class PasswordLoginFeatureTest extends FeatureTest {
         String password = "my-secret-password";
         userPopulator.superUser(username, password);
 
-        postJson(
-                "/auth/login",
-                Map.of(
+        mockMvc.perform(postJson("/auth/login")
+                .content(jsonContent(Map.of(
                         "username", username,
                         "password", password
-                ))
+                ))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accessToken").isString())
                 .andExpect(jsonPath("$.refreshToken").isString())

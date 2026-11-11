@@ -1,5 +1,6 @@
 package io.openkairos.kairos.testing;
 
+import io.openkairos.kairos.kernel.security.Authenticatable;
 import io.openkairos.kairos.testing.mongo.assertion.MongoAssertions;
 import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
 import org.junit.jupiter.api.AfterEach;
@@ -13,12 +14,12 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import tools.jackson.databind.ObjectMapper;
 
-import java.util.Map;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -41,19 +42,27 @@ public abstract class FeatureTest {
         tearDown.clearMongoCollections();
     }
 
-    protected ResultActions postJson(String path) throws Exception {
-        return mockMvc.perform(postJsonRequest(path));
+    protected MockHttpServletRequestBuilder post(String path) {
+        return MockMvcRequestBuilders.post(path);
     }
 
-    protected ResultActions postJson(String path, Map<String, ?> content) throws Exception {
-        return mockMvc.perform(postJsonRequest(path).content(objectMapper.writeValueAsString(content)));
+    protected MockHttpServletRequestBuilder postJson(String path) {
+        return post(path).contentType(MediaType.APPLICATION_JSON);
     }
 
-    protected ResultActions getJson(String path) throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.get(path).accept(MediaType.APPLICATION_JSON));
+    protected MockHttpServletRequestBuilder get(String path) {
+        return MockMvcRequestBuilders.get(path);
     }
 
-    private MockHttpServletRequestBuilder postJsonRequest(String path) {
-        return MockMvcRequestBuilders.post(path).contentType(MediaType.APPLICATION_JSON);
+    protected MockHttpServletRequestBuilder getJson(String path) {
+        return get(path).accept(MediaType.APPLICATION_JSON);
+    }
+
+    protected String jsonContent(Object value) throws Exception {
+        return objectMapper.writeValueAsString(value);
+    }
+
+    protected RequestPostProcessor actAs(Authenticatable user) {
+        return jwt().jwt(token -> token.subject(user.id().value()));
     }
 }

@@ -16,16 +16,17 @@ public final class UserPopulator {
         this.passwordHasher = passwordHasher;
     }
 
-    public void superUser() {
-        superUser("super-user", "password");
+    public SuperUser superUser() {
+        return superUser("super-user", "password");
     }
 
-    public void superUser(String username, String plainPassword) {
+    public SuperUser superUser(String username, String plainPassword) {
         var superUser = new SuperUser(
                 () -> new ObjectId().toHexString(),
                 username,
                 passwordHasher.hash(plainPassword)
         );
         mongoTemplate.insert(UserDocument.from(superUser));
+        return superUser;
     }
 }
