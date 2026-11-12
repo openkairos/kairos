@@ -36,13 +36,13 @@ jobs:
 
       - parallel:
           - name: Check code formatting
-            run: ./mvnw -Dproject.build.directory="$RUNNER_TEMP/format" spotless:check
+            run: ./mvnw spotless:check
 
           - name: Run tests
-            run: ./mvnw -Dproject.build.directory="$RUNNER_TEMP/test" test
+            run: ./mvnw test
 
           - name: Run static analysis
-            run: ./mvnw -Dproject.build.directory="$RUNNER_TEMP/static-analysis" spotbugs:check
+            run: ./mvnw spotbugs:check
 
-          - name: Build Docker image
-            run: make image IMAGE=kairos IMAGE_TAG=ci REVISION=${{ github.sha }} BUILD_DIRECTORY="$RUNNER_TEMP/container-image"
+      - name: Build Docker image
+        run: make image IMAGE=kairos IMAGE_TAG=ci REVISION=${{ github.sha }}

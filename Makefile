@@ -3,10 +3,9 @@ VERSION ?= $(DEFAULT_VERSION)
 IMAGE ?= kairos
 IMAGE_TAG ?= local
 REVISION ?= unknown
-BUILD_DIRECTORY ?= target
 
-ARTIFACT := $(BUILD_DIRECTORY)/kairos-$(VERSION).jar
-IMAGE_CONTEXT ?= $(BUILD_DIRECTORY)/image
+ARTIFACT := target/kairos-$(VERSION).jar
+IMAGE_CONTEXT := build/image
 STAGED_ARTIFACT := $(IMAGE_CONTEXT)/app.jar
 SOURCE_FILES := $(shell find src -type f)
 WRAPPER_FILES := $(shell find .mvn -type f)
@@ -16,7 +15,7 @@ WRAPPER_FILES := $(shell find .mvn -type f)
 jar: $(ARTIFACT)
 
 $(ARTIFACT): pom.xml mvnw $(WRAPPER_FILES) $(SOURCE_FILES)
-	./mvnw -Dproject.build.directory=$(BUILD_DIRECTORY) -Drevision=$(VERSION) package -DskipTests
+	./mvnw -Drevision=$(VERSION) package -DskipTests
 
 image-context: $(STAGED_ARTIFACT)
 
