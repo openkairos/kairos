@@ -5,10 +5,12 @@ import io.openkairos.kairos.testing.IntegrationTest;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.data.mongodb.test.autoconfigure.DataMongoTest;
 import org.springframework.context.annotation.Import;
 
 import java.util.Map;
 
+@DataMongoTest
 @Import(SourceRepository.class)
 final class SourceRepositoryTest extends IntegrationTest {
 

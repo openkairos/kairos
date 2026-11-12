@@ -7,6 +7,7 @@ import io.openkairos.kairos.workspace.domain.exception.WorkspaceSlugConflictExce
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.data.mongodb.test.autoconfigure.DataMongoTest;
 import org.springframework.context.annotation.Import;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@DataMongoTest
 @Import(WorkspaceRepository.class)
 final class WorkspaceRepositoryTest extends IntegrationTest {
 
