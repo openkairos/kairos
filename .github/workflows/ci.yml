@@ -9,7 +9,8 @@ on:
       - main
 
 jobs:
-  test:
+  check:
+    name: Check
     runs-on: ubuntu-latest
     services:
       mongodb:
@@ -35,13 +36,13 @@ jobs:
 
       - parallel:
           - name: Check code formatting
-            run: ./mvnw spotless:check
+            run: ./mvnw -Dproject.build.directory="$RUNNER_TEMP/format" spotless:check
 
           - name: Run tests
-            run: ./mvnw test
+            run: ./mvnw -Dproject.build.directory="$RUNNER_TEMP/test" test
 
-      - name: Run static analysis
-        run: ./mvnw spotbugs:check
+          - name: Run static analysis
+            run: ./mvnw -Dproject.build.directory="$RUNNER_TEMP/static-analysis" spotbugs:check
 
-      - name: Build Docker image
-        run: make image IMAGE=kairos IMAGE_TAG=ci REVISION=${{ github.sha }}
+          - name: Build Docker image
+            run: make image IMAGE=kairos IMAGE_TAG=ci REVISION=${{ github.sha }} BUILD_DIRECTORY="$RUNNER_TEMP/container-image"
