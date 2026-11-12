@@ -1,11 +1,13 @@
 package io.openkairos.kairos.testing.mongo.populator;
 
-import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
 import io.openkairos.kairos.adapters.framework.persistence.document.UserDocument;
+import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
 import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.stereotype.Component;
 
+@Component
 public final class UserPopulator {
 
     private final MongoTemplate mongoTemplate;

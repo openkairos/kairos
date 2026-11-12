@@ -2,7 +2,6 @@ package io.openkairos.kairos.testing;
 
 import io.openkairos.kairos.kernel.security.Authenticatable;
 import io.openkairos.kairos.testing.mongo.assertion.MongoAssertions;
-import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -23,7 +22,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Import({IntegrationTestConfiguration.class, MongoAssertions.class, UserPopulator.class, TearDown.class})
+@Import({IntegrationTestConfiguration.class, MongoAssertions.class, TearDown.class})
 @Execution(ExecutionMode.SAME_THREAD)
 @ResourceLock(value = "mongo-tests", mode = ResourceAccessMode.READ_WRITE)
 public abstract class FeatureTest {
@@ -58,7 +57,7 @@ public abstract class FeatureTest {
         return get(path).accept(MediaType.APPLICATION_JSON);
     }
 
-    protected String jsonContent(Object value) throws Exception {
+    protected String jsonContent(Object value) {
         return objectMapper.writeValueAsString(value);
     }
 
