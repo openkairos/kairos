@@ -1,22 +1,24 @@
 package io.openkairos.kairos.adapters.framework.persistence.repository.adapter;
 
-import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
-import io.openkairos.kairos.adapters.framework.persistence.document.UserDocument;
-import io.openkairos.kairos.adapters.framework.persistence.repository.springdata.UserRepository;
-import io.openkairos.kairos.kernel.id.Id;
-import io.openkairos.kairos.testing.IntegrationTest;
-import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
-import org.bson.types.ObjectId;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
-
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Import({SuperUserRepository.class, UserPopulator.class})
+import io.openkairos.kairos.adapters.framework.persistence.document.UserDocument;
+import io.openkairos.kairos.adapters.framework.persistence.repository.springdata.UserRepository;
+import io.openkairos.kairos.adapters.framework.security.password.Argon2PasswordHasher;
+import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
+import io.openkairos.kairos.kernel.id.Id;
+import io.openkairos.kairos.testing.IntegrationTest;
+import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
+import java.util.Map;
+import org.bson.types.ObjectId;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.data.mongodb.test.autoconfigure.DataMongoTest;
+import org.springframework.context.annotation.Import;
+
+@DataMongoTest
+@Import({Argon2PasswordHasher.class, SuperUserRepository.class, UserPopulator.class})
 final class SuperUserRepositoryTest extends IntegrationTest {
 
     @Autowired
@@ -53,11 +55,12 @@ final class SuperUserRepositoryTest extends IntegrationTest {
 
         sut.save(superUser);
 
-        mongoAssertions.assertDocumentExists("users", Map.of(
-                "_id", new ObjectId(id.value()),
-                "username", username,
-                "password", password
-        ));
+        mongoAssertions.assertDocumentExists(
+                "users",
+                Map.of(
+                        "_id", new ObjectId(id.value()),
+                        "username", username,
+                        "password", password));
     }
 
     @Test
@@ -68,10 +71,11 @@ final class SuperUserRepositoryTest extends IntegrationTest {
 
         sut.save(superUser);
 
-        mongoAssertions.assertDocumentExists("users", Map.of(
-                "_id", new ObjectId(id.value()),
-                "username", "kairos",
-                "password", "hashed-password"
-        ));
+        mongoAssertions.assertDocumentExists(
+                "users",
+                Map.of(
+                        "_id", new ObjectId(id.value()),
+                        "username", "kairos",
+                        "password", "hashed-password"));
     }
 }

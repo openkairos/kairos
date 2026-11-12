@@ -1,10 +1,9 @@
 package io.openkairos.kairos.workspace.application.create;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 final class CreateWorkspaceCommandTest {
 

@@ -1,19 +1,20 @@
 package io.openkairos.kairos.adapters.framework.persistence.repository.adapter;
 
-import io.openkairos.kairos.testing.IntegrationTest;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import io.openkairos.kairos.kernel.id.Id;
+import io.openkairos.kairos.testing.IntegrationTest;
 import io.openkairos.kairos.workspace.domain.Workspace;
 import io.openkairos.kairos.workspace.domain.exception.WorkspaceSlugConflictException;
+import java.util.List;
+import java.util.Map;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.data.mongodb.test.autoconfigure.DataMongoTest;
 import org.springframework.context.annotation.Import;
 
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+@DataMongoTest
 @Import(WorkspaceRepository.class)
 final class WorkspaceRepositoryTest extends IntegrationTest {
 
@@ -27,12 +28,17 @@ final class WorkspaceRepositoryTest extends IntegrationTest {
 
         sut.save(workspace);
 
-        mongoAssertions.assertDocumentExists("workspaces", Map.of(
-                "_id", new ObjectId(id.value()),
-                "name", "Acme",
-                "slug", "acme",
-                "environments", List.of("production")
-        ));
+        mongoAssertions.assertDocumentExists(
+                "workspaces",
+                Map.of(
+                        "_id",
+                        new ObjectId(id.value()),
+                        "name",
+                        "Acme",
+                        "slug",
+                        "acme",
+                        "environments",
+                        List.of("production")));
     }
 
     @Test
@@ -43,12 +49,17 @@ final class WorkspaceRepositoryTest extends IntegrationTest {
 
         sut.save(workspace);
 
-        mongoAssertions.assertDocumentExists("workspaces", Map.of(
-                "_id", new ObjectId(id.value()),
-                "name", "Acme",
-                "slug", "acme",
-                "environments", List.of("production")
-        ));
+        mongoAssertions.assertDocumentExists(
+                "workspaces",
+                Map.of(
+                        "_id",
+                        new ObjectId(id.value()),
+                        "name",
+                        "Acme",
+                        "slug",
+                        "acme",
+                        "environments",
+                        List.of("production")));
     }
 
     @Test

@@ -1,13 +1,13 @@
 package io.openkairos.kairos.bootstrap.superuser.application;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
 final class SetupSuperUserCommandTest {
-    
+
     @Test
     void it_keeps_the_supplied_password_and_marks_it_as_not_generated() {
         String username = "kairos";

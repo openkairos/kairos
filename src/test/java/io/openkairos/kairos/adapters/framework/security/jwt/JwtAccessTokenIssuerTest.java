@@ -1,16 +1,15 @@
 package io.openkairos.kairos.adapters.framework.security.jwt;
 
-import io.openkairos.kairos.auth.domain.User;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import io.openkairos.kairos.auth.domain.User;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.Test;
 
 final class JwtAccessTokenIssuerTest {
 
@@ -56,7 +55,6 @@ final class JwtAccessTokenIssuerTest {
                 "https://kairos.test",
                 Duration.ofMinutes(15),
                 Duration.ofDays(30),
-                "test-signing-secret-that-is-long-enough-for-hmac"
-        );
+                "test-signing-secret-that-is-long-enough-for-hmac");
     }
 }

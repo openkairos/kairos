@@ -1,12 +1,13 @@
 package io.openkairos.kairos.bootstrap.superuser.application;
 
 import io.openkairos.kairos.kernel.annotation.AsModel;
-
 import java.security.SecureRandom;
 import java.util.Base64;
 
 @AsModel
 public final class SetupSuperUserCommand {
+    private static final SecureRandom RANDOM = new SecureRandom();
+
     private final String username;
     private final String password;
     private final boolean passwordGenerated;
@@ -23,7 +24,7 @@ public final class SetupSuperUserCommand {
         }
 
         byte[] bytes = new byte[32];
-        new SecureRandom().nextBytes(bytes);
+        RANDOM.nextBytes(bytes);
         String generatedPassword = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
 
         return new SetupSuperUserCommand(username, generatedPassword, true);

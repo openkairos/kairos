@@ -9,10 +9,8 @@ import org.springframework.stereotype.Component;
 public final class ProblemDetailMapper {
 
     public ProblemDetail map(Problem problem) {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
-                HttpStatusCode.valueOf(problem.status()),
-                problem.detail()
-        );
+        ProblemDetail problemDetail =
+                ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(problem.status()), problem.detail());
         problemDetail.setType(problem.type());
         problemDetail.setTitle(problem.title());
 

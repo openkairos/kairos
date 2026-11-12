@@ -1,17 +1,16 @@
 package io.openkairos.kairos.feature.workspace;
 
-import io.openkairos.kairos.testing.FeatureTest;
-import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-import java.util.Map;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import io.openkairos.kairos.testing.FeatureTest;
+import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
+import java.util.List;
+import java.util.Map;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 final class CreateWorkspaceFeatureTest extends FeatureTest {
 
@@ -27,8 +26,7 @@ final class CreateWorkspaceFeatureTest extends FeatureTest {
                         .content(jsonContent(Map.of(
                                 "name", "Acme",
                                 "slug", "acme",
-                                "environments", List.of("development", "production")
-                        ))))
+                                "environments", List.of("development", "production")))))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Location", Matchers.startsWith("/workspaces/")))
                 .andExpect(jsonPath("$.id").isString())
@@ -37,5 +35,4 @@ final class CreateWorkspaceFeatureTest extends FeatureTest {
                 .andExpect(jsonPath("$.environments[0]").value("development"))
                 .andExpect(jsonPath("$.environments[1]").value("production"));
     }
-
 }

@@ -28,6 +28,12 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
+		<maven-surefire-junit5-tree-reporter.version>2.2.0</maven-surefire-junit5-tree-reporter.version>
+		<spotless-maven-plugin.version>3.11.0</spotless-maven-plugin.version>
+		<palantir-java-format.version>2.102.0</palantir-java-format.version>
+		<spotbugs-maven-plugin.version>4.10.5.0</spotbugs-maven-plugin.version>
+		<test.logging.level>WARN</test.logging.level>
+		<mongodb.logging.level>WARN</mongodb.logging.level>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -68,21 +74,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-testcontainers</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testcontainers</groupId>
-			<artifactId>testcontainers-junit-jupiter</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testcontainers</groupId>
-			<artifactId>testcontainers-mongodb</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
@@ -95,7 +86,69 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<version>${spotless-maven-plugin.version}</version>
+				<configuration>
+					<java>
+						<palantirJavaFormat>
+							<version>${palantir-java-format.version}</version>
+						</palantirJavaFormat>
+					</java>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>${spotbugs-maven-plugin.version}</version>
+				<configuration>
+					<effort>Max</effort>
+					<threshold>Low</threshold>
+					<failThreshold>Low</failThreshold>
+					<maxAllowedViolations>0</maxAllowedViolations>
+					<includeTests>false</includeTests>
+					<excludeFilterFile>${project.basedir}/config/spotbugs/exclude.xml</excludeFilterFile>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>me.fabriciorby</groupId>
+						<artifactId>maven-surefire-junit5-tree-reporter</artifactId>
+						<version>${maven-surefire-junit5-tree-reporter.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<systemPropertyVariables>
+						<test.logging.level>${test.logging.level}</test.logging.level>
+						<mongodb.logging.level>${mongodb.logging.level}</mongodb.logging.level>
+						<logging.level.root>${test.logging.level}</logging.level.root>
+						<logging.level.org.mongodb.driver>${mongodb.logging.level}</logging.level.org.mongodb.driver>
+					</systemPropertyVariables>
+					<statelessTestsetInfoReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter"/>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>test-info</id>
+			<properties>
+				<test.logging.level>INFO</test.logging.level>
+				<mongodb.logging.level>INFO</mongodb.logging.level>
+			</properties>
+		</profile>
+		<profile>
+			<id>test-debug</id>
+			<properties>
+				<test.logging.level>INFO</test.logging.level>
+				<mongodb.logging.level>DEBUG</mongodb.logging.level>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

@@ -1,16 +1,5 @@
 package io.openkairos.kairos.adapters.framework.security.password;
 
-import io.openkairos.kairos.adapters.framework.persistence.document.UserDocument;
-import io.openkairos.kairos.adapters.framework.persistence.repository.springdata.UserRepository;
-import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
-import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
-import io.openkairos.kairos.auth.application.login.PasswordCredentials;
-import io.openkairos.kairos.auth.application.login.exception.InvalidCredentialsException;
-import org.bson.types.ObjectId;
-import org.junit.jupiter.api.Test;
-
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -18,6 +7,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import io.openkairos.kairos.adapters.framework.persistence.document.UserDocument;
+import io.openkairos.kairos.adapters.framework.persistence.repository.springdata.UserRepository;
+import io.openkairos.kairos.auth.application.login.PasswordCredentials;
+import io.openkairos.kairos.auth.application.login.exception.InvalidCredentialsException;
+import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
+import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
+import java.util.Optional;
+import org.bson.types.ObjectId;
+import org.junit.jupiter.api.Test;
 
 final class PasswordCredentialsVerifierTest {
 

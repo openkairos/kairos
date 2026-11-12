@@ -1,10 +1,9 @@
 package io.openkairos.kairos.adapters.framework.validation.constraint;
 
 import jakarta.validation.Constraint;
-import jakarta.validation.ReportAsSingleViolation;
 import jakarta.validation.Payload;
+import jakarta.validation.ReportAsSingleViolation;
 import jakarta.validation.constraints.Pattern;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

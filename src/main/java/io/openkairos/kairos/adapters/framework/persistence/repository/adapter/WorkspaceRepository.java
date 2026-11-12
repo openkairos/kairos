@@ -10,11 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 public final class WorkspaceRepository implements WorkspaceRepositoryInterface {
 
-    private final io.openkairos.kairos.adapters.framework.persistence.repository.springdata.WorkspaceRepository workspaceRepository;
+    private final io.openkairos.kairos.adapters.framework.persistence.repository.springdata.WorkspaceRepository
+            workspaceRepository;
 
     public WorkspaceRepository(
-            io.openkairos.kairos.adapters.framework.persistence.repository.springdata.WorkspaceRepository workspaceRepository
-    ) {
+            io.openkairos.kairos.adapters.framework.persistence.repository.springdata.WorkspaceRepository
+                    workspaceRepository) {
         this.workspaceRepository = workspaceRepository;
     }
 

@@ -22,9 +22,10 @@ public final class LoginController {
 
     @PostMapping(path = "/auth/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<?> passwordLogin(@Valid @RequestBody PasswordLoginRequest request) {
-        return passwordLogin.execute(request.toPasswordCredentials()).fold(
-                accessToken -> ResponseEntity.ok(PasswordLoginResponse.from(accessToken)),
-                problem -> ResponseEntity.status(problem.status()).body(problemDetailMapper.map(problem))
-        );
+        return passwordLogin
+                .execute(request.toPasswordCredentials())
+                .fold(
+                        accessToken -> ResponseEntity.ok(PasswordLoginResponse.from(accessToken)),
+                        problem -> ResponseEntity.status(problem.status()).body(problemDetailMapper.map(problem)));
     }
 }

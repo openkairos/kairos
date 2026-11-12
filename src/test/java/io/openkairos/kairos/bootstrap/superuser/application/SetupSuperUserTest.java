@@ -1,14 +1,5 @@
 package io.openkairos.kairos.bootstrap.superuser.application;
 
-import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
-import io.openkairos.kairos.bootstrap.superuser.domain.SuperUserRepositoryInterface;
-import io.openkairos.kairos.kernel.id.Id;
-import io.openkairos.kairos.kernel.id.IdGeneratorInterface;
-import io.openkairos.kairos.kernel.logger.LoggerInterface;
-import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
-import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,6 +9,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
+import io.openkairos.kairos.bootstrap.superuser.domain.SuperUserRepositoryInterface;
+import io.openkairos.kairos.kernel.id.Id;
+import io.openkairos.kairos.kernel.id.IdGeneratorInterface;
+import io.openkairos.kairos.kernel.logger.LoggerInterface;
+import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 final class SetupSuperUserTest {
 

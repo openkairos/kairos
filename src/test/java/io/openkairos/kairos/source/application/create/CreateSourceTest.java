@@ -1,18 +1,17 @@
 package io.openkairos.kairos.source.application.create;
 
-import io.openkairos.kairos.kernel.id.Id;
-import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
-import io.openkairos.kairos.source.domain.Source;
-import io.openkairos.kairos.source.domain.SourceRepositoryInterface;
-import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.atomic.AtomicReference;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import io.openkairos.kairos.kernel.id.Id;
+import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
+import io.openkairos.kairos.source.domain.Source;
+import io.openkairos.kairos.source.domain.SourceRepositoryInterface;
+import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.Test;
 
 final class CreateSourceTest {
 

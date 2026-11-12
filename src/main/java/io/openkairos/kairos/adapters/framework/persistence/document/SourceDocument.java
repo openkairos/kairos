@@ -23,13 +23,7 @@ public final class SourceDocument {
     private final String writeKey;
 
     private SourceDocument(
-            ObjectId id,
-            ObjectId workspaceId,
-            String name,
-            String description,
-            String appIdentifier,
-            String writeKey
-    ) {
+            ObjectId id, ObjectId workspaceId, String name, String description, String appIdentifier, String writeKey) {
         this.id = id;
         this.workspaceId = workspaceId;
         this.name = name;
@@ -45,27 +39,12 @@ public final class SourceDocument {
                 source.name(),
                 source.description(),
                 source.appIdentifier(),
-                source.writeKey()
-        );
+                source.writeKey());
     }
 
     public Source toSource() {
         return new Source(
-                new BsonObjectId(id),
-                new BsonObjectId(workspaceId),
-                name,
-                description,
-                appIdentifier,
-                writeKey
-        );
-    }
-
-    public ObjectId id() {
-        return id;
-    }
-
-    public ObjectId workspaceId() {
-        return workspaceId;
+                new BsonObjectId(id), new BsonObjectId(workspaceId), name, description, appIdentifier, writeKey);
     }
 
     public String name() {

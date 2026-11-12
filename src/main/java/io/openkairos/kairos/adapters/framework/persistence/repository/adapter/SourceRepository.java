@@ -8,11 +8,12 @@ import org.springframework.stereotype.Component;
 @Component
 public final class SourceRepository implements SourceRepositoryInterface {
 
-    private final io.openkairos.kairos.adapters.framework.persistence.repository.springdata.SourceRepository sourceRepository;
+    private final io.openkairos.kairos.adapters.framework.persistence.repository.springdata.SourceRepository
+            sourceRepository;
 
     public SourceRepository(
-            io.openkairos.kairos.adapters.framework.persistence.repository.springdata.SourceRepository sourceRepository
-    ) {
+            io.openkairos.kairos.adapters.framework.persistence.repository.springdata.SourceRepository
+                    sourceRepository) {
         this.sourceRepository = sourceRepository;
     }
 

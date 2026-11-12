@@ -15,9 +15,8 @@ public final class Argon2PasswordHasher implements PasswordHasherInterface {
     private static final int MEMORY_COST_KIB = 19 * 1024;
     private static final int ITERATIONS = 2;
 
-    private final Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(
-            SALT_LENGTH_BYTES, HASH_LENGTH_BYTES, PARALLELISM, MEMORY_COST_KIB, ITERATIONS
-    );
+    private final Argon2PasswordEncoder encoder =
+            new Argon2PasswordEncoder(SALT_LENGTH_BYTES, HASH_LENGTH_BYTES, PARALLELISM, MEMORY_COST_KIB, ITERATIONS);
 
     @Override
     public String hash(String plainPassword) {

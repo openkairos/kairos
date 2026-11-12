@@ -18,8 +18,7 @@ public final class SetupSuperUser {
             LoggerInterface logger,
             SuperUserRepositoryInterface superUserRepository,
             PasswordHasherInterface passwordHasher,
-            IdGeneratorInterface idGenerator
-    ) {
+            IdGeneratorInterface idGenerator) {
         this.logger = logger;
         this.superUserRepository = superUserRepository;
         this.passwordHasher = passwordHasher;
@@ -32,11 +31,8 @@ public final class SetupSuperUser {
             return Result.success(SetupSuperUserOutcome.ALREADY_EXISTS);
         }
 
-        var superUser = new SuperUser(
-                idGenerator.generate(),
-                command.username(),
-                passwordHasher.hash(command.password())
-        );
+        var superUser =
+                new SuperUser(idGenerator.generate(), command.username(), passwordHasher.hash(command.password()));
         superUserRepository.save(superUser);
         logger.info("Super user created successfully.");
         return Result.success(SetupSuperUserOutcome.CREATED);
