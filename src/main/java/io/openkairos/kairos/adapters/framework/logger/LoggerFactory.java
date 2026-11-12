@@ -13,6 +13,7 @@ public final class LoggerFactory {
     @Bean("logger")
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     LoggerInterface create(InjectionPoint injectionPoint) {
-        return new Slf4jLogger(org.slf4j.LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass()));
+        return new Slf4jLogger(
+                org.slf4j.LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass()));
     }
 }

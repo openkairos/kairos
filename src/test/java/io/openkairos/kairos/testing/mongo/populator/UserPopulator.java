@@ -23,11 +23,7 @@ public final class UserPopulator {
     }
 
     public SuperUser superUser(String username, String plainPassword) {
-        var superUser = new SuperUser(
-                () -> new ObjectId().toHexString(),
-                username,
-                passwordHasher.hash(plainPassword)
-        );
+        var superUser = new SuperUser(() -> new ObjectId().toHexString(), username, passwordHasher.hash(plainPassword));
         mongoTemplate.insert(UserDocument.from(superUser));
         return superUser;
     }

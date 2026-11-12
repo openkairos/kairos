@@ -1,15 +1,14 @@
 package io.openkairos.kairos.kernel.result;
 
-import org.junit.jupiter.api.Test;
-
-import java.net.URI;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.net.URI;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 final class ResultTest {
 
@@ -63,20 +62,17 @@ final class ResultTest {
     void it_folds_a_success() {
         var success = Result.success("value");
 
-        assertEquals("success: value", success.fold(
-                value -> "success: " + value,
-                problem -> "failure: " + problem.title()
-        ));
+        assertEquals(
+                "success: value", success.fold(value -> "success: " + value, problem -> "failure: " + problem.title()));
     }
 
     @Test
     void it_folds_a_failure() {
         var failure = Result.<String>failure(problem());
 
-        assertEquals("failure: Example problem", failure.fold(
-                value -> "success: " + value,
-                problem -> "failure: " + problem.title()
-        ));
+        assertEquals(
+                "failure: Example problem",
+                failure.fold(value -> "success: " + value, problem -> "failure: " + problem.title()));
     }
 
     private Problem problem() {
@@ -85,7 +81,6 @@ final class ResultTest {
                 "Example problem",
                 400,
                 "An example problem occurred.",
-                Map.of()
-        );
+                Map.of());
     }
 }

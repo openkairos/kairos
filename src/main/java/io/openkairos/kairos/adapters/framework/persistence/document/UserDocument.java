@@ -1,8 +1,8 @@
 package io.openkairos.kairos.adapters.framework.persistence.document;
 
-import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
 import io.openkairos.kairos.adapters.framework.persistence.objectid.BsonObjectId;
 import io.openkairos.kairos.auth.domain.User;
+import io.openkairos.kairos.bootstrap.superuser.domain.SuperUser;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -26,11 +26,7 @@ public final class UserDocument {
     }
 
     public static UserDocument from(SuperUser superUser) {
-        return new UserDocument(
-                new ObjectId(superUser.id().value()),
-                superUser.username(),
-                superUser.password()
-        );
+        return new UserDocument(new ObjectId(superUser.id().value()), superUser.username(), superUser.password());
     }
 
     public User toUser() {

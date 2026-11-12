@@ -35,3 +35,17 @@ Debug the MongoDB driver while retaining normal application information:
 
 Set `KAIROS_TEST_MONGODB_URI` to use a different MongoDB server or database. The default is
 `mongodb://localhost:27017/kairos_test`.
+
+## Code formatting
+
+Check that Java sources follow the project formatting rules:
+
+```bash
+./mvnw spotless:check
+```
+
+Apply the formatting rules:
+
+```bash
+./mvnw spotless:apply
+```

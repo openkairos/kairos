@@ -2,5 +2,5 @@ package io.openkairos.kairos.kernel.logger;
 
 public interface LoggerInterface {
 
-	void info(String message);
+    void info(String message);
 }

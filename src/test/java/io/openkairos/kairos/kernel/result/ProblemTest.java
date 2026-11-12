@@ -1,15 +1,14 @@
 package io.openkairos.kairos.kernel.result;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 final class ProblemTest {
 
@@ -45,7 +44,9 @@ final class ProblemTest {
     void it_exposes_immutable_error_messages() {
         var problem = problem(Map.of("fieldOne", List.of("first message")));
 
-        assertThrows(UnsupportedOperationException.class, () -> problem.errors().get("fieldOne").add("second message"));
+        assertThrows(
+                UnsupportedOperationException.class,
+                () -> problem.errors().get("fieldOne").add("second message"));
     }
 
     private Problem problem(Map<String, List<String>> errors) {
@@ -54,7 +55,6 @@ final class ProblemTest {
                 "Example problem",
                 400,
                 "An example problem occurred.",
-                errors
-        );
+                errors);
     }
 }

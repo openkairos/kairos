@@ -6,13 +6,7 @@ import io.openkairos.kairos.source.domain.Source;
 
 @AsModel
 public record CreatedSource(
-        Id id,
-        Id workspaceId,
-        String name,
-        String description,
-        String appIdentifier,
-        String writeKey
-) {
+        Id id, Id workspaceId, String name, String description, String appIdentifier, String writeKey) {
 
     static CreatedSource from(Source source, String writeKey) {
         return new CreatedSource(
@@ -21,7 +15,6 @@ public record CreatedSource(
                 source.name(),
                 source.description(),
                 source.appIdentifier(),
-                writeKey
-        );
+                writeKey);
     }
 }

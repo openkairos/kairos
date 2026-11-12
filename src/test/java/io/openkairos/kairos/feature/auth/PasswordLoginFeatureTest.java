@@ -1,14 +1,13 @@
 package io.openkairos.kairos.feature.auth;
 
-import io.openkairos.kairos.testing.FeatureTest;
-import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Map;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import io.openkairos.kairos.testing.FeatureTest;
+import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 final class PasswordLoginFeatureTest extends FeatureTest {
 
@@ -22,10 +21,9 @@ final class PasswordLoginFeatureTest extends FeatureTest {
         userPopulator.superUser(username, password);
 
         mockMvc.perform(postJson("/auth/login")
-                .content(jsonContent(Map.of(
-                        "username", username,
-                        "password", password
-                ))))
+                        .content(jsonContent(Map.of(
+                                "username", username,
+                                "password", password))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accessToken").isString())
                 .andExpect(jsonPath("$.refreshToken").isString())

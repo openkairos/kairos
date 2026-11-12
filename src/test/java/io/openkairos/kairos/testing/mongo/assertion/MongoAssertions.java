@@ -1,11 +1,10 @@
 package io.openkairos.kairos.testing.mongo.assertion;
 
-import org.bson.Document;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.bson.Document;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 public final class MongoAssertions {
 
@@ -16,13 +15,13 @@ public final class MongoAssertions {
     }
 
     public void assertDocumentExists(String collectionName, Map<String, ?> criteria) {
-        var document = mongoTemplate.getCollection(collectionName)
+        var document = mongoTemplate
+                .getCollection(collectionName)
                 .find(new Document(criteria))
                 .first();
 
-        assertNotNull(document, () -> "Expected a document in collection '%s' matching %s".formatted(
-                collectionName,
-                criteria
-        ));
+        assertNotNull(
+                document,
+                () -> "Expected a document in collection '%s' matching %s".formatted(collectionName, criteria));
     }
 }

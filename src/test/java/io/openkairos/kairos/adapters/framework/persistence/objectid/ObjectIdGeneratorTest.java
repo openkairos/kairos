@@ -1,11 +1,11 @@
 package io.openkairos.kairos.adapters.framework.persistence.objectid;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import io.openkairos.kairos.kernel.id.IdGeneratorInterface;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 final class ObjectIdGeneratorTest {
 

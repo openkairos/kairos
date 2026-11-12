@@ -42,7 +42,6 @@ public final class BootstrapRunner implements ApplicationRunner {
     private void printGeneratedCredentials() {
         System.out.printf(
                 "Initial super user credentials:%nUsername: %s%nPassword: %s%n",
-                command.username(), command.password()
-        );
+                command.username(), command.password());
     }
 }

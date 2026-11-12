@@ -1,11 +1,11 @@
 package io.openkairos.kairos.adapters.framework.security.password;
 
-import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import io.openkairos.kairos.kernel.security.PasswordHasherInterface;
+import org.junit.jupiter.api.Test;
 
 final class Argon2PasswordHasherTest {
 
@@ -46,5 +46,4 @@ final class Argon2PasswordHasherTest {
         assertTrue(firstHashVerified);
         assertTrue(secondHashVerified);
     }
-
 }

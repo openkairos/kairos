@@ -10,6 +10,23 @@ on:
       - main
 
 jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Check code formatting
+        run: ./mvnw spotless:check
+
   test:
     runs-on: ubuntu-latest
     services:

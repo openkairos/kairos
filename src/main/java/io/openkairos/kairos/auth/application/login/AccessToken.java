@@ -1,7 +1,6 @@
 package io.openkairos.kairos.auth.application.login;
 
 import io.openkairos.kairos.kernel.annotation.AsModel;
-
 import java.time.Duration;
 
 @AsModel

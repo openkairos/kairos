@@ -1,7 +1,6 @@
 package io.openkairos.kairos.kernel.result;
 
 import io.openkairos.kairos.kernel.annotation.AsModel;
-
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -48,10 +47,7 @@ public final class Result<T> {
         return problem;
     }
 
-    public <R> R fold(
-            Function<? super T, ? extends R> onSuccess,
-            Function<? super Problem, ? extends R> onFailure
-    ) {
+    public <R> R fold(Function<? super T, ? extends R> onSuccess, Function<? super Problem, ? extends R> onFailure) {
         Objects.requireNonNull(onSuccess);
         Objects.requireNonNull(onFailure);
 

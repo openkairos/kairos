@@ -1,17 +1,16 @@
 package io.openkairos.kairos.feature.source;
 
-import io.openkairos.kairos.testing.FeatureTest;
-import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
-import io.openkairos.kairos.testing.mongo.populator.WorkspacePopulator;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Map;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import io.openkairos.kairos.testing.FeatureTest;
+import io.openkairos.kairos.testing.mongo.populator.UserPopulator;
+import io.openkairos.kairos.testing.mongo.populator.WorkspacePopulator;
+import java.util.Map;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 final class CreateSourceFeatureTest extends FeatureTest {
 
@@ -31,12 +30,12 @@ final class CreateSourceFeatureTest extends FeatureTest {
                         .content(jsonContent(Map.of(
                                 "name", "Acme iOS",
                                 "description", "iOS app",
-                                "appIdentifier", "com.acme.ios"
-                        ))))
+                                "appIdentifier", "com.acme.ios"))))
                 .andExpect(status().isCreated())
-                .andExpect(header().string("Location", Matchers.startsWith(
-                        "/workspaces/" + workspace.id().value() + "/sources/"
-                )))
+                .andExpect(header().string(
+                                "Location",
+                                Matchers.startsWith(
+                                        "/workspaces/" + workspace.id().value() + "/sources/")))
                 .andExpect(jsonPath("$.id").isString())
                 .andExpect(jsonPath("$.workspaceId").value(workspace.id().value()))
                 .andExpect(jsonPath("$.name").value("Acme iOS"))

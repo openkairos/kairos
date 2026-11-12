@@ -29,6 +29,8 @@
 	<properties>
 		<java.version>25</java.version>
 		<maven-surefire-junit5-tree-reporter.version>2.2.0</maven-surefire-junit5-tree-reporter.version>
+		<spotless-maven-plugin.version>3.11.0</spotless-maven-plugin.version>
+		<palantir-java-format.version>2.102.0</palantir-java-format.version>
 		<test.logging.level>WARN</test.logging.level>
 		<mongodb.logging.level>WARN</mongodb.logging.level>
 	</properties>
@@ -82,6 +84,18 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<version>${spotless-maven-plugin.version}</version>
+				<configuration>
+					<java>
+						<palantirJavaFormat>
+							<version>${palantir-java-format.version}</version>
+						</palantirJavaFormat>
+					</java>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

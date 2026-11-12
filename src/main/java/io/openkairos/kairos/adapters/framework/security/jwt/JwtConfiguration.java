@@ -1,5 +1,10 @@
 package io.openkairos.kairos.adapters.framework.security.jwt;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import java.time.Clock;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,13 +14,6 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-
-import java.time.Clock;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(JwtSettings.class)

@@ -1,15 +1,14 @@
 package io.openkairos.kairos.adapters.interfaces.http;
 
-import io.openkairos.kairos.kernel.result.Problem;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+import io.openkairos.kairos.kernel.result.Problem;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.Test;
 
 final class ProblemDetailMapperTest {
 
@@ -20,8 +19,7 @@ final class ProblemDetailMapperTest {
                 "Example problem",
                 400,
                 "An example problem occurred.",
-                Map.of()
-        );
+                Map.of());
         var mapper = new ProblemDetailMapper();
 
         var problemDetail = mapper.map(problem);
@@ -41,12 +39,12 @@ final class ProblemDetailMapperTest {
                 "Example problem",
                 400,
                 "An example problem occurred.",
-                errors
-        );
+                errors);
         var mapper = new ProblemDetailMapper();
 
         var problemDetail = mapper.map(problem);
 
-        assertEquals(errors, Objects.requireNonNull(problemDetail.getProperties()).get("errors"));
+        assertEquals(
+                errors, Objects.requireNonNull(problemDetail.getProperties()).get("errors"));
     }
 }
