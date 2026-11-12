@@ -34,8 +34,9 @@ jobs:
           java-version: '25'
           cache: maven
 
-      - name: Check code formatting
-        run: ./mvnw spotless:check
+      - parallel:
+          - name: Check code formatting
+            run: ./mvnw spotless:check
 
-      - name: Run tests
-        run: ./mvnw test
+          - name: Run tests
+            run: ./mvnw test
