@@ -47,8 +47,7 @@ jobs:
             fi
 
             version="$RELEASE_TAG"
-            image_tags="$REGISTRY/$IMAGE_NAME:$version
-$REGISTRY/$IMAGE_NAME:latest"
+            image_tags="$(printf '%s\\n%s' "$REGISTRY/$IMAGE_NAME:$version" "$REGISTRY/$IMAGE_NAME:latest")"
           else
             version="$(./mvnw -q -DforceStdout help:evaluate -Dexpression=project.version)"
             image_tags="$REGISTRY/$IMAGE_NAME:test"
