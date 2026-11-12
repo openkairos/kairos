@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches:
@@ -8,13 +9,12 @@ on:
       - main
 
 jobs:
-  test:
+  check:
+    name: Check
     runs-on: ubuntu-latest
-    container:
-      image: node:24
     services:
       mongodb:
-        image: mongo:8
+        image: mongo:9.0.4
         ports:
           - 27017:27017
         options: >-
@@ -27,17 +27,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
 
-      - name: Linting
-        run: npm run lint
+      - parallel:
+          - name: Check code formatting
+            run: ./mvnw spotless:check
 
-      - name: Format check
-        run: npm run format:check
+          - name: Run tests
+            run: ./mvnw test
 
-      - name: Run tests
-        run: npm test
+          - name: Run static analysis
+            run: ./mvnw spotbugs:check
 
-      - name: Build
-        run: npm run build
+      - name: Build Docker image
+        run: make image IMAGE=kairos IMAGE_TAG=ci REVISION=${{ github.sha }}

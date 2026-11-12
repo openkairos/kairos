@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- MongoDB ObjectId is immutable in the driver used by Kairos. -->
+    <Match>
+        <Class name="io.openkairos.kairos.adapters.framework.persistence.objectid.BsonObjectId"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+    <!-- Workspace guarantees that environments is immutable. -->
+    <Match>
+        <Class name="io.openkairos.kairos.adapters.interfaces.http.workspace.CreateWorkspaceResponse"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+</FindBugsFilter>

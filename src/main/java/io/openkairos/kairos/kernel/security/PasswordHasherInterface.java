@@ -1,0 +1,8 @@
+package io.openkairos.kairos.kernel.security;
+
+public interface PasswordHasherInterface {
+
+    String hash(String plainPassword);
+
+    boolean verify(String hashedPassword, String plainPassword);
+}
