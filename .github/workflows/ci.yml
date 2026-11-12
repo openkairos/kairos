@@ -42,3 +42,6 @@ jobs:
 
       - name: Run static analysis
         run: ./mvnw spotbugs:check
+
+      - name: Build Docker image
+        run: make image IMAGE=kairos IMAGE_TAG=ci REVISION=${{ github.sha }}

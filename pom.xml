@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>io.openkairos</groupId>
 	<artifactId>kairos</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${revision}</version>
 	<name>Kairos</name>
 	<description>Kairos</description>
 	<url/>
@@ -27,6 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
+		<revision>0.0.1-SNAPSHOT</revision>
 		<java.version>25</java.version>
 		<maven-surefire-junit5-tree-reporter.version>2.2.0</maven-surefire-junit5-tree-reporter.version>
 		<spotless-maven-plugin.version>3.11.0</spotless-maven-plugin.version>
