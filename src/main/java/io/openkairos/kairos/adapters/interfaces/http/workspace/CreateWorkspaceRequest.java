@@ -13,6 +13,10 @@ public record CreateWorkspaceRequest(
         @UniqueElements(message = "must contain unique values")
         List<@NotBlank String> environments) {
 
+    public CreateWorkspaceRequest {
+        environments = environments == null ? null : List.copyOf(environments);
+    }
+
     CreateWorkspaceCommand toCommand() {
         return new CreateWorkspaceCommand(name, slug, environments);
     }

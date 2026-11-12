@@ -40,3 +40,6 @@ jobs:
 
           - name: Run tests
             run: ./mvnw test
+
+      - name: Run static analysis
+        run: ./mvnw spotbugs:check

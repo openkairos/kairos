@@ -49,3 +49,11 @@ Apply the formatting rules:
 ```bash
 ./mvnw spotless:apply
 ```
+
+## Static analysis
+
+Run strict static analysis after compiling production code:
+
+```bash
+./mvnw compile spotbugs:check
+```

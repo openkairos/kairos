@@ -33,10 +33,6 @@ public final class UserDocument {
         return new User(new BsonObjectId(id), username);
     }
 
-    public ObjectId id() {
-        return id;
-    }
-
     public String username() {
         return username;
     }

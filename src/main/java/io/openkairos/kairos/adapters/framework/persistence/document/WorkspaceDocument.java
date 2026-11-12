@@ -37,10 +37,6 @@ public final class WorkspaceDocument {
         return new Workspace(new BsonObjectId(id), name, slug, environments);
     }
 
-    public ObjectId id() {
-        return id;
-    }
-
     public String name() {
         return name;
     }

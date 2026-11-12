@@ -47,14 +47,6 @@ public final class SourceDocument {
                 new BsonObjectId(id), new BsonObjectId(workspaceId), name, description, appIdentifier, writeKey);
     }
 
-    public ObjectId id() {
-        return id;
-    }
-
-    public ObjectId workspaceId() {
-        return workspaceId;
-    }
-
     public String name() {
         return name;
     }

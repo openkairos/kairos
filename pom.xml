@@ -31,6 +31,7 @@
 		<maven-surefire-junit5-tree-reporter.version>2.2.0</maven-surefire-junit5-tree-reporter.version>
 		<spotless-maven-plugin.version>3.11.0</spotless-maven-plugin.version>
 		<palantir-java-format.version>2.102.0</palantir-java-format.version>
+		<spotbugs-maven-plugin.version>4.10.5.0</spotbugs-maven-plugin.version>
 		<test.logging.level>WARN</test.logging.level>
 		<mongodb.logging.level>WARN</mongodb.logging.level>
 	</properties>
@@ -95,6 +96,19 @@
 							<version>${palantir-java-format.version}</version>
 						</palantirJavaFormat>
 					</java>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>${spotbugs-maven-plugin.version}</version>
+				<configuration>
+					<effort>Max</effort>
+					<threshold>Low</threshold>
+					<failThreshold>Low</failThreshold>
+					<maxAllowedViolations>0</maxAllowedViolations>
+					<includeTests>false</includeTests>
+					<excludeFilterFile>${project.basedir}/config/spotbugs/exclude.xml</excludeFilterFile>
 				</configuration>
 			</plugin>
 			<plugin>
